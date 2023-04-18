@@ -13,9 +13,7 @@ body {
 }
 
 #root {
-
   height: 100vh;
-  /* padding: 35px 35px 60px 0; */
 }
 
 .app {
@@ -196,10 +194,10 @@ body {
 .featured__text {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .featured__rating {
-  margin-top: 0.5em;
   display: flex;
   gap: 1em;
 }
@@ -210,11 +208,10 @@ body {
 }
 
 .featured__desc {
-  margin-top: 0.5em;
+
 }
 
 .featured__panel {
-  margin-top: 0.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -242,7 +239,6 @@ body {
 }
 
 .featured__buttons {
-  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;

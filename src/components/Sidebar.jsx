@@ -28,7 +28,7 @@ export default function Sidebar(props) {
             link: ""
         }
     ]
-    
+
     const navLinksHtml = navLinksData.map(link => {
         return <NavLink text={link.text}
                         icon={link.icon}
@@ -56,7 +56,7 @@ export default function Sidebar(props) {
                     </div>
                     <div className="newsletter__form">
                     <div className="newsletter__input input">
-                        <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className='icon--input'/>
+                        <FontAwesomeIcon icon="fa-solid fa-envelope" className='icon--input'/>
                         <p className='text--input-small'>Email</p>
                     </div>
                     <div className="btn--solid btn--small btn">Sign me up</div>

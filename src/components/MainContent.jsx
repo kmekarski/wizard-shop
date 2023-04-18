@@ -7,7 +7,7 @@ import ProductCard from "./ProductCard";
 
 const productsData = [
     {
-        name: "Magic Caster Wand",
+        name: "Featured Wand",
         desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
         price: "69",
         rating: "4.8",
@@ -15,7 +15,7 @@ const productsData = [
         img: ""
     },
     {
-        name: "Magic Caster Wand",
+        name: "First Wand",
         desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
         price: "68",
         rating: "4.7",
@@ -23,7 +23,7 @@ const productsData = [
         img: ""
     },
     {
-        name: "Magic Caster Wand",
+        name: "Second Wand",
         desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
         price: "67",
         rating: "4.6",
@@ -31,7 +31,7 @@ const productsData = [
         img: ""
     },
     {
-        name: "Magic Caster Wand",
+        name: "Third Wand",
         desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
         price: "66",
         rating: "4.5",
@@ -39,10 +39,18 @@ const productsData = [
         img: ""
     },
     {
-        name: "Magic Caster Wand",
+        name: "Fourth Wand",
         desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
         price: "65",
         rating: "4.4",
+        reviewCount: 179,
+        img: ""
+    },
+    {
+        name: "Fifth Wand",
+        desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
+        price: "64",
+        rating: "4.3",
         reviewCount: 179,
         img: ""
     }
@@ -51,12 +59,13 @@ const productsData = [
 export default function MainContent(props) {
 
 
-    const productsHtml = productsData.map((product, index) => {
+    const productsHtml = productsData.slice(1, productsData.length).map((product, index) => {
         return <ProductCard name={product.name}
                             price={product.price}
                             rating={product.rating}
                             img={product.img}
-                            last={index === productsData.length-1 ? true : false}/>
+                            last={index === productsData.length-2 ? true : false}
+                />
     })
 
 

@@ -236,6 +236,7 @@ body {
   padding: 0.8em;
   border-radius: 50%;
   background-color: #ffffff;
+  cursor: pointer;
 }
 
 .featured__buttons {
@@ -333,7 +334,8 @@ body {
   font-size: 1.25rem;
   font-weight: 500;
   background: #DAC6E1;
-  color: #7D576C
+  color: #7D576C;
+  cursor: pointer;
 }
 
 /* 5th product */
@@ -365,6 +367,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 /* typography */
@@ -384,6 +387,12 @@ body {
 .text--medium-bold {
   font-size: 1.2rem;
   font-weight: 600;
+  color: #ffffff;
+}
+
+.text--medium-regular {
+  font-size: 1.2rem;
+  font-weight: 400;
   color: #ffffff;
 }
 
@@ -411,16 +420,22 @@ body {
   color: #ffffff;
 }
 
+.text--input-big {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #2E2E2E;
+}
+
 .text--input-medium {
   font-size: 1rem;
   font-weight: 500;
-  color: #666666;
+  color: #2E2E2E;
 }
 
 .text--input-small {
   font-size: 0.8rem;
   font-weight: 500;
-  color: #666666;
+  color: #2E2E2E;
 }
 
 .text--icon {
@@ -479,6 +494,8 @@ body {
 .btn {
   font-weight: 600;
   border-radius: 0.625em;
+  cursor: pointer;
+  border: none;
 }
 
 .btn--medium {
@@ -516,4 +533,60 @@ body {
 
 .card--small {
   border-radius: 10px;
+}
+
+
+/* login */
+
+div.login {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form.login {
+  background-color: #ffffff;
+  color: #2e2e2e;
+
+  width: 400px;
+  
+  padding: 3em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.login__title {
+  text-align: center;
+  color: inherit;
+}
+
+.login__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+form.login label {
+  display: block;
+  color: inherit;
+}
+
+form.login input {
+  border: none;
+  outline: none;
+  text-indent: 0.5em;
+}
+
+.login__input {
+  border-bottom: 2px solid #666;
+  background-color: inherit;
+  width: 100%;
+  padding: 0.5em;
+}
+
+.login__btn {
+  margin-top: 1em;
 }

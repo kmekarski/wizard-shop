@@ -551,7 +551,7 @@ form.login {
 
   width: 400px;
   
-  padding: 3em;
+  padding: 2.5em 3em 4em;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -588,5 +588,5 @@ form.login input {
 }
 
 .login__btn {
-  margin-top: 1em;
+  margin-top: 1.5em;
 }

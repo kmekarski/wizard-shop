@@ -1,6 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import ProductImage from "./ProductImage";
+
 export default function FeaturedCard(props) {
 
     const [numberOfItems, setNumberOfItems] = React.useState(1)
@@ -13,9 +15,7 @@ export default function FeaturedCard(props) {
 
     return (
         <div className='featured card--big'>
-            <div className="featured__image">
-
-            </div>
+            <ProductImage src={props.img} />
             <div className="featured__text">
               <h3 className="featured__name text--medium-bold">{props.name}</h3>
               <div className="featured__rating">

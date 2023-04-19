@@ -1,12 +1,14 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import ProductImage from "./ProductImage";
+
 export default function CartPopup(props) {
 
     const cartItemsHtml = props.cart.map((item, index) => {
         return (
             <div className="cart-popup__item" key={index}>
-                <div className="cart-popup__item__image"></div>
+                <ProductImage src={item.img} />
                 <div className="cart-popup__item__text">
                     <p className="cart-popup__item__name text--small-bold">{item.name}</p>
                     <p className="cart-popup__item__price text--small-bold">${item.price}</p>

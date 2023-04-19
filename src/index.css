@@ -40,7 +40,7 @@ body {
 .sidebar .container {
   width: 100%;
   height: 100%;
-  padding: 25px 25px 40px 25px;
+  padding: 25px 25px 35px 25px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 3fr 10fr 1fr 10fr;
@@ -131,7 +131,7 @@ body {
 .main .container {
 
   height: 100%;
-  padding: 25px 35px 40px 0;
+  padding: 25px 35px 35px 0;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 3fr 10fr 1fr 10fr;
@@ -189,15 +189,9 @@ body {
 .featured {
   grid-area: featured;
   padding: 25px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 9fr 10fr;
   gap: 25px;
-}
-
-.featured__image {
-  height: 100%;
-  width: 80%;
-  background-color: #D9D9D9;
-  border-radius: 10px;
 }
 
 .featured__text {
@@ -306,17 +300,18 @@ body {
 .product {
   width: 100%;
   padding: 1em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 50% auto auto auto;
+  row-gap: .35em;
 }
 
-.product__image {
+.product-image {
   width: 100%;
-  height: 50%;
-  margin-bottom: 0.4em;
-  background-color: #eaeaea;
+  background-color: #ffffff;
   border-radius: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .product__panel {
@@ -653,27 +648,17 @@ form.login input {
 .cart-popup__item {
   width: 100%;
   padding: 1.5em 0;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 3fr 5fr;
   gap: 1.5em;
   border-bottom: 1px solid #D9D9D9;
 }
 
-.cart-popup__item__image {
-  width: 35%;
-  background-color: #D9D9D9;
-  border-radius: 10px;
-  flex: 0 1 auto;
-}
-
 .cart-popup__item__text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75em;
-  justify-content: space-between;
-  align-items: start;
-  flex: 1 1 auto;
-
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: minmax(48px, auto) auto;
+  gap: 0.75em 0;
 }
 
 .cart-popup__item__text p {
@@ -681,14 +666,15 @@ form.login input {
 }
 
 .cart-popup__item__price {
-  align-self: end;
+  margin-top: auto;
+  margin-left: auto;
 }
 
 .cart-popup__item__panel {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  align-self: stretch;
+  grid-column: span 2;
 }
 
 .cart-popup__item__quantity {

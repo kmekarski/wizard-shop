@@ -9,26 +9,30 @@ import ProductCard from "./ProductCard";
 export default function MainContent(props) {
 
 
-    const [productsData, setProductsData] = React.useState([])
-    const [cart, setCart] = React.useState([])
+
 
     React.useEffect(() => {
         fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-
-                setProductsData(data)
                 data.forEach(el => {
-                    fetch(`https://wizardshopstorageaccount.blob.core.windows.net/blobcontainerws/${el.photoId}.png`)
+                    fetch(`https://wishop.azurewebsites.net/api/Storage/${el.photoId}`)
                         .then(res => res.json())
-                        .then(data => {
-                            console.log(data)
+                        .then(imgData => {
+                            const newProduct = {
+                                ...el,
+                                img: imgData.uri
+                            }
+                            setProductsData(prev => [...prev, newProduct])
+                            console.log("?")
                         })
                 })
 
             })
     }, [])
+
+    const [productsData, setProductsData] = React.useState([])
+    const [cart, setCart] = React.useState([])
 
     const productsHtml = productsData.slice(1, productsData.length).map((product, index) => {
         return <ProductCard key={product.id}

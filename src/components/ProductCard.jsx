@@ -1,11 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import ProductImage from "./ProductImage";
+
 export default function ProductCard(props) {
     return (
         <div className="product card--small">
-            <div className="product__image">
-            </div>
+            <ProductImage src={props.img} />
             <h3 className="text--small-bold">{props.name}</h3>
             <h3 className="text--small-regular">Price: ${props.price}</h3>
             <div className="product__panel">

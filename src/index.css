@@ -660,10 +660,10 @@ form.login input {
 }
 
 .cart-popup__item__image {
-  width: 30%;
+  width: 35%;
   background-color: #D9D9D9;
   border-radius: 10px;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
 }
 
 .cart-popup__item__text {

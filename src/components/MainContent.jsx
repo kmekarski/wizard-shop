@@ -5,66 +5,44 @@ import FeaturedCard from "./FeaturedCard";
 import AdCard from "./AdCard";
 import ProductCard from "./ProductCard";
 
-const productsData = [
-    {
-        id: 1,
-        name: "Featured Wand",
-        desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
-        price: "69",
-        rating: "4.8",
-        reviewCount: 179,
-        img: ""
-    },
-    {
-        id: 2,
-        name: "First Wand",
-        desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
-        price: "68",
-        rating: "4.7",
-        reviewCount: 179,
-        img: ""
-    },
-    {
-        id: 3,
-        name: "Second Wand",
-        desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
-        price: "67",
-        rating: "4.6",
-        reviewCount: 179,
-        img: ""
-    },
-    {
-        id: 4,
-        name: "Third Wand",
-        desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
-        price: "66",
-        rating: "4.5",
-        reviewCount: 179,
-        img: ""
-    },
-    {
-        id: 5,
-        name: "Fourth Wand",
-        desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
-        price: "65",
-        rating: "4.4",
-        reviewCount: 179,
-        img: ""
-    },
-    {
-        id: 6,
-        name: "Fifth Wand",
-        desc: "Great wand for amateur Wizards. Solid, easy to use and reliable in practice combat.",
-        price: "64",
-        rating: "4.3",
-        reviewCount: 179,
-        img: ""
-    }
-]
 
 export default function MainContent(props) {
 
+
+    const [productsData, setProductsData] = React.useState([])
     const [cart, setCart] = React.useState([])
+
+    React.useEffect(() => {
+        fetch("https://wishop.azurewebsites.net/api/Products")
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+
+                setProductsData(data)
+                data.forEach(el => {
+                    fetch(`https://wizardshopstorageaccount.blob.core.windows.net/blobcontainerws/${el.photoId}.png`)
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                        })
+                })
+
+            })
+    }, [])
+
+    const productsHtml = productsData.slice(1, productsData.length).map((product, index) => {
+        return <ProductCard key={product.id}
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            rating={product.rating}
+            img={product.img}
+            last={index === productsData.length - 2 ? true : false}
+            addToCart={addToCart}
+        />
+    })
+
+    const featuredProduct = productsData[0]
 
     function addToCart(id, number) {
 
@@ -111,30 +89,14 @@ export default function MainContent(props) {
         setCart(newCart)
     }
 
-
-    const productsHtml = productsData.slice(1, productsData.length).map((product, index) => {
-        return <ProductCard key={product.id}
-            id={product.id}
-            name={product.name}
-            price={product.price}
-            rating={product.rating}
-            img={product.img}
-            last={index === productsData.length - 2 ? true : false}
-            addToCart={addToCart}
-        />
-    })
-
-
-    const featuredProduct = productsData[0]
-
     return (
         <div className="main">
-            <div className="container">
+            {productsData.length > 0 && <div className="container">
                 <Header cart={cart} removeFromCart={removeFromCart} changeNumberOfItemsInCart={changeNumberOfItemsInCart} />
 
                 <FeaturedCard id={featuredProduct.id}
                     name={featuredProduct.name}
-                    desc={featuredProduct.desc}
+                    desc={featuredProduct.description}
                     price={featuredProduct.price}
                     rating={featuredProduct.rating}
                     reviewCount={featuredProduct.reviewCount}
@@ -152,7 +114,7 @@ export default function MainContent(props) {
                 <div className='products'>
                     {productsHtml}
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

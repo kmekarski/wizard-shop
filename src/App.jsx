@@ -15,9 +15,9 @@ function App() {
 
   return (
     <div className="app">
-      {/* <Sidebar />
-      <MainContent /> */}
-      <Login />
+      <Sidebar />
+      <MainContent />
+      {/* <Login /> */}
     </div>
   )
 }

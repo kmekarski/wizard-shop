@@ -2,6 +2,15 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function FeaturedCard(props) {
+
+    const [numberOfItems, setNumberOfItems] = React.useState(1)
+
+    React.useEffect( () => {
+        if(numberOfItems<1) {
+            setNumberOfItems(1)
+        }
+    }, [numberOfItems] )
+
     return (
         <div className='featured card--big'>
             <div className="featured__image">
@@ -23,16 +32,16 @@ export default function FeaturedCard(props) {
               <div className="featured__panel">
                 <p className="text--medium-bold">Price: ${props.price}</p>
                 <div className="featured__quantity">
-                  <div className="featured__quantity-btn">-</div>
-                  <p className="featured__quantity-number">1</p>
-                  <div className="featured__quantity-btn">+</div>
+                  <div className="featured__quantity-btn" onClick={() => setNumberOfItems(prev => prev-1)}>-</div>
+                  <p className="featured__quantity-number">{numberOfItems}</p>
+                  <div className="featured__quantity-btn" onClick={() => setNumberOfItems(prev => prev+1)}>+</div>
                 </div>
               </div>
               <div className="featured__buttons">
                 <div className="btn--ghost btn--small btn">
-                <FontAwesomeIcon icon="fa-solid fa-heart" className='icon--xs'/>
+                <FontAwesomeIcon icon="fa-solid fa-heart" className='icon--xs icon--primary'/>
                 </div>
-                <div className="btn--ghost btn--small btn">Add to Cart</div>
+                <div className="btn--ghost btn--small btn" onClick={() => props.addToCart(props.id, numberOfItems)}>Add to Cart</div>
                 <div className="btn--solid btn--small btn">Buy Now</div>
               </div>
             </div>

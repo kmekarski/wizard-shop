@@ -29,8 +29,9 @@ export default function Sidebar(props) {
         }
     ]
 
-    const navLinksHtml = navLinksData.map(link => {
-        return <NavLink text={link.text}
+    const navLinksHtml = navLinksData.map((link,index) => {
+        return <NavLink key={index}
+                        text={link.text}
                         icon={link.icon}
                         link={link.link}/>
     })
@@ -41,7 +42,7 @@ export default function Sidebar(props) {
 
                 <div className='title text--primary'>
                     <h2 className="title__text text--primary">Wizards Shop</h2>
-                    <FontAwesomeIcon icon="fa-solid fa-wand-magic-sparkles" className='icon--xl'/>
+                    <FontAwesomeIcon icon="fa-solid fa-wand-magic-sparkles" className='icon--xl icon--primary'/>
                 </div>
 
                 <div className="nav">
@@ -50,7 +51,7 @@ export default function Sidebar(props) {
 
                 <div className='newsletter card--small'>
                     <div className="newsletter__header">
-                    <FontAwesomeIcon icon="fa-solid fa-newspaper" className='icon--xl'/>
+                    <FontAwesomeIcon icon="fa-solid fa-newspaper" className='icon--xl icon--primary'/>
                     <h2 className="text--medium-bold">Join our Newsletter!</h2>
                     <h2 className="text--desc">Get great deals and information about new products</h2>
                     </div>

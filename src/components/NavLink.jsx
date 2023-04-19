@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function NavLink(props) {
     return (
         <div className="nav__element">
-            <FontAwesomeIcon icon={`fa-solid fa-${props.icon}`} className='icon--l' />
+            <FontAwesomeIcon icon={`fa-solid fa-${props.icon}`} className='icon--l icon--primary' />
             <p className="nav__text">{props.text}</p>
         </div>
     )

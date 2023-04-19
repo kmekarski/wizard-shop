@@ -11,14 +11,14 @@ export default function ProductCard(props) {
             <div className="product__panel">
                 <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
                 <h3 className="text--small-regular">{props.rating}</h3>
-                <div className="product__btn">+</div>
+                <div className="product__btn" onClick={() => props.addToCart(props.id, 1)}>+</div>
             </div>
 
 
             {props.last && <div>
                 <div className="product-cover"></div>
                 <div className="product-cover__btn">
-                    <FontAwesomeIcon icon="fa-solid fa-chevron-right" className='icon--s' />
+                    <FontAwesomeIcon icon="fa-solid fa-chevron-right" className='icon--s icon--primary' />
                 </div>
             </div>}
 

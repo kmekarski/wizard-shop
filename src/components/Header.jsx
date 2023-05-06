@@ -1,11 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 import CartPopup from "./CartPopup";
 
 export default function Header(props) {
 
     const [showCart, setShowCart] = React.useState(false)
+    const navigate = useNavigate()
 
     function toggleCart() {
         setShowCart(prev => !prev)
@@ -25,21 +27,19 @@ export default function Header(props) {
               <div className="header__cart-btn header__icon-btn">
                 <FontAwesomeIcon icon="fa-solid fa-cart-shopping" className='icon--m icon--primary' onClick={(e) => toggleCart(e)}/>
                 <p className='text--icon' onClick={(e) => toggleCart(e)}>Cart</p>
-                < CartPopup show={showCart} 
-                            toggle={toggleCart} 
-                            removeFromCart={props.removeFromCart} 
+                <CartPopup show={showCart}
+                            toggle={toggleCart}
+                            removeFromCart={props.removeFromCart}
                             changeNumberOfItemsInCart = {props.changeNumberOfItemsInCart}
                             cart={props.cart}/>
               </div>
-              <div className="header__account-btn header__icon-btn">
+              {localStorage.getItem("userID") !== null && <div className="header__account-btn header__icon-btn" onClick={() => navigate("/profile")}>
                 <FontAwesomeIcon icon="fa-solid fa-user" className='icon--m icon--primary'/>
                 <p className='text--icon'>Account</p>
-              </div>
-              <div className="header__logout-btn btn--solid btn--medium btn">Logout</div>
+              </div>}
+              {localStorage.getItem("userID") === null && <div className="header__logout-btn btn--solid btn--medium btn" onClick={() => navigate("/login")}>Login</div>}
+              {localStorage.getItem("userID") !== null && <div className="header__logout-btn btn--solid btn--medium btn" onClick={() => navigate("/logout")}>Logout</div>}
             </div>
-
-            
-
           </div>
     )
 }

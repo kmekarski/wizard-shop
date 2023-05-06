@@ -10,22 +10,22 @@ export default function Sidebar(props) {
         {
             text: "Home",
             icon: "home",
-            link: ""
+            link: "/"
         },
         {
             text: "All products",
             icon: "hat-wizard",
-            link: ""
+            link: "/products"
         },
         {
             text: "Categories",
             icon: "wand-magic-sparkles",
-            link: ""
+            link: "/products"
         },
         {
             text: "Contact",
             icon: "phone",
-            link: ""
+            link: "/contact"
         }
     ]
 
@@ -51,16 +51,18 @@ export default function Sidebar(props) {
 
                 <div className='newsletter card--small'>
                     <div className="newsletter__header">
-                    <FontAwesomeIcon icon="fa-solid fa-newspaper" className='icon--xl icon--primary'/>
-                    <h2 className="text--medium-bold">Join our Newsletter!</h2>
-                    <h2 className="text--desc">Get great deals and information about new products</h2>
+                        <FontAwesomeIcon icon="fa-solid fa-newspaper" className='icon--xl icon--primary'/>
+                        <h2 className="text--medium-bold">Join our Newsletter!</h2>
+                        <h2 className="text--desc">Get great deals and information about new products</h2>
                     </div>
                     <div className="newsletter__form">
-                    <div className="newsletter__input input">
-                        <FontAwesomeIcon icon="fa-solid fa-envelope" className='icon--input'/>
-                        <p className='text--input-small'>Email</p>
-                    </div>
-                    <div className="btn--solid btn--small btn">Sign me up</div>
+                        <div className="newsletter__input input">
+                            <FontAwesomeIcon icon="fa-solid fa-envelope" className='icon--input'/>
+                            <p className='text--input-small'>Email</p>
+                        </div>
+                        <div className="btn--solid btn--small btn">
+                            Sign me up
+                        </div>
                     </div>
                 </div>
 

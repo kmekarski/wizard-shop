@@ -539,6 +539,7 @@ body {
 /* login */
 
 div.login {
+  width: 100%;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -714,4 +715,26 @@ form.login input {
   justify-content: space-between;
   align-self: stretch;
   color: inherit;
+}
+
+/* profile */
+
+.profile {
+  width: 100%;
+  height: 100%;
+}
+
+.profile .container {
+  height: 100%;
+  padding: 25px 35px 35px 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 3fr 10fr 1fr 10fr;
+  column-gap: 25px;
+  row-gap: 30px;
+  grid-template-areas:
+    "header header header header header"
+    "featured featured featured ad ad"
+    "products-title products-title products-title ad ad"
+    "products products products products products";
 }

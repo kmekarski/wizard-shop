@@ -8,15 +8,12 @@ import ProductCard from "./ProductCard";
 
 export default function MainContent(props) {
 
-
-
-
     React.useEffect(() => {
         fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
                 data.forEach(el => {
-                    fetch(`https://wishop.azurewebsites.net/api/Storage/${el.photoId}`)
+                    fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`)
                         .then(res => res.json())
                         .then(imgData => {
                             const newProduct = {

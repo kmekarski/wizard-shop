@@ -1,7 +1,10 @@
 import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Sidebar from './components/Sidebar'
 import MainContent from './components/MainContent'
+import Profile from "./components/Profile.jsx";
+import Register from "./components/Register.jsx";
 
 import { Login, Logout } from './components/Login'
 
@@ -14,11 +17,18 @@ library.add(fas, far)
 function App() {
 
   return (
-    <div className="app">
-      <Sidebar />
-      <MainContent />
-      {/* <Login /> */}
-    </div>
+    <Router>
+      <div className="app">
+        <Sidebar />
+        <Routes>
+          <Route path='/' element={<MainContent />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/profile' element={<Profile />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 

@@ -16,7 +16,8 @@ export default function Register() {
       const response = await fetch(backendAddr + '/api/Users/Register', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({username, email, password})
       });
@@ -75,7 +76,7 @@ export default function Register() {
           <label htmlFor='password' className='text--medium-small'>Password</label>
           <div className='login__input text--input-big'>
             <FontAwesomeIcon icon="fa-solid fa-lock" className='icon--input' />
-            <input className=' text--input-big' type="text"
+            <input className='text--input-big' type="password"
                    value={password}
                    name='password'
                    id='password'

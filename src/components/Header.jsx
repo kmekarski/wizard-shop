@@ -33,6 +33,9 @@ export default function Header(props) {
                             changeNumberOfItemsInCart = {props.changeNumberOfItemsInCart}
                             cart={props.cart}/>
               </div>
+              {localStorage.getItem("userID") === null && <div className="header__logout-btn btn--solid btn--medium btn" onClick={() => navigate("/register")}>
+                Register
+              </div>}
               {localStorage.getItem("userID") !== null && <div className="header__account-btn header__icon-btn" onClick={() => navigate("/profile")}>
                 <FontAwesomeIcon icon="fa-solid fa-user" className='icon--m icon--primary'/>
                 <p className='text--icon'>Account</p>

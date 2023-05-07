@@ -2,9 +2,10 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import NavLink from "./NavLink";
+import {useNavigate} from "react-router-dom";
 
 export default function Sidebar(props) {
-
+    const navigate = useNavigate()
 
     const navLinksData = [
         {
@@ -40,7 +41,7 @@ export default function Sidebar(props) {
         <div className='sidebar'>
             <div className="container">
 
-                <div className='title text--primary'>
+                <div className='title text--primary btn' onClick={() => navigate("/")}>
                     <h2 className="title__text text--primary">Wizards Shop</h2>
                     <FontAwesomeIcon icon="fa-solid fa-wand-magic-sparkles" className='icon--xl icon--primary'/>
                 </div>

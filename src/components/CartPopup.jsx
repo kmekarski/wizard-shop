@@ -2,8 +2,11 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ProductImage from "./ProductImage";
+import {useNavigate} from "react-router-dom";
 
 export default function CartPopup(props) {
+
+    const navigate = useNavigate()
 
     const cartItemsHtml = props.cart.map((item, index) => {
         return (
@@ -28,7 +31,6 @@ export default function CartPopup(props) {
     let total = 0 
     props.cart.forEach(item => total += item.price * item.number)
 
-
     return (
         <div>
             {props.show && <div className="cart-popup card--small">
@@ -51,7 +53,7 @@ export default function CartPopup(props) {
                             <p>Total:</p>
                             <p>${total}</p>
                         </div>
-                        <div className="btn--medium btn--solid btn">Checkout</div>
+                        <div className="btn--medium btn--solid btn" onClick={() => navigate("/checkout")}>Checkout</div>
                     </div>
 
                 </div>}

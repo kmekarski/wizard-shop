@@ -4,6 +4,7 @@ import Header from "./Header";
 import FeaturedCard from "./FeaturedCard";
 import AdCard from "./AdCard";
 import ProductCard from "./ProductCard";
+import {useLocation} from "react-router-dom";
 
 
 export default function MainContent(props) {
@@ -29,21 +30,10 @@ export default function MainContent(props) {
     }, [])
 
     const [productsData, setProductsData] = React.useState([])
-    const [cart, setCart] = React.useState([])
-
-    const productsHtml = productsData.slice(1, productsData.length).map((product, index) => {
-        return <ProductCard key={product.id}
-            id={product.id}
-            name={product.name}
-            price={product.price}
-            rating={product.rating}
-            img={product.img}
-            last={index === productsData.length - 2 ? true : false}
-            addToCart={addToCart}
-        />
+    const [cart, setCart] = React.useState(() => {
+        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+        return localStorageCart || []
     })
-
-    const featuredProduct = productsData[0]
 
     function addToCart(id, number) {
 
@@ -56,20 +46,20 @@ export default function MainContent(props) {
                 }
                 return item
             })
-            setCart(newCart)
         } else {
             const itemToAdd = { ...productsData.filter(item => item.id === id)[0], number: number }
             newCart = [...cart, itemToAdd]
-            setCart(newCart)
         }
 
 
         setCart(newCart)
+        localStorage.setItem('cart', JSON.stringify(newCart));
     }
 
     function removeFromCart(id) {
         const newCart = cart.filter(item => item.id !== id)
         setCart(newCart)
+        localStorage.setItem('cart', JSON.stringify(newCart));
     }
 
     function changeNumberOfItemsInCart(id, sign) {
@@ -88,34 +78,76 @@ export default function MainContent(props) {
             return item
         })
         setCart(newCart)
+        localStorage.setItem('cart', JSON.stringify(newCart));
     }
 
-    return (
-        <div className="main">
-            {productsData.length > 0 && <div className="container">
-                <Header cart={cart} removeFromCart={removeFromCart} changeNumberOfItemsInCart={changeNumberOfItemsInCart} />
+    const location = useLocation()
+    const pathName = location.pathname
 
-                <FeaturedCard id={featuredProduct.id}
-                    name={featuredProduct.name}
-                    desc={featuredProduct.description}
-                    price={featuredProduct.price}
-                    rating={featuredProduct.rating}
-                    reviewCount={featuredProduct.reviewCount}
-                    img={featuredProduct.img}
-                    addToCart={addToCart}
-                />
+    if (pathName === "/") {
+        const productsHtml = productsData.slice(1, productsData.length).map((product, index) => {
+            return <ProductCard key={product.id}
+                                id={product.id}
+                                name={product.name}
+                                price={product.price}
+                                rating={product.rating}
+                                img={product.img}
+                                last={index === productsData.length - 2 ? true : false}
+                                addToCart={addToCart}
+            />
+        })
 
-                <AdCard />
+        const featuredProduct = productsData[0]
 
-                <div className='products-title'>
-                    <h2 className="text--primary">Our top products</h2>
-                    <h4 className="text--secondary">View all</h4>
-                </div>
+        return (
+          <div className="main">
+              {productsData.length > 0 && <div className="container">
+                  <Header cart={cart} removeFromCart={removeFromCart}
+                          changeNumberOfItemsInCart={changeNumberOfItemsInCart}/>
 
-                <div className='products'>
-                    {productsHtml}
-                </div>
-            </div>}
-        </div>
-    )
+                  <FeaturedCard id={featuredProduct.id}
+                                name={featuredProduct.name}
+                                desc={featuredProduct.description}
+                                price={featuredProduct.price}
+                                rating={featuredProduct.rating}
+                                reviewCount={featuredProduct.reviewCount}
+                                img={featuredProduct.img}
+                                addToCart={addToCart}
+                  />
+
+                  <AdCard/>
+
+                  <div className='products-title'>
+                      <h2 className="text--primary">Our top products</h2>
+                      <h4 className="text--secondary btn">View all</h4>
+                  </div>
+
+                  <div className='products'>
+                      {productsHtml}
+                  </div>
+              </div>}
+          </div>
+        )
+    } else if (pathName === "/products") {
+        const productsHtml = productsData.slice(0, productsData.length).map((product, index) => {
+            return <ProductCard key={product.id}
+                                id={product.id}
+                                name={product.name}
+                                price={product.price}
+                                rating={product.rating}
+                                img={product.img}
+                                addToCart={addToCart}
+            />
+        })
+
+        return (
+          <div className="all-main">
+              {productsData.length > 0 && <div className="container">
+                  <div className='all-products'>
+                      {productsHtml}
+                  </div>
+              </div>}
+          </div>
+        )
+    }
 }

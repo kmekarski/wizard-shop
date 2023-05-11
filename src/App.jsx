@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar'
 import MainContent from './components/MainContent'
 import Profile from "./components/Profile.jsx";
 import Register from "./components/Register.jsx";
+import Contact from "./components/Contact.jsx";
+import Checkout from "./components/Checkout.jsx";
 
 import { Login, Logout } from './components/Login'
 
@@ -22,10 +24,13 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path='/' element={<MainContent />} />
+          <Route path='/products' element={<MainContent />} />
           <Route path='/login' element={<Login />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Routes>
       </div>
     </Router>

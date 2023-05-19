@@ -6,13 +6,18 @@ import AdCard from "./AdCard";
 import ProductCard from "./ProductCard";
 import {useLocation} from "react-router-dom";
 
+import { ProductsContext } from "../context/productsContext";
+
 
 export default function MainContent(props) {
+
+    const productsContext = React.useContext(ProductsContext)
 
     React.useEffect(() => {
         fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
+                productsContext.setProductsList([])
                 data.forEach(el => {
                     fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`)
                         .then(res => res.json())
@@ -21,115 +26,53 @@ export default function MainContent(props) {
                                 ...el,
                                 img: imgData.uri
                             }
-                            setProductsData(prev => [...prev, newProduct])
-                            console.log("?")
+                            productsContext.setProductsList(prev => [...prev, newProduct])
                         })
                 })
 
             })
     }, [])
 
-    const [productsData, setProductsData] = React.useState([])
-    const [cart, setCart] = React.useState(() => {
-        const localStorageCart = JSON.parse(localStorage.getItem('cart'))
-        return localStorageCart || []
-    })
 
-    function addToCart(id, number) {
-
-        let newCart
-
-        if (cart.filter(item => item.id === id).length) {  //if item has already been added to cart
-            newCart = cart.map(item => {
-                if (item.id === id) {
-                    item.number = item.number + number
-                }
-                return item
-            })
-        } else {
-            const itemToAdd = { ...productsData.filter(item => item.id === id)[0], number: number }
-            newCart = [...cart, itemToAdd]
-        }
-
-
-        setCart(newCart)
-        localStorage.setItem('cart', JSON.stringify(newCart));
-    }
-
-    function removeFromCart(id) {
-        const newCart = cart.filter(item => item.id !== id)
-        setCart(newCart)
-        localStorage.setItem('cart', JSON.stringify(newCart));
-    }
-
-    function changeNumberOfItemsInCart(id, sign) {
-        let amount = 1
-        if (sign === "minus") {
-            amount = -1
-        }
-
-        const newCart = cart.map(item => {
-            if (item.id === id) {
-                item.number = item.number + amount
-            }
-            if (item.number < 1) {
-                item.number = 1
-            }
-            return item
-        })
-        setCart(newCart)
-        localStorage.setItem('cart', JSON.stringify(newCart));
-    }
+    const productsList = productsContext.productsList
 
     const location = useLocation()
     const pathName = location.pathname
 
     if (pathName === "/") {
-        const productsHtml = productsData.slice(1, productsData.length).map((product, index) => {
+        const productsHtml = productsList.slice(1, productsList.length).map((product, index) => {
             return <ProductCard key={product.id}
                                 id={product.id}
                                 name={product.name}
                                 price={product.price}
                                 rating={product.rating}
                                 img={product.img}
-                                last={index === productsData.length - 2 ? true : false}
-                                addToCart={addToCart}
+                                last={index === productsList.length - 2 ? true : false}
             />
         })
 
-        const featuredProduct = productsData[0]
-
         return (
-          <div className="main">
-              {productsData.length > 0 && <div className="container">
-                  <Header cart={cart} removeFromCart={removeFromCart}
-                          changeNumberOfItemsInCart={changeNumberOfItemsInCart}/>
-
-                  <FeaturedCard id={featuredProduct.id}
-                                name={featuredProduct.name}
-                                desc={featuredProduct.description}
-                                price={featuredProduct.price}
-                                rating={featuredProduct.rating}
-                                reviewCount={featuredProduct.reviewCount}
-                                img={featuredProduct.img}
-                                addToCart={addToCart}
-                  />
-
-                  <AdCard/>
-
-                  <div className='products-title'>
-                      <h2 className="text--primary">Our top products</h2>
-                      <h4 className="text--secondary btn">View all</h4>
-                  </div>
-
-                  <div className='products'>
-                      {productsHtml}
-                  </div>
-              </div>}
-          </div>
+            <div className="main">
+                {productsList.length > 0 && <div className="container">
+                    <Header />
+    
+                    <FeaturedCard/>
+    
+                    <AdCard />
+    
+                    <div className='products-title'>
+                        <h2 className="text--primary">Our top products</h2>
+                        <h4 className="text--secondary">View all</h4>
+                    </div>
+    
+                    <div className='products'>
+                        {productsHtml}
+                    </div>
+                </div>}
+            </div>
         )
     } else if (pathName === "/products") {
-        const productsHtml = productsData.slice(0, productsData.length).map((product, index) => {
+        const productsHtml = productsList.slice(0, productsList.length).map((product, index) => {
             return <ProductCard key={product.id}
                                 id={product.id}
                                 name={product.name}
@@ -142,7 +85,7 @@ export default function MainContent(props) {
 
         return (
           <div className="all-main">
-              {productsData.length > 0 && <div className="container">
+              {productsList.length > 0 && <div className="container">
                   <div className='all-products'>
                       {productsHtml}
                   </div>

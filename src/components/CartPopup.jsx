@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ProductImage from "./ProductImage";
 import {useNavigate} from "react-router-dom";
+import { ProductsContext } from "../context/productsContext";
 
 export default function CartPopup(props) {
 
     const navigate = useNavigate()
+    const context = React.useContext(ProductsContext)
 
-    const cartItemsHtml = props.cart.map((item, index) => {
+    const cartItemsHtml = context.cart.map((item, index) => {
         return (
             <div className="cart-popup__item" key={index}>
                 <ProductImage src={item.img} />
@@ -17,11 +19,11 @@ export default function CartPopup(props) {
                     <p className="cart-popup__item__price text--small-bold">${item.price}</p>
                     <div className="cart-popup__item__panel">
                         <div className="cart-popup__item__quantity">
-                            <div className="cart-popup__item__quantity-btn" onClick={() => props.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
+                            <div className="cart-popup__item__quantity-btn" onClick={() => context.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
                             <p className="cart-popup__item__quantity-number">{item.number}</p>
-                            <div className="cart-popup__item__quantity-btn" onClick={() => props.changeNumberOfItemsInCart(item.id, "plus")}>+</div>
+                            <div className="cart-popup__item__quantity-btn" onClick={() => context.changeNumberOfItemsInCart(item.id, "plus")}>+</div>
                         </div>
-                        <p className="text--small" onClick={() => props.removeFromCart(item.id)}>remove</p>
+                        <p className="text--small" onClick={() => context.removeFromCart(item.id)}>remove</p>
                     </div>
                 </div>
             </div>
@@ -29,18 +31,18 @@ export default function CartPopup(props) {
     })
 
     let total = 0 
-    props.cart.forEach(item => total += item.price * item.number)
+    context.cart.forEach(item => total += item.price * item.number)
 
     return (
         <div>
             {props.show && <div className="cart-popup card--small">
                 <div className="cart-popup__arrow"></div>
                 <div className="cart-popup__header">
-                    <p>{props.cart.length > 0 ? `${props.cart.length} item${props.cart.length > 1 ? 's' : ''} in cart` : 'The cart is empty'}</p>
+                    <p>{context.cart.length > 0 ? `${context.cart.length} item${context.cart.length > 1 ? 's' : ''} in cart` : 'The cart is empty'}</p>
                     <FontAwesomeIcon icon={`fa-solid fa-xmark`} className='icon--l icon--clickable' onClick={props.toggle} />
 
                 </div>
-               {props.cart.length > 0 && <div className="cart-popup__inner">
+               {context.cart.length > 0 && <div className="cart-popup__inner">
 
                     <div className="cart-popup__items">
 
@@ -55,7 +57,6 @@ export default function CartPopup(props) {
                         </div>
                         <div className="btn--medium btn--solid btn" onClick={() => navigate("/checkout")}>Checkout</div>
                     </div>
-
                 </div>}
             </div>}
         </div>

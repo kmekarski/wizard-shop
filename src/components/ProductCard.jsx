@@ -1,9 +1,14 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { ProductsContext } from "../context/productsContext";
+
 import ProductImage from "./ProductImage";
 
 export default function ProductCard(props) {
+
+    const context = React.useContext(ProductsContext)
+
     return (
         <div className="product card--small">
             <ProductImage src={props.img} />
@@ -12,7 +17,7 @@ export default function ProductCard(props) {
             <div className="product__panel">
                 <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
                 <h3 className="text--small-regular">{props.rating}</h3>
-                <div className="product__btn" onClick={() => props.addToCart(props.id, 1)}>+</div>
+                <div className="product__btn" onClick={() => context.addToCart(props.id, 1)}>+</div>
             </div>
 
 

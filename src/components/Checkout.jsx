@@ -2,14 +2,12 @@ import React, {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
+import { ProductsContext } from "../context/productsContext";
 
 export default function Checkout(props) {
-  const [cart, setCart] = React.useState(() => {
-    const localStorageCart = JSON.parse(localStorage.getItem('cart'))
-    return localStorageCart || []
-  })
+  const context = React.useContext(ProductsContext)
 
-  const cartItemsHtml = cart.map((item, index) => {
+  const cartItemsHtml = context.cart.map((item, index) => {
     return (
       <div className="cart-popup__item" key={index}>
         <ProductImage src={item.img} />
@@ -18,11 +16,11 @@ export default function Checkout(props) {
           <p className="cart-popup__item__price text--small-bold">${item.price}</p>
           <div className="cart-popup__item__panel">
             <div className="cart-popup__item__quantity">
-              <div className="cart-popup__item__quantity-btn" onClick={() => props.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
+              <div className="cart-popup__item__quantity-btn" onClick={() => context.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
               <p className="cart-popup__item__quantity-number">{item.number}</p>
-              <div className="cart-popup__item__quantity-btn" onClick={() => props.changeNumberOfItemsInCart(item.id, "plus")}>+</div>
+              <div className="cart-popup__item__quantity-btn" onClick={() => context.changeNumberOfItemsInCart(item.id, "plus")}>+</div>
             </div>
-            <p className="text--small" onClick={() => props.removeFromCart(item.id)}>remove</p>
+            <p className="text--small" onClick={() => context.removeFromCart(item.id)}>remove</p>
           </div>
         </div>
       </div>

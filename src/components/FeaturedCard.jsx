@@ -3,8 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ProductImage from "./ProductImage";
 
+import { ProductsContext } from "../context/productsContext";
+
+
 export default function FeaturedCard(props) {
 
+    const context = React.useContext(ProductsContext)
+    const featuredProduct = context.productsList[0]
     const [numberOfItems, setNumberOfItems] = React.useState(1)
 
     React.useEffect( () => {
@@ -15,9 +20,9 @@ export default function FeaturedCard(props) {
 
     return (
         <div className='featured card--big'>
-            <ProductImage src={props.img} />
+            <ProductImage src={featuredProduct.img} />
             <div className="featured__text">
-              <h3 className="featured__name text--medium-bold">{props.name}</h3>
+              <h3 className="featured__name text--medium-bold">{featuredProduct.name}</h3>
               <div className="featured__rating">
                 <div className="featured__stars">
                   <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star'/>
@@ -26,11 +31,11 @@ export default function FeaturedCard(props) {
                   <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star'/>
                   <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star'/>
                 </div>
-                <p className="text--small">({props.reviewCount} reviews)</p>
+                <p className="text--small">({featuredProduct.reviewCount} reviews)</p>
               </div>
-              <p className="featured__desc text--desc">{props.desc}</p>
+              <p className="featured__desc text--desc">{featuredProduct.desc}</p>
               <div className="featured__panel">
-                <p className="text--medium-bold">Price: ${props.price}</p>
+                <p className="text--medium-bold">Price: ${featuredProduct.price}</p>
                 <div className="featured__quantity">
                   <div className="featured__quantity-btn" onClick={() => setNumberOfItems(prev => prev-1)}>-</div>
                   <p className="featured__quantity-number">{numberOfItems}</p>
@@ -41,8 +46,8 @@ export default function FeaturedCard(props) {
                 <div className="btn--ghost btn--small btn">
                 <FontAwesomeIcon icon="fa-solid fa-heart" className='icon--xs icon--primary'/>
                 </div>
-                <div className="btn--ghost btn--small btn" onClick={() => props.addToCart(props.id, numberOfItems)}>Add to Cart</div>
-                <div className="btn--solid btn--small btn">Buy Now</div>
+                <div className="btn--ghost btn--small btn" onClick={() => context.addToCart(featuredProduct.id, numberOfItems)}>Add to Cart</div>
+                <div className="btn--solid btn--small btn">Buy now</div>
               </div>
             </div>
           </div>

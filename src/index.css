@@ -25,7 +25,7 @@ body {
   height: 100%;
   display: flex;
   justify-content: space-between;
-  gap: 50px;
+  /* gap: 50px; */
 }
 
 /* sidebar */
@@ -129,19 +129,18 @@ body {
 }
 
 .main .container {
-
   height: 100%;
   padding: 25px 35px 35px 0;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 25px repeat(5, 1fr);
   grid-template-rows: 3fr 10fr 1fr 10fr;
   column-gap: 25px;
   row-gap: 30px;
   grid-template-areas:
-    "header header header header header"
-    "featured featured featured ad ad"
-    "products-title products-title products-title ad ad"
-    "products products products products products";
+    ". header header header header header"
+    ". featured featured featured ad ad"
+    ". products-title products-title products-title ad ad"
+    ". products products products products products";
 }
 
 /* all-main */
@@ -171,16 +170,6 @@ body {
 .contact .container {
 }
 
-/* checkout */
-
-.checkout {
-  width: 100%;
-  height: 100%;
-}
-
-.checkout .container {
-}
-
 
 
 /* header */
@@ -194,7 +183,6 @@ body {
 }
 
 .header__text {
-  align-self: end;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -281,7 +269,8 @@ body {
 
 .featured__buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1em;
   align-items: center;
 }
 
@@ -635,7 +624,6 @@ form.login input {
 
 .cart-popup {
   width: 400px;
-  /* height: 440px; */
   position: absolute;
   z-index: 3;
   background-color: #D9D9D9;
@@ -755,6 +743,42 @@ form.login input {
   align-self: stretch;
   color: inherit;
 }
+
+/* checkout */
+
+.checkout {
+  width: 100%;
+  height: 100%;
+}
+
+.checkout .container{
+  height: 100%;
+  padding: 25px 0 0 0;
+  display: grid;
+  grid-template-columns: 25px auto;
+  grid-template-rows: 3fr 24fr;
+  column-gap: 25px;
+  row-gap: 20px;
+  grid-template-areas:
+    ". header"
+    "checkout-main checkout-main"
+}
+
+.checkout__main {
+  grid-area: checkout-main;
+  background-color: #d9d9d9;
+  padding: 3.5em 7em;
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  column-gap: 2em;
+}
+
+.checkout__card {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
 
 /* profile */
 

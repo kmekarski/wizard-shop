@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
+import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 
 export default function Checkout(props) {
@@ -30,7 +31,11 @@ export default function Checkout(props) {
   return (
     <div className="checkout">
       <div className="container">
-        {cartItemsHtml}
+        <Header title="Checkout" subtitle="" searchbar={false} buttons={false}></Header>
+        <div className="checkout__main">
+          <div className="checkout__card card--small"></div>
+          <div className="checkout__card card--small"></div>
+        </div>
       </div>
     </div>
   );

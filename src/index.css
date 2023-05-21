@@ -447,7 +447,7 @@ body {
 .text--small {
   font-size: 0.75rem;
   font-weight: 400;
-  color: #ffffff;
+  /* color: #ffffff; */
 }
 
 .text--input-big {
@@ -472,6 +472,18 @@ body {
   font-size: 0.75rem;
   font-weight: 400;
   color: #ffffff;
+}
+
+.text--white {
+  color: #fff;
+}
+
+.text--medium-dark {
+  color: #666;
+}
+
+.text--dark {
+  color: #2e2e2e;
 }
 
 .text--special {
@@ -539,6 +551,10 @@ body {
 .btn--solid {
   background: #D81E5B;
   color: #ffffff;
+}
+
+.btn--light {
+  background: #f4f4f4;
 }
 
 .btn--ghost {
@@ -767,18 +783,90 @@ form.login input {
 .checkout__main {
   grid-area: checkout-main;
   background-color: #d9d9d9;
-  padding: 3.5em 7em;
+  padding: 2.5em 7em;
   display: grid;
   grid-template-columns: 6fr 5fr;
   column-gap: 2em;
 }
 
-.checkout__card {
+.checkout__cart {
   width: 100%;
   height: 100%;
   background-color: #fff;
+  color: #2e2e2e;
+  padding: 2.5rem;
 }
 
+.checkout__payment {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+}
+
+.checkout__providers {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  border-bottom: 1px solid #D9D9D9;
+  margin-bottom: 0.5rem;
+}
+
+.checkout__form {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkout__long-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.checkout__two-inputs-container {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  column-gap: 1rem;
+}
+
+.checkout__two-inputs-container > div{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.checkout input {
+  font-size: 1rem;
+  padding: 0.5rem;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  text-indent: 0.75rem;
+  border: none;
+  outline: none;
+}
+
+.checkout__input--short{
+  width: 100%;
+}
+
+.checkout__input--medium{
+  width: 100%;
+}
+
+.checkout__input--long{
+  width: 100%;
+}
+
+.checkout__purchase-btn {
+  margin-top: auto;
+}
 
 /* profile */
 

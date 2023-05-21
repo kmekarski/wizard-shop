@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
@@ -6,7 +7,12 @@ import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 
 export default function Checkout(props) {
+  const navigate = useNavigate()
   const context = React.useContext(ProductsContext)
+
+  if(context.cart.length === 0) {
+    navigate('/')
+  }
 
   const cartItemsHtml = context.cart.map((item, index) => {
     return (
@@ -28,13 +34,66 @@ export default function Checkout(props) {
     )
   })
 
+  let total = 0
+  context.cart.forEach(item => total += item.price * item.number)
+
   return (
     <div className="checkout">
       <div className="container">
         <Header title="Checkout" subtitle="" searchbar={false} buttons={false}></Header>
         <div className="checkout__main">
-          <div className="checkout__card card--small"></div>
-          <div className="checkout__card card--small"></div>
+          <div className="checkout__cart card--small">
+            <p className="text--medium-bold text--dark">Cart</p>
+            <div className="checkout__cart__items">
+              {cartItemsHtml}
+            </div>
+            <div className="cart-popup__checkout">
+              <div className="cart-popup__checkout__text text--medium-bold">
+                <p>Total:</p>
+                <p>${total}</p>
+              </div>
+            </div>
+          </div>
+          <div className="checkout__payment card--small">
+            <p className="text--small text--medium-dark">pay using:</p>
+            <div className="checkout__providers">
+              <div className="btn--medium btn--light btn">Paypal</div>
+            </div>
+            <p className="text--small text--medium-dark">or pay using credit card:</p>
+            <div className="checkout__form">
+              <div className='checkout__long-input-container'>
+                <label htmlFor="card-number">Card number:</label>
+                <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+              </div>
+              <div className='checkout__two-inputs-container'>
+                <div>
+                  <label htmlFor="card-number">Expiration date:</label>
+                  <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+                </div>
+                <div>
+                  <label htmlFor="card-number">CVC:</label>
+                  <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+                </div>
+              </div>
+              <div className='checkout__long-input-container'>
+                <label htmlFor="card-number">Name on card:</label>
+                <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+              </div>
+              <div className='checkout__two-inputs-container'>
+                <div>
+                  <label htmlFor="card-number">Country or region:</label>
+                  <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+                </div>
+                <div>
+                  <label htmlFor="card-number">ZIP:</label>
+                  <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+                </div>
+              </div>
+
+
+            </div>
+            <div className="btn--medium btn--solid btn checkout__purchase-btn">Purchase</div>
+          </div>
         </div>
       </div>
     </div>

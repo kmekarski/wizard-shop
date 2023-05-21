@@ -32,7 +32,7 @@ export default function FeaturedCard(props) {
             <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
             <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
           </div>
-          <p className="text--small">({featuredProduct.reviewCount} reviews)</p>
+          <p className="text--small text--white">({featuredProduct.reviewCount}200 reviews)</p>
         </div>
         <p className="featured__desc text--desc">{featuredProduct.desc}</p>
         <div className="featured__panel">

@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 import { ProductsContext } from "../context/productsContext";
 
 
-export default function MainContent(props) {
+export default function AllProducts(props) {
 
     const productsContext = React.useContext(ProductsContext)
 
@@ -36,27 +36,16 @@ export default function MainContent(props) {
             })
     }, [])
 
-
     const productsList = productsContext.productsList
 
 
     return (
-        <div className="main">
+        <div className="all-products">
             {productsList.length > 0 && <div className="container">
-                <Header />
-
-                <FeaturedCard />
-
-                <AdCard />
-
-                <div className='products-title'>
-                    <h2 className="text--primary">Our top products</h2>
-                    <h4 className="text--secondary">View all</h4>
-                </div>
+                <Header title="All products" subtitle="Find your magic"/>
 
                 <ScrollableProductsList>
                 </ScrollableProductsList>
             </div>}
         </div>)
 }
-

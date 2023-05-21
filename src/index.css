@@ -129,6 +129,7 @@ body {
 }
 
 .main .container {
+  width: 100%;
   height: 100%;
   padding: 25px 35px 35px 0;
   display: grid;
@@ -167,8 +168,7 @@ body {
   height: 100%;
 }
 
-.contact .container {
-}
+.contact .container {}
 
 
 
@@ -321,12 +321,24 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 26px;
+  width: 100%;
+  overflow-x: auto;
 }
 
 /* product */
 
 .product {
-  width: 100%;
+  min-width: 12.5vw;
+  max-width: 12.5vw;
+  padding: 1em;
+  display: grid;
+  grid-template-rows: 50% auto auto auto;
+  row-gap: .35em;
+}
+
+.product--big {
+  min-width: 20vw;
+  max-width: 20vw;
   padding: 1em;
   display: grid;
   grid-template-rows: 50% auto auto auto;
@@ -350,17 +362,13 @@ body {
 
 .product__btn {
   margin-left: auto;
-
   align-self: start;
-
   height: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 1.25rem;
   font-weight: 500;
   background: #DAC6E1;
@@ -679,14 +687,16 @@ form.login input {
   height: calc(100% - 50px);
   background-color: white;
   border-radius: 0 0 10px 10px;
-
-  padding: 0 1.5em;
+  padding: 0 1.5em 1.5em;
 }
 
 .cart-popup__items {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: 55vh;
+  overflow: auto;
+  margin-bottom: 1em;
 }
 
 .cart-popup__item {
@@ -767,7 +777,7 @@ form.login input {
   height: 100%;
 }
 
-.checkout .container{
+.checkout .container {
   height: 100%;
   padding: 25px 0 0 0;
   display: grid;
@@ -795,6 +805,19 @@ form.login input {
   background-color: #fff;
   color: #2e2e2e;
   padding: 2.5rem;
+  display: grid;
+  grid-template-rows: auto auto auto;
+}
+
+.checkout__cart__items {
+  height: 52vh;
+  overflow: auto;
+}
+
+.cart-popup__checkout {
+  padding: 0;
+  margin-top: auto;
+  margin-bottom: .4em;
 }
 
 .checkout__payment {
@@ -836,7 +859,7 @@ form.login input {
   column-gap: 1rem;
 }
 
-.checkout__two-inputs-container > div{
+.checkout__two-inputs-container>div {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -852,21 +875,40 @@ form.login input {
   outline: none;
 }
 
-.checkout__input--short{
+.checkout__input--short {
   width: 100%;
 }
 
-.checkout__input--medium{
+.checkout__input--medium {
   width: 100%;
 }
 
-.checkout__input--long{
+.checkout__input--long {
   width: 100%;
 }
 
 .checkout__purchase-btn {
   margin-top: auto;
 }
+
+/* all products */
+
+.all-products .container {
+  width: 100%;
+  height: 100%;
+  padding: 25px 35px 35px 0;
+  display: grid;
+  grid-template-columns: 25px auto;
+  grid-template-rows: 3fr 3fr 22fr;
+  column-gap: 25px;
+  row-gap: 30px;
+  grid-template-areas:
+    ". header"
+    ". controls"
+    ". products"
+}
+
+
 
 /* profile */
 

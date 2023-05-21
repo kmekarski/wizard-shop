@@ -1,8 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { ProductsContext } from "../context/productsContext";
-
 import ProductImage from "./ProductImage";
 
 export default function ProductCard(props) {
@@ -23,7 +21,7 @@ export default function ProductCard(props) {
 
             {props.last && <div>
                 <div className="product-cover"></div>
-                <div className="product-cover__btn">
+                <div className="product-cover__btn" onClick={props.scroll}>
                     <FontAwesomeIcon icon="fa-solid fa-chevron-right" className='icon--s icon--primary' />
                 </div>
             </div>}

@@ -966,13 +966,13 @@ form.login input {
 }
 
 .all-products__dropdown-option{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5em;
   padding: 0.5em 1.8em;
   width: 100%;
   height: 100%;
-}
-
-.all-products__dropdown-option:hover {
-  background-color: yellow;
 }
 
 .all-products__products {

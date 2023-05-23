@@ -99,8 +99,8 @@ export default function AllProducts(props) {
     }
 
     const controlsHtml = controls.map(el => {
-        const optionsHtml = el.options.map(option => {
-            return <div className="all-products__dropdown-option" onClick={()=> selectOption(el.name, option)}>{option}</div>
+        const optionsHtml = [el.name, ...el.options].map(option => {
+            return <div className="all-products__dropdown-option" onClick={()=> selectOption(el.name, option)}>{option}{option === el.name && <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />}</div>
         })
 
         return <div>

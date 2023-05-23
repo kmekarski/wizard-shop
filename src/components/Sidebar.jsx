@@ -59,7 +59,7 @@ export default function Sidebar(props) {
                     <div className="newsletter__form">
                         <div className="newsletter__input input">
                             <FontAwesomeIcon icon="fa-solid fa-envelope" className='icon--input'/>
-                            <p className='text--input-small'>Email</p>
+                            <input className='text--input-medium' placeholder="Email"/>
                         </div>
                         <div className="btn--solid btn--small btn">
                             Sign me up

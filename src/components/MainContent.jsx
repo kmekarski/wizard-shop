@@ -6,11 +6,14 @@ import AdCard from "./AdCard";
 import ProductCard from "./ProductCard";
 import ScrollableProductsList from "./ScrollableProductsList";
 import { useLocation } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import { ProductsContext } from "../context/productsContext";
 
 
 export default function MainContent(props) {
+
+    const navigate = useNavigate()
 
     const productsContext = React.useContext(ProductsContext)
 
@@ -51,7 +54,7 @@ export default function MainContent(props) {
 
                 <div className='products-title'>
                     <h2 className="text--primary">Our top products</h2>
-                    <h4 className="text--secondary">View all</h4>
+                    <h4 className="text--secondary" style={{cursor: 'pointer'}} onClick={() => navigate('/products')}>View all</h4>
                 </div>
 
                 <ScrollableProductsList>

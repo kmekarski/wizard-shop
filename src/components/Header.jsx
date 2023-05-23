@@ -22,7 +22,7 @@ export default function Header(props) {
       </div>
       {props.searchbar && <div className="header__searchbar input">
         <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className='icon--input' />
-        <p className='text--input-medium'>Search</p>
+        <input className='text--input-medium' placeholder="Search"/>
       </div>}
       {props.buttons && <div className="header__buttons">
         <div className="header__cart-btn header__icon-btn">
@@ -34,9 +34,7 @@ export default function Header(props) {
             changeNumberOfItemsInCart={props.changeNumberOfItemsInCart}
             cart={props.cart} />
         </div>
-        {localStorage.getItem("userID") === null && <div className="header__logout-btn btn--solid btn--medium btn" onClick={() => navigate("/register")}>
-          Register
-        </div>}
+
         {localStorage.getItem("userID") !== null && <div className="header__account-btn header__icon-btn" onClick={() => navigate("/profile")}>
           <FontAwesomeIcon icon="fa-solid fa-user" className='icon--m icon--primary' />
           <p className='text--icon'>Account</p>

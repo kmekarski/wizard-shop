@@ -37,15 +37,28 @@ export default function AllProducts(props) {
     }, [])
 
     const productsList = productsContext.productsList
+    
+    const productsHtml = productsList.slice(0, productsList.length).map((product, index) => {
+        return <ProductCard key={product.id}
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            rating={product.rating}
+            img={product.img}
+            addToCart={productsContext.addToCart}
+            size='big'
+        />
+    })
 
 
     return (
         <div className="all-products">
             {productsList.length > 0 && <div className="container">
-                <Header title="All products" subtitle="Find your magic"/>
-
-                <ScrollableProductsList>
-                </ScrollableProductsList>
+                <Header title="All products" subtitle="Find your magic" />
+                <div className="all-products__controls"></div>
+                <div className="all-products__products">
+                    {productsHtml}
+                </div>
             </div>}
         </div>)
 }

@@ -7,8 +7,21 @@ export default function ProductCard(props) {
 
     const context = React.useContext(ProductsContext)
 
+
+    if (props.size === 'big')
+        return (
+            <div className={`product--big card--small`}>
+                <ProductImage src={props.img} />
+                <h3 className="text--small-bold">{props.name}</h3>
+                <div className="product__panel">
+                    <h3 className="text--small-regular">Price: ${props.price}</h3>
+                    <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
+                    <h3 className="text--small-regular">{props.rating}</h3>
+                </div>
+            </div>
+        )
     return (
-        <div className="product card--small">
+        <div className={`product--${props.size} card--small`}>
             <ProductImage src={props.img} />
             <h3 className="text--small-bold">{props.name}</h3>
             <h3 className="text--small-regular">Price: ${props.price}</h3>
@@ -28,4 +41,8 @@ export default function ProductCard(props) {
 
         </div>
     )
+}
+
+ProductCard.defaultProps = {
+    size: "small"
 }

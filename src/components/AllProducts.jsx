@@ -57,26 +57,31 @@ export default function AllProducts(props) {
         {
             name: "Category",
             options: ["Wands", "Brooms", "Hats"],
+            selected: "Category",
             isOpen: false
         },
         {
             name: "Price",
             options: ["0-10", "10-20", "20+"],
+            selected: "Price",
             isOpen: false
         },
         {
             name: "Color",
             options: ["Red", "Blue", "Purple"],
+            selected: "Color",
             isOpen: false
         },
         {
             name: "Size",
             options: ["S", "M", "L"],
+            selected: "Size",
             isOpen: false
         },
         {
             name: "Sort by",
             options: ["Name", "Price", "Rating"],
+            selected: "Sort by",
             isOpen: false
         },
     ])
@@ -89,14 +94,18 @@ export default function AllProducts(props) {
         );
     };
 
+    const selectOption = (controlName, option) => {
+        setControls(prevControls => prevControls.map(control => control.name === controlName ? {...control, selected: option} : control))
+    }
+
     const controlsHtml = controls.map(el => {
         const optionsHtml = el.options.map(option => {
-            return <div className="all-products__dropdown-option">{option}</div>
+            return <div className="all-products__dropdown-option" onClick={()=> selectOption(el.name, option)}>{option}</div>
         })
 
         return <div>
             <div className="all-products__dropdown-btn" onClick={() => toggleOptions(el.name)}>
-                    {el.name}
+                    {el.selected}
                     <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
                     {el.isOpen && <div className="all-products__dropdown-list">
                         {optionsHtml}

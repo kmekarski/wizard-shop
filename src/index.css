@@ -937,7 +937,7 @@ form.login input {
   display: grid;
   width: 70%;
   grid-template-columns: repeat(5, 20%);
-  column-gap: 1.5em;
+  column-gap: 2em;
   position: relative;
 }
 

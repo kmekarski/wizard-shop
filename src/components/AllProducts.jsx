@@ -89,7 +89,7 @@ export default function AllProducts(props) {
     const toggleOptions = (controlName) => {
         setControls(prevControls =>
             prevControls.map(control =>
-                control.name === controlName ? { ...control, isOpen: !control.isOpen } : control
+                control.name === controlName ? { ...control, isOpen: !control.isOpen } : { ...control, isOpen: false }
             )
         );
     };
@@ -102,7 +102,7 @@ export default function AllProducts(props) {
         const optionsHtml = el.options.map(option => {
             return <div className="all-products__dropdown-option" onClick={()=> selectOption(el.name, option)}>{option}</div>
         })
-        
+
         return <div>
             <div className="all-products__dropdown-btn" onClick={() => toggleOptions(el.name)}>
                     {el.selected}

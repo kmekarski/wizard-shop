@@ -5,6 +5,8 @@ import FeaturedCard from "./FeaturedCard";
 import AdCard from "./AdCard";
 import ProductCard from "./ProductCard";
 import ScrollableProductsList from "./ScrollableProductsList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useLocation } from "react-router-dom";
 
 import { ProductsContext } from "../context/productsContext";
@@ -37,7 +39,7 @@ export default function AllProducts(props) {
     }, [])
 
     const productsList = productsContext.productsList
-    
+
     const productsHtml = productsList.slice(0, productsList.length).map((product, index) => {
         return <ProductCard key={product.id}
             id={product.id}
@@ -50,12 +52,21 @@ export default function AllProducts(props) {
         />
     })
 
+    const controls = ["Category", "Price", "Color", "Size", "Sort by"].map(el => {
+        return <div className="all-products__dropdown">
+            {el}
+            <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
+        </div>
+    })
+
 
     return (
         <div className="all-products">
             {productsList.length > 0 && <div className="container">
                 <Header title="All products" subtitle="Find your magic" />
-                <div className="all-products__controls"></div>
+                <div className="all-products__controls">
+                    {controls}
+                </div>
                 <div className="all-products__products">
                     {productsHtml}
                 </div>

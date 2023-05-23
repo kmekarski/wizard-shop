@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation } from "react-router-dom";
 
 import { ProductsContext } from "../context/productsContext";
+import { faList } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function AllProducts(props) {
@@ -52,12 +53,71 @@ export default function AllProducts(props) {
         />
     })
 
-    const controls = ["Category", "Price", "Color", "Size", "Sort by"].map(el => {
-        return <div className="all-products__dropdown">
-            {el}
-            <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
+    const [controls, setControls] = React.useState([
+        {
+            name: "Category",
+            options: ["Wands", "Brooms", "Hats"],
+            isOpen: false
+        },
+        {
+            name: "Price",
+            options: ["0-10", "10-20", "20+"],
+            isOpen: false
+        },
+        {
+            name: "Color",
+            options: ["Red", "Blue", "Purple"],
+            isOpen: false
+        },
+        {
+            name: "Size",
+            options: ["S", "M", "L"],
+            isOpen: false
+        },
+        {
+            name: "Sort by",
+            options: ["Name", "Price", "Rating"],
+            isOpen: false
+        },
+    ])
+
+    const toggleOptions = (controlName) => {
+        setControls(prevControls =>
+            prevControls.map(control =>
+                control.name === controlName ? { ...control, isOpen: !control.isOpen } : control
+            )
+        );
+    };
+
+    const controlsHtml = controls.map(el => {
+        const optionsHtml = el.options.map(option => {
+            return <div className="all-products__dropdown-option">{option}</div>
+        })
+
+        return <div>
+            <div className="all-products__dropdown-btn" onClick={() => toggleOptions(el.name)}>
+                    {el.name}
+                    <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
+                    {el.isOpen && <div className="all-products__dropdown-list">
+                        {optionsHtml}
+                    </div>}
+            </div>
+
+            
+
         </div>
+
+
+        // <div className="all-products__dropdown-btn" onClick={() => toggleOptions(el.name)}>
+        //     {el.name}
+        //     <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
+        //     {el.isOpen && <div className="all-products__dropdown-list">
+        //         {optionsHtml}
+        //     </div>}
+        // </div>
     })
+
+
 
 
     return (
@@ -65,7 +125,7 @@ export default function AllProducts(props) {
             {productsList.length > 0 && <div className="container">
                 <Header title="All products" subtitle="Find your magic" />
                 <div className="all-products__controls">
-                    {controls}
+                    {controlsHtml}
                 </div>
                 <div className="all-products__products">
                     {productsHtml}

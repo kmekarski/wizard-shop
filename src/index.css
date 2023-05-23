@@ -938,16 +938,41 @@ form.login input {
   align-items: center;
   gap: 1.5em;
   margin-top: -1em;
+  position: relative;
 }
 
-.all-products__dropdown {
+.all-products__dropdown-btn {
   padding: 0.5em 1.8em;
-  border-radius: 3em;
+  border-radius: 1em;
   background-color: #d9d9d9;
   display: flex;
   gap: .5em;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.all-products__dropdown-list {
+
+  border-radius: 1em;
+  background-color: #d9d9d9;
+  display: grid;
+  gap: .5em;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.all-products__dropdown-option{
+  padding: 0.5em 1.8em;
+  width: 100%;
+  height: 100%;
+}
+
+.all-products__dropdown-option:hover {
+  background-color: yellow;
 }
 
 .all-products__products {

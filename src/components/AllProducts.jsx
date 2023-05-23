@@ -41,7 +41,7 @@ export default function AllProducts(props) {
 
     const productsList = productsContext.productsList
 
-    const productsHtml = productsList.slice(0, productsList.length).map((product, index) => {
+    const productsHtml = productsList.slice(0, productsList.length).map((product) => {
         return <ProductCard key={product.id}
             id={product.id}
             name={product.name}
@@ -102,7 +102,7 @@ export default function AllProducts(props) {
         const optionsHtml = el.options.map(option => {
             return <div className="all-products__dropdown-option" onClick={()=> selectOption(el.name, option)}>{option}</div>
         })
-
+        
         return <div>
             <div className="all-products__dropdown-btn" onClick={() => toggleOptions(el.name)}>
                     {el.selected}

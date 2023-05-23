@@ -934,10 +934,10 @@ form.login input {
 
 .all-products__controls {
   grid-area: controls;
-  display: flex;
-  align-items: center;
-  gap: 1.5em;
-  margin-top: -1em;
+  display: grid;
+  width: 70%;
+  grid-template-columns: repeat(5, 20%);
+  column-gap: 1.5em;
   position: relative;
 }
 

@@ -59,28 +59,28 @@ export default function Checkout(props) {
 
   const addressForm = <form onSubmit={e => handleAddressSubmit(e)} className="checkout__form">
     <div className='checkout__long-input-container'>
-      <label htmlFor="card-number">Address line 1</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+      <label htmlFor="address1">Address line 1</label>
+      <input type="text" id='address1' name='address1' className='checkout__input--long' />
     </div>
 
     <div className='checkout__long-input-container'>
-      <label htmlFor="card-number">Address line 2 (optional)</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+      <label htmlFor="address2">Address line 2 (optional)</label>
+      <input type="text" id='address2' name='address2' className='checkout__input--long' />
     </div>
         <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="card-number">Country or region</label>
-        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+        <label htmlFor="country">Country or region</label>
+        <input type="text" id='country' name='country' className='checkout__input--medium' />
       </div>
     </div>
     <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="card-number">City</label>
-        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+        <label htmlFor="city">City</label>
+        <input type="text" id='city' name='city' className='checkout__input--medium' />
       </div>
       <div>
-        <label htmlFor="card-number">ZIP</label>
-        <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+        <label htmlFor="zip">ZIP</label>
+        <input type="text" id='zip' name='zip' className='checkout__input--short' />
       </div>
     </div>
     <button className="btn--medium btn--solid btn checkout__purchase-btn">Proceed</button>
@@ -93,26 +93,26 @@ export default function Checkout(props) {
     </div>
     <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="card-number">Expiration date</label>
-        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+        <label htmlFor="exp-date">Expiration date</label>
+        <input type="text" id='exp-date' name='exp-date' className='checkout__input--medium' />
       </div>
       <div>
-        <label htmlFor="card-number">CVC</label>
-        <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+        <label htmlFor="cvc">CVC</label>
+        <input type="text" id='cvc' name='cvc' className='checkout__input--short' />
       </div>
     </div>
     <div className='checkout__long-input-container'>
-      <label htmlFor="card-number">Name on card</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+      <label htmlFor="name">Name on card</label>
+      <input type="text" id='name' name='name' className='checkout__input--long' />
     </div>
     <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="card-number">Country or region</label>
-        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+        <label htmlFor="country">Country or region</label>
+        <input type="text" id='country' name='country' className='checkout__input--medium' />
       </div>
       <div>
-        <label htmlFor="card-number">ZIP</label>
-        <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+        <label htmlFor="zip">ZIP</label>
+        <input type="text" id='zip' name='zip' className='checkout__input--short' />
       </div>
     </div>
     <button className="btn--medium btn--solid btn checkout__purchase-btn">Purchase</button>

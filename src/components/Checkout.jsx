@@ -26,12 +26,12 @@ export default function Checkout(props) {
 
   function handleAddressSubmit(e) {
     e.preventDefault()
-    setAddressData(prev => { return {...prev, isSet: true}})
+    setAddressData(prev => { return { ...prev, isSet: true } })
   }
 
   function handlePaymentSubmit(e) {
     e.preventDefault()
-    setPaymentData(prev => { return {...prev, isSet: true}})
+    setPaymentData(prev => { return { ...prev, isSet: true } })
   }
 
   const cartItemsHtml = context.cart.map((item, index) => {
@@ -58,38 +58,38 @@ export default function Checkout(props) {
   context.cart.forEach(item => total += item.price * item.number)
 
   const addressForm = <form onSubmit={e => handleAddressSubmit(e)} className="checkout__form">
-  <div className='checkout__long-input-container'>
-    <label htmlFor="card-number">Address:</label>
-    <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
-  </div>
-  <div className='checkout__two-inputs-container'>
-    <div>
-      <label htmlFor="card-number">First name:</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+    <div className='checkout__long-input-container'>
+      <label htmlFor="card-number">Address:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
     </div>
-    <div>
-      <label htmlFor="card-number">Last name:</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+    <div className='checkout__two-inputs-container'>
+      <div>
+        <label htmlFor="card-number">First name:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+      </div>
+      <div>
+        <label htmlFor="card-number">Last name:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+      </div>
     </div>
-  </div>
-  <div className='checkout__long-input-container'>
-    <label htmlFor="card-number">Name on card:</label>
-    <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
-  </div>
-  <div className='checkout__two-inputs-container'>
-    <div>
-      <label htmlFor="card-number">Country or region:</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+    <div className='checkout__long-input-container'>
+      <label htmlFor="card-number">Name on card:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
     </div>
-    <div>
-      <label htmlFor="card-number">ZIP:</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+    <div className='checkout__two-inputs-container'>
+      <div>
+        <label htmlFor="card-number">Country or region:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+      </div>
+      <div>
+        <label htmlFor="card-number">ZIP:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+      </div>
     </div>
-  </div>
-  <button className="btn--medium btn--solid btn checkout__purchase-btn">Proceed</button>
-</form>
+    <button className="btn--medium btn--solid btn checkout__purchase-btn">Proceed</button>
+  </form>
 
-  const paymentForm = <form onSubmit={e => handlePaymentSubmit(e)}className="checkout__form">
+  const paymentForm = <form onSubmit={e => handlePaymentSubmit(e)} className="checkout__form">
     <div className='checkout__long-input-container'>
       <label htmlFor="card-number">Card number:</label>
       <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
@@ -139,13 +139,19 @@ export default function Checkout(props) {
             </div>
           </div>
           <div className="checkout__payment card--small">
-            <p className="text--small text--medium-dark">pay using:</p>
-            <div className="checkout__providers">
-              <div className="btn--medium btn--light btn">Paypal</div>
-            </div>
-            <p className="text--small text--medium-dark">or pay using credit card:</p>
-            {addressData.isSet? paymentForm : addressForm}
+
+
             
+            {addressData.isSet === true ? <div>
+              <p className="text--small text--medium-dark">pay using:</p>
+              <div className="checkout__providers">
+                <div className="btn--medium btn--light btn">Paypal</div>
+              </div>
+              <p className="text--small text--medium-dark">or pay using credit card:</p>
+            </div> : <p className="text--small text--medium-dark">your address info:</p>}
+
+            {addressData.isSet ? paymentForm : addressForm}
+
           </div>
         </div>
       </div>

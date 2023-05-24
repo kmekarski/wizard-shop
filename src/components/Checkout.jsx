@@ -27,11 +27,14 @@ export default function Checkout(props) {
   function handleAddressSubmit(e) {
     e.preventDefault()
     setAddressData(prev => { return { ...prev, isSet: true } })
+    //odpowiednio sformatować dane z formularza i zapisać w state addressData
   }
 
   function handlePaymentSubmit(e) {
     e.preventDefault()
     setPaymentData(prev => { return { ...prev, isSet: true } })
+  //odpowiednio sformatować dane z formularza, zapisać w state paymentData
+  //i wysłać na odpowiedni endpoint
   }
 
   const cartItemsHtml = context.cart.map((item, index) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
@@ -10,8 +10,28 @@ export default function Checkout(props) {
   const navigate = useNavigate()
   const context = React.useContext(ProductsContext)
 
-  if(context.cart.length === 0) {
+
+
+  if (context.cart.length === 0) {
     navigate('/')
+  }
+
+  const [addressData, setAddressData] = useState({
+    isSet: false
+  })
+
+  const [paymentData, setPaymentData] = useState({
+    isSet: false
+  })
+
+  function handleAddressSubmit(e) {
+    e.preventDefault()
+    setAddressData(prev => { return {...prev, isSet: true}})
+  }
+
+  function handlePaymentSubmit(e) {
+    e.preventDefault()
+    setPaymentData(prev => { return {...prev, isSet: true}})
   }
 
   const cartItemsHtml = context.cart.map((item, index) => {
@@ -37,6 +57,70 @@ export default function Checkout(props) {
   let total = 0
   context.cart.forEach(item => total += item.price * item.number)
 
+  const addressForm = <form onSubmit={e => handleAddressSubmit(e)} className="checkout__form">
+  <div className='checkout__long-input-container'>
+    <label htmlFor="card-number">Address:</label>
+    <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+  </div>
+  <div className='checkout__two-inputs-container'>
+    <div>
+      <label htmlFor="card-number">First name:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+    </div>
+    <div>
+      <label htmlFor="card-number">Last name:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+    </div>
+  </div>
+  <div className='checkout__long-input-container'>
+    <label htmlFor="card-number">Name on card:</label>
+    <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+  </div>
+  <div className='checkout__two-inputs-container'>
+    <div>
+      <label htmlFor="card-number">Country or region:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+    </div>
+    <div>
+      <label htmlFor="card-number">ZIP:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+    </div>
+  </div>
+  <button className="btn--medium btn--solid btn checkout__purchase-btn">Proceed</button>
+</form>
+
+  const paymentForm = <form onSubmit={e => handlePaymentSubmit(e)}className="checkout__form">
+    <div className='checkout__long-input-container'>
+      <label htmlFor="card-number">Card number:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+    </div>
+    <div className='checkout__two-inputs-container'>
+      <div>
+        <label htmlFor="card-number">Expiration date:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+      </div>
+      <div>
+        <label htmlFor="card-number">CVC:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+      </div>
+    </div>
+    <div className='checkout__long-input-container'>
+      <label htmlFor="card-number">Name on card:</label>
+      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+    </div>
+    <div className='checkout__two-inputs-container'>
+      <div>
+        <label htmlFor="card-number">Country or region:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
+      </div>
+      <div>
+        <label htmlFor="card-number">ZIP:</label>
+        <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
+      </div>
+    </div>
+    <button className="btn--medium btn--solid btn checkout__purchase-btn">Purchase</button>
+  </form>
+
   return (
     <div className="checkout">
       <div className="container">
@@ -60,39 +144,8 @@ export default function Checkout(props) {
               <div className="btn--medium btn--light btn">Paypal</div>
             </div>
             <p className="text--small text--medium-dark">or pay using credit card:</p>
-            <div className="checkout__form">
-              <div className='checkout__long-input-container'>
-                <label htmlFor="card-number">Card number:</label>
-                <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
-              </div>
-              <div className='checkout__two-inputs-container'>
-                <div>
-                  <label htmlFor="card-number">Expiration date:</label>
-                  <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
-                </div>
-                <div>
-                  <label htmlFor="card-number">CVC:</label>
-                  <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
-                </div>
-              </div>
-              <div className='checkout__long-input-container'>
-                <label htmlFor="card-number">Name on card:</label>
-                <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
-              </div>
-              <div className='checkout__two-inputs-container'>
-                <div>
-                  <label htmlFor="card-number">Country or region:</label>
-                  <input type="text" id='card-number' name='card-number' className='checkout__input--medium' />
-                </div>
-                <div>
-                  <label htmlFor="card-number">ZIP:</label>
-                  <input type="text" id='card-number' name='card-number' className='checkout__input--short' />
-                </div>
-              </div>
-
-
-            </div>
-            <div className="btn--medium btn--solid btn checkout__purchase-btn">Purchase</div>
+            {addressData.isSet? paymentForm : addressForm}
+            
           </div>
         </div>
       </div>

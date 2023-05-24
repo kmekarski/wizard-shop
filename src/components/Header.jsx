@@ -14,6 +14,11 @@ export default function Header(props) {
     setShowCart(prev => !prev)
   }
 
+  function search(e) {
+    e.preventDefault()
+    navigate("/products")
+  }
+
   return (
     <div className='header'>
       <div className="header__text">
@@ -22,7 +27,7 @@ export default function Header(props) {
       </div>
       {props.searchbar && <div className="header__searchbar input">
         <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className='icon--input' />
-        <input className='text--input-medium' placeholder="Search"/>
+        <form onSubmit={e => search(e)}><input className='text--input-medium' placeholder="Search"/></form>
       </div>}
       {props.buttons && <div className="header__buttons">
         <div className="header__cart-btn header__icon-btn">

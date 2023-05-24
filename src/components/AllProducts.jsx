@@ -57,31 +57,31 @@ export default function AllProducts(props) {
         {
             name: "Category",
             options: ["Wands", "Brooms", "Hats"],
-            selected: "Category",
+            selected: "",
             isOpen: false
         },
         {
             name: "Price",
             options: ["0-10", "10-20", "20+"],
-            selected: "Price",
+            selected: "",
             isOpen: false
         },
         {
             name: "Color",
             options: ["Red", "Blue", "Purple"],
-            selected: "Color",
+            selected: "",
             isOpen: false
         },
         {
             name: "Size",
             options: ["S", "M", "L"],
-            selected: "Size",
+            selected: "",
             isOpen: false
         },
         {
             name: "Sort by",
             options: ["Name", "Price", "Rating"],
-            selected: "Sort by",
+            selected: "",
             isOpen: false
         },
     ])
@@ -95,24 +95,27 @@ export default function AllProducts(props) {
     };
 
     const selectOption = (controlName, option) => {
-        setControls(prevControls => prevControls.map(control => control.name === controlName ? {...control, selected: option} : control))
+        setControls(prevControls => prevControls.map(control => control.name === controlName ? { ...control, selected: option !== controlName ? option : ""} : control))
     }
 
     const controlsHtml = controls.map(el => {
         const optionsHtml = [el.name, ...el.options].map(option => {
-            return <div className="all-products__dropdown-option" onClick={()=> selectOption(el.name, option)}>{option}{option === el.name && <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />}</div>
+            return <div className="all-products__dropdown-option" onClick={() => selectOption(el.name, option)}>
+                {option}
+                {option === el.name && <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />}
+            </div>
         })
 
         return <div>
             <div className="all-products__dropdown-btn" onClick={() => toggleOptions(el.name)}>
-                    {el.selected}
-                    <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
-                    {el.isOpen && <div className="all-products__dropdown-list">
-                        {optionsHtml}
-                    </div>}
+                {el.selected || el.name}
+                <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
+                {el.isOpen && <div className="all-products__dropdown-list">
+                    {optionsHtml}
+                </div>}
             </div>
 
-            
+
 
         </div>
 

@@ -20,7 +20,9 @@ export default function ProductPage(props) {
     const productsContext = React.useContext(ProductsContext)
     const { id } = useParams()
     return (
-        <div className="products-page">
-            <Header title={`Product ${id}`} subtitle="" searchbar={false} buttons={false}></Header>
+        <div className="all-products">
+            <div className="container">
+                <Header title={`Product ${id}`} subtitle="" searchbar={false} buttons={false}></Header>
+            </div>
         </div>)
 }

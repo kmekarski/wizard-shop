@@ -2,9 +2,11 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ProductsContext } from "../context/productsContext";
 import ProductImage from "./ProductImage";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard(props) {
 
+    const navigate = useNavigate()
     const context = React.useContext(ProductsContext)
 
 
@@ -21,7 +23,7 @@ export default function ProductCard(props) {
             </div>
         )
     return (
-        <div className={`product--${props.size} card--small`}>
+        <div className={`product--${props.size} card--small`} onClick={() => navigate(`/product/${props.id}`)}>
             <ProductImage src={props.img} />
             <h3 className="text--small-bold">{props.name}</h3>
             <h3 className="text--small-regular">Price: ${props.price}</h3>

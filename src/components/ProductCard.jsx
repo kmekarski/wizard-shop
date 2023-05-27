@@ -9,10 +9,11 @@ export default function ProductCard(props) {
     const navigate = useNavigate()
     const context = React.useContext(ProductsContext)
 
+    
 
     if (props.size === 'big')
         return (
-            <div className={`product--big card--small`}>
+            <div className={`product--big card--small`} onClick={() => navigate(`/product/${props.id}`)}>
                 <ProductImage src={props.img} />
                 <h3 className="text--small-bold">{props.name}</h3>
                 <div className="product__panel">

@@ -118,15 +118,6 @@ export default function AllProducts(props) {
 
 
         </div>
-
-
-        // <div className="all-products__dropdown-btn" onClick={() => toggleOptions(el.name)}>
-        //     {el.name}
-        //     <FontAwesomeIcon icon="fa-solid fa-chevron-down" className='text--dark' />
-        //     {el.isOpen && <div className="all-products__dropdown-list">
-        //         {optionsHtml}
-        //     </div>}
-        // </div>
     })
 
 

@@ -129,6 +129,7 @@ export default function AllProducts(props) {
                 <Header title="All products" subtitle="Find your magic" />
                 <div className="all-products__controls">
                     {controlsHtml}
+                    <div className="btn--ghost btn--small btn all-products__filter-btn">Apply filters</div>
                 </div>
                 <div className="all-products__products">
                     {productsHtml}

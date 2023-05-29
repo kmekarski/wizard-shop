@@ -364,6 +364,7 @@ body {
 
 .product-image {
   width: 100%;
+  height: 100%;
   background-color: #ffffff;
   border-radius: 10px;
   background-size: contain;
@@ -462,7 +463,6 @@ body {
 .text--small-regular {
   font-size: 1rem;
   font-weight: 400;
-  color: #ffffff;
 }
 
 .text--desc {
@@ -522,13 +522,17 @@ body {
 }
 
 .text--clickable:hover {
-  text-decoration:  underline;
+  text-decoration: underline;
 }
 
 /* icons */
 
 .icon--primary {
   color: #DAC6E1;
+}
+
+.icon--darker {
+  color: #634464;
 }
 
 .icon--xl {
@@ -560,6 +564,7 @@ body {
   color: #FCF352;
 }
 
+
 .icon--clickable {
   cursor: pointer;
 }
@@ -571,6 +576,7 @@ body {
   border-radius: 0.625em;
   cursor: pointer;
   border: none;
+  text-align: center;
 }
 
 .btn--medium {
@@ -583,13 +589,23 @@ body {
   padding: 0.65em 1.25em;
 }
 
+.btn--big {
+  font-size: 1.25rem;
+  padding: 0.5em 0;
+  width: 14vw;
+  text-align: center;
+}
+
 .btn--solid {
   background: #D81E5B;
   color: #ffffff;
+  border: 1px solid transparent;
+
 }
 
 .btn--light {
   background: #f4f4f4;
+  border: 1px solid transparent;
 }
 
 .btn--ghost {
@@ -944,9 +960,10 @@ form.login input {
 .all-products__controls {
   grid-area: controls;
   display: grid;
-  width: 70%;
-  grid-template-columns: repeat(5, 20%);
-  column-gap: 2em;
+  align-items: center;
+  /* width: 70%; */
+  grid-template-columns: repeat(5, 4fr) 5fr;
+  column-gap: 1.25em;
   position: relative;
 }
 
@@ -973,7 +990,7 @@ form.login input {
   top: 0;
 }
 
-.all-products__dropdown-option{
+.all-products__dropdown-option {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -981,6 +998,10 @@ form.login input {
   padding: 0.5em 1.8em;
   width: 100%;
   height: 100%;
+}
+
+.all-products__filter-btn {
+  margin: at;
 }
 
 .all-products__products {
@@ -997,7 +1018,153 @@ form.login input {
 }
 
 
+/* product page */
 
+.product-page {
+  width: 100%;
+  height: 100%;
+}
+
+.product-page .container {
+  width: 100%;
+  height: 100%;
+  padding: 25px 0 0 0;
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  grid-template-rows: 3fr 25fr;
+  column-gap: 25px;
+  row-gap: 30px;
+  grid-template-areas:
+    ". header"
+    "product product"
+}
+
+.product-page__main {
+  grid-area: product;
+  background-color: #7D576C;
+  padding: 2.5em 5em 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.product-page__preview {
+  width: 100%;
+  min-height: 60vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5em;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+  border-bottom: 4px solid #DAC6E1;
+}
+
+.product-page__images,
+.product-page__panel {
+  display: grid;
+  grid-template-rows: 8fr 2fr;
+  row-gap: 2em;
+}
+
+.product-page__small-images {
+  width: 70%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75em;
+}
+
+.product-page__text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 2.5em;
+}
+
+.hr--short{
+  margin-top: 0.3em;
+  height: 1px;
+  width: 20%;
+  border-radius: 2px;
+  border: 2px solid #dac6e1;
+}
+
+.product-page__buttons {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.product-page__reviews-panel {
+
+}
+
+.product-page__reviews__header {
+  display: flex;
+  align-items: baseline;
+  gap: 2.5em;
+  margin-bottom: 2em;
+}
+
+.product-page__reviews {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  padding: 0 7.5em;
+  gap: 1.75em;
+}
+
+.product-page__review,
+.product-page__review--with-photo {
+  background-color: #DAC6E1;
+  width: 100%;
+  margin: auto;
+  padding: 2em;
+  display: grid;
+}
+
+.product-page__review {
+  grid-template-rows: 5fr 2fr;
+  grid-template-areas: 
+    "panel"
+    "footer";
+}
+
+.product-page__review--with-photo {
+  grid-template-columns: 5fr 2fr;
+  grid-template-rows: 5fr 1fr;
+  grid-template-areas: 
+    "panel image"
+    "footer footer";
+    column-gap: 1em;
+    row-gap: 1em;
+}
+
+.product-page__review__panel {
+  grid-area: panel;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.product-page__review__title {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.product-page__review__image {
+  aspect-ratio: 1.3;
+  grid-area: image;
+}
+
+.product-page__review__footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
 
 /* profile */
 

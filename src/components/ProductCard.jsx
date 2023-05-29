@@ -17,9 +17,9 @@ export default function ProductCard(props) {
                 <ProductImage src={props.img} />
                 <h3 className="text--small-bold">{props.name}</h3>
                 <div className="product__panel">
-                    <h3 className="text--small-regular">Price: ${props.price}</h3>
+                    <h3 className="text--small-regular text--white">Price: ${props.price}</h3>
                     <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
-                    <h3 className="text--small-regular">{props.rating}</h3>
+                    <h3 className="text--small-regular text--white">{props.rating}</h3>
                 </div>
             </div>
         )
@@ -27,10 +27,10 @@ export default function ProductCard(props) {
         <div className={`product--${props.size} card--small`} onClick={() => navigate(`/product/${props.id}`)}>
             <ProductImage src={props.img} />
             <h3 className="text--small-bold">{props.name}</h3>
-            <h3 className="text--small-regular">Price: ${props.price}</h3>
+            <h3 className="text--small-regular text--white">Price: ${props.price}</h3>
             <div className="product__panel">
                 <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
-                <h3 className="text--small-regular">{props.rating}</h3>
+                <h3 className="text--small-regular text--white">{props.rating}</h3>
                 <div className="product__btn" onClick={() => context.addToCart(props.id, 1)}>+</div>
             </div>
 

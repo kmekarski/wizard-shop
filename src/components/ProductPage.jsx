@@ -63,7 +63,7 @@ export default function ProductPage(props) {
             <div className="text--medium-regular text--dark">{el.text}</div>
         </div>
         {el.withPhoto && <div className="product-page__review__image">
-            <ProductImage src={product.img}></ProductImage>
+            <ProductImage shadow={true} src={product.img}></ProductImage>
         </div>}
         <div className="product-page__review__footer">
             <div className="text--small-regular text-dark">2 hours ago</div>
@@ -79,11 +79,11 @@ export default function ProductPage(props) {
                 <div className="product-page__main">
                     <div className="product-page__preview">
                         <div className="product-page__images">
-                            <ProductImage src={product.img}></ProductImage>
+                            <ProductImage shadow={true} src={product.img}></ProductImage>
                             <div className="product-page__small-images">
-                                <ProductImage src={product.img}></ProductImage>
-                                <ProductImage src={product.img}></ProductImage>
-                                <ProductImage src={product.img}></ProductImage>
+                                <ProductImage shadow={true} src={product.img}></ProductImage>
+                                <ProductImage shadow={true} src={product.img}></ProductImage>
+                                <ProductImage shadow={true} src={product.img}></ProductImage>
                             </div>
                         </div>
                         <div className="product-page__panel">

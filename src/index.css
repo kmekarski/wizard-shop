@@ -1042,7 +1042,7 @@ form.login input {
 .product-page__main {
   grid-area: product;
   background-color: #7D576C;
-  padding: 2.5em 5em 0;
+  padding: 2.5em 6em 0;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -1061,13 +1061,14 @@ form.login input {
 
 .product-page__images,
 .product-page__panel {
+  
   display: grid;
   grid-template-rows: 8fr 2fr;
   row-gap: 2em;
 }
 
 .product-page__small-images {
-  width: 70%;
+  width: 80%;
   height: 100%;
   margin: auto;
   display: flex;
@@ -1076,6 +1077,7 @@ form.login input {
 }
 
 .product-page__text {
+  
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -1217,8 +1219,8 @@ form.login input {
   aspect-ratio: 1.3;
 }
 
-.add-review input,
-.add-review textarea {
+.add-review__main input,
+.add-review__main textarea {
   display: block;
   margin-top: 0.75em;
   min-width: 90%;

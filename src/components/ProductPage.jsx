@@ -119,7 +119,7 @@ export default function ProductPage(props) {
                     <div className="product-page__reviews-panel">
                         <div className="product-page__reviews__header">
                             <div className="text--primary">User reviews</div>
-                            <div className="btn--ghost btn--big btn">Add review</div>
+                            <div className="btn--ghost btn--big btn" onClick={() => navigate(`/product/${id}/add-review`)}>Add review</div>
                         </div>
                         <div className="product-page__reviews">
                             {reviewsHtml}

@@ -334,7 +334,6 @@ body {
 
 .product--small {
   min-width: 12.5vw;
-  max-width: 12.5vw;
   padding: 1em;
   display: grid;
   grid-template-rows: 50% auto auto auto;
@@ -342,8 +341,7 @@ body {
 }
 
 .product--big {
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 0.9;
   padding: 1.5em;
   display: grid;
   grid-template-rows: 70% auto auto;
@@ -1008,7 +1006,7 @@ form.login input {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 50%;
-  row-gap: 2em;
+  row-gap: 6em;
   column-gap: 2em;
   height: calc(100% + 20px);
   grid-area: products;

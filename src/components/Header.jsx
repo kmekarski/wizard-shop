@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
+import { UserContext } from "../context/userContext";
+
 import CartPopup from "./CartPopup";
 
 export default function Header(props) {
+
+  const userContext = useContext(UserContext)
 
   const [showCart, setShowCart] = React.useState(false)
   const navigate = useNavigate()

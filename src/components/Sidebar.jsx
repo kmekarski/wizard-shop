@@ -19,15 +19,15 @@ export default function Sidebar(props) {
             link: "/products"
         },
         {
-            text: "Categories",
-            icon: "wand-magic-sparkles",
-            link: "/products"
-        },
-        {
             text: "Contact",
             icon: "phone",
             link: "/contact"
-        }
+        },
+        {
+            text: "Admin panel",
+            icon: "wand-magic-sparkles",
+            link: "/admin"
+        },
     ]
 
     const navLinksHtml = navLinksData.map((link,index) => {

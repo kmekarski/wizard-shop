@@ -813,12 +813,14 @@ form.login input {
 
 /* checkout */
 
-.checkout {
+.checkout,
+.admin {
   width: 100%;
   height: 100%;
 }
 
-.checkout .container {
+.checkout .container,
+.admin .container {
   height: 100%;
   padding: 25px 0 0 0;
   display: grid;
@@ -828,14 +830,70 @@ form.login input {
   row-gap: 20px;
   grid-template-areas:
     ". header"
-    "checkout-main checkout-main"
+    "main main"
+}
+
+.checkout__main,
+.admin__main {
+  grid-area: main;
+  background-color: #d9d9d9;
+  display: grid;
+}
+
+.admin__main {
+  padding: 2.5em;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 1.75em;
+}
+
+.admin__top-cards,
+.admin__bottom-cards {
+  display: grid;
+  column-gap: 2em;
+}
+
+.admin__top-cards {
+  grid-template-columns: 1fr 1fr;
+}
+
+.admin__bottom-cards {
+  grid-template-columns: 1fr 3fr;
+}
+
+.admin__card {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 1.75em;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin__card__buttons {
+  flex: 1;
+  margin-top: 1.5em;
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 1.75em;
+}
+
+.admin__card__button {
+  background-color: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75em;
+  cursor: pointer;
+}
+
+.admin__button__icon {
+  font-size: 4em;
+  color: #7D576C;
 }
 
 .checkout__main {
-  grid-area: checkout-main;
-  background-color: #d9d9d9;
   padding: 2.5em 7em;
-  display: grid;
   grid-template-columns: 6fr 5fr;
   column-gap: 2em;
 }
@@ -1258,6 +1316,9 @@ form.login input {
   grid-row: 3;
   margin: 1em auto 0;
 }
+
+/* admin panel */
+
 
 
 /* profile */

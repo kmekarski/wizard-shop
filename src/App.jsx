@@ -10,6 +10,7 @@ import Checkout from "./components/Checkout.jsx";
 import AllProducts from './components/AllProducts';
 import ProductPage from './components/ProductPage';
 import AddReview from './components/AddReview';
+import AdminPanel from './components/AdminPanel';
 
 import { Login, Logout } from './components/Login'
 
@@ -35,7 +36,9 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/checkout' element={<Checkout />} />
+          <Route path='/admin' element={<AdminPanel />} />
           <Route path='/product/:id/add-review' element={<AddReview />} />
+          
         </Routes>
       </div>
     </Router>

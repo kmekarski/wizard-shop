@@ -79,7 +79,25 @@ body {
   color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
+
+.nav__element:hover {
+  margin-left: 0.5em;
+}
+
+.nav__element--selected:before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 3em;
+  background: #D81E5B;
+  border-radius: 6px;
+  position: fixed;
+  left: 0;
+}
+
+
 
 /* newsletter */
 
@@ -329,7 +347,7 @@ body {
 
 .product--small,
 .product--big {
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .product--small {
@@ -349,7 +367,9 @@ body {
 
 .product--small:hover,
 .product--big:hover {
-  box-shadow: 0 0 30px rgba(236, 164, 0, 0.5);
+  box-shadow: 0 0 20px #7D576C;
+  margin-bottom: 0.25em;
+  margin-top: -0.25em;
 }
 
 .product--big h3:nth-child(2) {
@@ -885,6 +905,13 @@ form.login input {
   align-items: center;
   gap: 0.75em;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin__card__button:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  margin-bottom: 0.25em;
+  margin-top: -0.25em;
 }
 
 .admin__button__icon {
@@ -1118,7 +1145,7 @@ form.login input {
 
 .product-page__images,
 .product-page__panel {
-  
+
   display: grid;
   grid-template-rows: 8fr 2fr;
   row-gap: 2em;
@@ -1134,7 +1161,7 @@ form.login input {
 }
 
 .product-page__text {
-  
+
   display: flex;
   flex-direction: column;
   align-items: start;

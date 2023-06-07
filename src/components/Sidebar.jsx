@@ -34,7 +34,8 @@ export default function Sidebar(props) {
         return <NavLink key={index}
                         text={link.text}
                         icon={link.icon}
-                        link={link.link}/>
+                        link={link.link}
+                        />
     })
 
     return (

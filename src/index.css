@@ -1033,7 +1033,7 @@ form.login input {
   grid-template-columns: 25px 1fr;
   grid-template-rows: 3fr 2fr 21fr;
   column-gap: 25px;
-  row-gap: 30px;
+  row-gap: 25px;
   grid-template-areas:
     ". header"
     ". controls"
@@ -1041,6 +1041,7 @@ form.login input {
 }
 
 .all-products__controls {
+  margin-top: -2em;
   grid-area: controls;
   display: grid;
   align-items: center;

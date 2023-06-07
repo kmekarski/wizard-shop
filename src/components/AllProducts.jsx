@@ -31,7 +31,6 @@ export default function AllProducts(props) {
                                 img: imgData.uri
                             }
                             productsContext.setProductsList(prev => [...prev, newProduct])
-                            productsContext.setProductsList(prev => [...prev, newProduct])
                         })
 
                 })

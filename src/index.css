@@ -235,6 +235,12 @@ body {
   display: grid;
   grid-template-columns: 9fr 10fr;
   gap: 25px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.featured:hover {
+  box-shadow: 0 0 20px #7D576C;
 }
 
 .featured__text {

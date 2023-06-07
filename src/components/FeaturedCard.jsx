@@ -20,7 +20,7 @@ export default function FeaturedCard(props) {
   }, [numberOfItems])
 
   return (
-    <div className='featured card--big'>
+    <div className='featured card--big' onClick={() => navigate(`/product/${featuredProduct.id}`)}>
       <ProductImage src={featuredProduct.img} />
       <div className="featured__text">
         <h3 className="featured__name text--primary">{featuredProduct.name}</h3>
@@ -34,17 +34,21 @@ export default function FeaturedCard(props) {
         <div className="featured__panel">
           <p className="text--medium-bold">Price: ${featuredProduct.price}</p>
           <div className="featured__quantity">
-            <div className="featured__quantity-btn" onClick={() => setNumberOfItems(prev => prev - 1)}>-</div>
+            <div className="featured__quantity-btn" onClick={(e) => {e.stopPropagation()
+              setNumberOfItems(prev => prev - 1)}}>-</div>
             <p className="featured__quantity-number">{numberOfItems}</p>
-            <div className="featured__quantity-btn" onClick={() => setNumberOfItems(prev => prev + 1)}>+</div>
+            <div className="featured__quantity-btn" onClick={(e) => {e.stopPropagation()
+              setNumberOfItems(prev => prev + 1)}}>+</div>
           </div>
         </div>
         <div className="featured__buttons">
-          <div className="btn--ghost btn--small btn" onClick={() => context.addToCart(featuredProduct.id, numberOfItems)}>Add to Cart</div>
-          <div className="btn--solid btn--small btn" onClick={() => {
+          <div className="btn--ghost btn--small btn" onClick={(e) => {e.stopPropagation()
+          context.addToCart(featuredProduct.id, numberOfItems)
+          context.setShowCart(true)}}>Add to Cart</div>
+          <div className="btn--solid btn--small btn" onClick={(e) => {{e.stopPropagation()
             context.addToCart(featuredProduct.id, 1)
             navigate("/checkout")
-          }}>Buy now</div>
+          }}}>Buy now</div>
         </div>
       </div>
     </div>

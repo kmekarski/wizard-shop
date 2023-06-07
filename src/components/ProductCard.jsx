@@ -31,7 +31,9 @@ export default function ProductCard(props) {
             <div className="product__panel">
                 <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
                 <h3 className="text--small-regular text--white">{props.rating}</h3>
-                <div className="product__btn" onClick={() => context.addToCart(props.id, 1)}>+</div>
+                <div className="product__btn" onClick={(e) => {e.stopPropagation()
+                context.addToCart(props.id, 1)
+                context.setShowCart(true)}}>+</div>
             </div>
 
 

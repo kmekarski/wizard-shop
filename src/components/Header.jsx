@@ -4,18 +4,19 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 import { UserContext } from "../context/userContext";
+import { ProductsContext } from "../context/productsContext";
 
 import CartPopup from "./CartPopup";
 
 export default function Header(props) {
 
   const userContext = useContext(UserContext)
+  const productsContext = useContext(ProductsContext)
 
-  const [showCart, setShowCart] = React.useState(false)
   const navigate = useNavigate()
 
   function toggleCart() {
-    setShowCart(prev => !prev)
+    productsContext.setShowCart(prev => !prev)
   }
 
   function search(e) {
@@ -37,7 +38,7 @@ export default function Header(props) {
         <div className="header__cart-btn header__icon-btn">
           <FontAwesomeIcon icon="fa-solid fa-cart-shopping" className='icon--m icon--primary' onClick={(e) => toggleCart(e)} />
           <p className='text--icon' onClick={(e) => toggleCart(e)}>Cart</p>
-          <CartPopup show={showCart}
+          <CartPopup show={productsContext.showCart}
             toggle={toggleCart}
             removeFromCart={props.removeFromCart}
             changeNumberOfItemsInCart={props.changeNumberOfItemsInCart}

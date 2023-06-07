@@ -5,6 +5,7 @@ const ProductsContext = createContext();
 const ProductsContextProvider = ({ children }) => {
 
     const [cart, setCart] = useState([])
+    const [showCart, setShowCart] = useState(false)
     const [productsList, setProductsList] = useState([])
 
     function addToCart(id, number) {
@@ -52,6 +53,8 @@ const ProductsContextProvider = ({ children }) => {
         <ProductsContext.Provider value={{
             cart,
             setCart,
+            showCart,
+            setShowCart,
             addToCart,
             removeFromCart,
             changeNumberOfItemsInCart,

@@ -23,16 +23,12 @@ export default function FeaturedCard(props) {
     <div className='featured card--big'>
       <ProductImage src={featuredProduct.img} />
       <div className="featured__text">
-        <h3 className="featured__name text--medium-bold">{featuredProduct.name}</h3>
+        <h3 className="featured__name text--primary">{featuredProduct.name}</h3>
         <div className="featured__rating">
           <div className="featured__stars">
-            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
-            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
-            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
-            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
-            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star' />
+            {Array(5).fill(null).map(() => {return <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />})}
           </div>
-          <p className="text--small text--white">({featuredProduct.reviewCount}200 reviews)</p>
+          <p className="text--small-regular text--white">({featuredProduct.reviewCount}200 reviews)</p>
         </div>
         <p className="featured__desc text--desc">{featuredProduct.desc}</p>
         <div className="featured__panel">

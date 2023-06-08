@@ -95,7 +95,9 @@ export default function UsersList(props) {
                 <div className="users-list__main">
                     <div className='users-list__card card--big'>
                         {headerHtml}
-                        {usersHtml}
+                        <div className='users-list__card__rows'>
+                            {usersHtml}
+                        </div>
                     </div>
                 </div>
             </div>

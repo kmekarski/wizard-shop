@@ -628,7 +628,11 @@ textarea {
   background: #D81E5B;
   color: #ffffff;
   border: 1px solid transparent;
+  transition: background-color 0.2s ease;
+}
 
+.btn--solid:hover {
+  background: #BA1C50;
 }
 
 .btn--light {
@@ -640,6 +644,12 @@ textarea {
   background: none;
   color: #DAC6E1;
   border: 1px solid #DAC6E1;
+  box-shadow: 0 0 0 1px #DAC6E1;
+  transition: box-shadow 0.2s ease;
+}
+
+.btn--ghost:hover {
+  box-shadow: 0 0 0 2px #DAC6E1;
 }
 
 /* cards */

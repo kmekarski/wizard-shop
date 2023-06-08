@@ -8,12 +8,11 @@ export default function ProductCard(props) {
 
     const navigate = useNavigate()
     const context = React.useContext(ProductsContext)
-
     
 
     if (props.size === 'big')
         return (
-            <div className={`product--big card--small`} onClick={() => navigate(`/product/${props.id}`)}>
+            <div className={`product--big card--small`} onClick={props.linkToEdit ? () => navigate(`/admin/edit-product/${props.id}`) : () => navigate(`/product/${props.id}`)}>
                 <ProductImage src={props.img} />
                 <h3 className="text--nowrap text--medium-bold">{props.name}</h3>
                 <div className="product__panel">
@@ -39,9 +38,6 @@ export default function ProductCard(props) {
 
             {props.last && <div>
                 <div className="product-cover"></div>
-                <div className="product-cover__btn" onClick={props.scroll}>
-                    <FontAwesomeIcon icon="fa-solid fa-chevron-right" className='icon--s icon--primary' />
-                </div>
             </div>}
 
         </div>

@@ -27,8 +27,8 @@ export default function Header(props) {
   return (
     <div className='header'>
       <div className="header__text">
-        <h2 className="header__title text--primary">{props.title}</h2>
-        <h4 className="header__subtitle text--secondary">{props.subtitle}</h4>
+        <h2 className="header__title text--primary text--nowrap">{props.title}</h2>
+        <h4 className="header__subtitle text--secondary text--nowrap" >{props.subtitle}</h4>
       </div>
       {props.searchbar && <div className="header__searchbar input">
         <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className='icon--input' />

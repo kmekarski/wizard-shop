@@ -7,6 +7,7 @@ import ProductCard from "./ProductCard";
 import ScrollableProductsList from "./ScrollableProductsList";
 import ProductImage from "./ProductImage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UploadImage from "./UploadImage";
 
 import { useLocation } from "react-router-dom";
 import { useParams } from 'react-router-dom';

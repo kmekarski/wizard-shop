@@ -17,12 +17,12 @@ export default function AdminPanel(props) {
                 {
                     text: "View products",
                     icon: "hat-wizard",
-                    link: ""
+                    link: "view-products"
                 },
                 {
                     text: "Add product",
                     icon: "wand-magic-sparkles",
-                    link: ""
+                    link: "add-product"
                 }
             ]
         },
@@ -77,7 +77,7 @@ export default function AdminPanel(props) {
     const panelHtml = panel.map(el => {
         const buttonsHtml = el.buttons.map(button => {
             return (
-                <div className="admin__card__button card--small">
+                <div className="admin__card__button card--small" onClick={() => navigate(button.link)}>
                     <FontAwesomeIcon icon={`fa-solid fa-${button.icon}`} className='admin__button__icon' />
                     <p className="text--medium-bold text--dark">{button.text}</p>
                 </div>

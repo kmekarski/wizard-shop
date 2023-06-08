@@ -33,13 +33,6 @@ export default function FeaturedCard(props) {
         <p className="featured__desc text--desc">{featuredProduct.desc}</p>
         <div className="featured__panel">
           <p className="text--medium-bold">Price: ${featuredProduct.price}</p>
-          <div className="featured__quantity">
-            <div className="featured__quantity-btn" onClick={(e) => {e.stopPropagation()
-              setNumberOfItems(prev => prev - 1)}}>-</div>
-            <p className="featured__quantity-number">{numberOfItems}</p>
-            <div className="featured__quantity-btn" onClick={(e) => {e.stopPropagation()
-              setNumberOfItems(prev => prev + 1)}}>+</div>
-          </div>
         </div>
         <div className="featured__buttons">
           <div className="btn--ghost btn--small btn" onClick={(e) => {e.stopPropagation()

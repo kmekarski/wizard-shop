@@ -52,8 +52,8 @@ export default function MainContent(props) {
                 <AdCard />
 
                 <div className='products-title'>
-                    <h2 className="text--primary">Our top products</h2>
-                    <h4 className="text--secondary text--clickable" onClick={() => navigate('/products')}>View all</h4>
+                    <h2 className="text--primary text--nowrap">Our top products</h2>
+                    <h4 className="text--secondary text--clickable text--nowrap" onClick={() => navigate('/products')}>View all</h4>
                 </div>
 
                 <ScrollableProductsList>

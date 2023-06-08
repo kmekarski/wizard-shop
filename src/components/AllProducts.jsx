@@ -49,6 +49,7 @@ export default function AllProducts(props) {
             img={product.img}
             addToCart={productsContext.addToCart}
             size='big'
+            linkToEdit={props.linkToEdit}
         />
     })
 
@@ -125,7 +126,9 @@ export default function AllProducts(props) {
     return (
         <div className="all-products">
             {productsList.length > 0 && <div className="container">
-                <Header title="All products" subtitle="Find your magic" />
+                <Header title={props.header_title}subtitle={props.header_subtitle}
+                searchbar={props.header_searchbar}
+                buttons={props.header_buttons} />
                 <div className="all-products__controls">
                     {controlsHtml}
                     <div className="btn--ghost btn--small btn all-products__filter-btn">Apply filters</div>
@@ -135,4 +138,12 @@ export default function AllProducts(props) {
                 </div>
             </div>}
         </div>)
+}
+
+AllProducts.defaultProps = {
+    header_title: "All products",
+    header_subtitle: "Find your magic",
+    header_searchbar: true,
+    header_buttons: true,
+    link_to: "product page"
 }

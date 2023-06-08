@@ -108,7 +108,8 @@ export default function ProductPage(props) {
                                 <div className="text--medium-regular">{product.description}</div>
                             </div>
                             <div className="product-page__buttons">
-                                <div className="btn--ghost btn--big btn" onClick={() => productsContext.addToCart(product.id, 1)}>Add to Cart</div>
+                                <div className="btn--ghost btn--big btn" onClick={() => {productsContext.addToCart(product.id, 1)
+                                productsContext.setShowCart(true)}}>Add to Cart</div>
                                 <div className="btn--solid btn--big btn" onClick={() => {
                                     productsContext.addToCart(product.id, 1)
                                     navigate("/checkout")

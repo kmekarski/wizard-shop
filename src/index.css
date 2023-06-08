@@ -437,6 +437,11 @@ textarea {
   background: #DAC6E1;
   color: #7D576C;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product__btn:hover {
+  box-shadow: 0 0 8px #DAC6E1;
 }
 
 /* 5th product */
@@ -649,7 +654,7 @@ textarea {
 }
 
 .btn--ghost:hover {
-  box-shadow: 0 0 0 2px #DAC6E1;
+  box-shadow: 0 0 4px 2px #DAC6E1;
 }
 
 /* cards */

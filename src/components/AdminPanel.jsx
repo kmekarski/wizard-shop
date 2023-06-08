@@ -57,17 +57,17 @@ export default function AdminPanel(props) {
                 {
                     text: "Pending orders",
                     icon: "plane-circle-exclamation",
-                    link: ""
+                    link: "pending-orders"
                 },
                 {
                     text: "Completed orders",
                     icon: "plane-circle-check",
-                    link: ""
+                    link: "completed-orders"
                 },
                 {
                     text: "Rejected orders",
                     icon: "plane-circle-xmark",
-                    link: ""
+                    link: "rejected-orders"
                 }
 
             ]

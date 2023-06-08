@@ -27,6 +27,11 @@ export default function ProductPage(props) {
 
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
+
+    React.useEffect( () => {
+        productsContext.setShowCart(false)
+      }, [])
+      
     const reviews = [
         {
             user: "Some user",

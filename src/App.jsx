@@ -13,6 +13,8 @@ import AddReview from './components/AddReview';
 import AdminPanel from './components/AdminPanel';
 import AddProduct from './components/AddProduct';
 import UsersList from './components/UsersList';
+import OrdersList from './components/OrdersList';
+import { ProductsContext } from './context/productsContext';
 
 import { Login, Logout } from './components/Login'
 
@@ -24,6 +26,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 library.add(fas, far)
 
 function App() {
+
   return (
     <Router>
       <div className="app">
@@ -45,6 +48,9 @@ function App() {
           <Route path='/admin/edit-product/:id' element={<AddProduct edit={true}/>} />
           <Route path='/admin/active-users' element={<UsersList type="active" />} />
           <Route path='/admin/blocked-users' element={<UsersList type="blocked" />} />
+          <Route path='/admin/pending-orders' element={<OrdersList type="pending" />} />
+          <Route path='/admin/completed-orders' element={<OrdersList type="completed" />} />
+          <Route path='/admin/rejected-orders' element={<OrdersList type="rejected" />} />
           <Route path='/product/:id/add-review' element={<AddReview />} />
           
           

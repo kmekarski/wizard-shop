@@ -6,7 +6,7 @@ import AdCard from "./AdCard";
 import ProductCard from "./ProductCard";
 import ScrollableProductsList from "./ScrollableProductsList";
 import { useLocation } from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { ProductsContext } from "../context/productsContext";
 
@@ -18,6 +18,7 @@ export default function MainContent(props) {
     const productsContext = React.useContext(ProductsContext)
 
     React.useEffect(() => {
+        productsContext.setShowCart(false)
         fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {

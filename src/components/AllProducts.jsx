@@ -17,7 +17,10 @@ export default function AllProducts(props) {
 
     const productsContext = React.useContext(ProductsContext)
 
+
+
     React.useEffect(() => {
+        productsContext.setShowCart(false)
         fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
@@ -95,7 +98,7 @@ export default function AllProducts(props) {
     };
 
     const selectOption = (controlName, option) => {
-        setControls(prevControls => prevControls.map(control => control.name === controlName ? { ...control, selected: option !== controlName ? option : ""} : control))
+        setControls(prevControls => prevControls.map(control => control.name === controlName ? { ...control, selected: option !== controlName ? option : "" } : control))
     }
 
     const controlsHtml = controls.map(el => {
@@ -126,9 +129,9 @@ export default function AllProducts(props) {
     return (
         <div className="all-products">
             {productsList.length > 0 && <div className="container">
-                <Header title={props.header_title}subtitle={props.header_subtitle}
-                searchbar={props.header_searchbar}
-                buttons={props.header_buttons} />
+                <Header title={props.header_title} subtitle={props.header_subtitle}
+                    searchbar={props.header_searchbar}
+                    buttons={props.header_buttons} />
                 <div className="all-products__controls">
                     {controlsHtml}
                     <div className="btn--ghost btn--small btn all-products__filter-btn">Apply filters</div>

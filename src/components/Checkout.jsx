@@ -126,7 +126,7 @@ export default function Checkout(props) {
       <div className="container">
         <Header title="Checkout" subtitle="" searchbar={false} buttons={false}></Header>
         <div className="checkout__main">
-          <div className="checkout__cart card--small">
+          <div className="checkout__cart card--big">
             <p className="text--medium-bold text--dark">Cart</p>
             <div className="checkout__cart__items">
               {cartItemsHtml}
@@ -138,7 +138,7 @@ export default function Checkout(props) {
               </div>
             </div>
           </div>
-          <div className="checkout__payment card--small">
+          <div className="checkout__payment card--big">
 
 
             

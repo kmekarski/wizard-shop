@@ -12,6 +12,7 @@ import ProductPage from './components/ProductPage';
 import AddReview from './components/AddReview';
 import AdminPanel from './components/AdminPanel';
 import AddProduct from './components/AddProduct';
+import UsersList from './components/UsersList';
 
 import { Login, Logout } from './components/Login'
 
@@ -42,7 +43,10 @@ function App() {
           <Route path='/admin/view-products' element={<AllProducts header_title="Admin panel"
           header_subtitle="Choose product to edit or delete" linkToEdit={true} header_buttons={false}/>}/>
           <Route path='/admin/edit-product/:id' element={<AddProduct edit={true}/>} />
+          <Route path='/admin/active-users' element={<UsersList type="active" />} />
+          <Route path='/admin/blocked-users' element={<UsersList type="blocked" />} />
           <Route path='/product/:id/add-review' element={<AddReview />} />
+          
           
         </Routes>
       </div>

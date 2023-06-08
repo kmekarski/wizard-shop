@@ -32,12 +32,12 @@ export default function AdminPanel(props) {
                 {
                     text: "Active users",
                     icon: "user",
-                    link: ""
+                    link: "active-users"
                 },
                 {
                     text: "Blocked users",
                     icon: "user-slash",
-                    link: ""
+                    link: "blocked-users"
                 }
             ]
         },
@@ -77,14 +77,14 @@ export default function AdminPanel(props) {
     const panelHtml = panel.map(el => {
         const buttonsHtml = el.buttons.map(button => {
             return (
-                <div className="admin__card__button card--small" onClick={() => navigate(button.link)}>
+                <div className="admin__card__button card--big" onClick={() => navigate(button.link)}>
                     <FontAwesomeIcon icon={`fa-solid fa-${button.icon}`} className='admin__button__icon' />
                     <p className="text--medium-bold text--dark">{button.text}</p>
                 </div>
             )
         })
         return (
-            <div className="admin__card card--small">
+            <div className="admin__card card--big">
                 <p className="text--medium-bold text--dark">{el.header}</p>
                 <div className="admin__card__buttons">
                     {buttonsHtml}

@@ -97,10 +97,10 @@ export default function AddProduct(props) {
             <div className="container">
                 <Header title="Admin panel" subtitle={props.edit ? "Edit or delete the product" : "Add product"} searchbar={false} buttons={false}></Header>
                 <div className="add-product__main">
-                    <div className="add-product__left card--small">
+                    <div className="add-product__left card--big">
                         {leftForm}
                     </div>
-                    <div className="add-product__right card--small">
+                    <div className="add-product__right card--big">
                         {rightForm}
                     </div>
                 </div>

@@ -1,39 +1,21 @@
-import React from "react";
-
-import Header from "./Header";
-import FeaturedCard from "./FeaturedCard";
-import AdCard from "./AdCard";
-import ProductCard from "./ProductCard";
-import ScrollableProductsList from "./ScrollableProductsList";
-import ProductImage from "./ProductImage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import UploadImage from "./UploadImage";
-
-import { useLocation } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CartPopup from "./CartPopup.jsx";
+import ProductImage from "./ProductImage.jsx";
+import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
-import { faList } from "@fortawesome/free-solid-svg-icons";
-
+import UploadImage from './UploadImage.jsx';
+import { useParams } from 'react-router-dom';
 
 export default function AddReview(props) {
-
-
-
-
     const navigate = useNavigate()
     const productsContext = React.useContext(ProductsContext)
+
     const { id } = useParams()
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
-
     const [clickedRating, setClickedRating] = React.useState(0)
-
-
-
-
     const [stars, setStars] = React.useState([
         {
             filled: false
@@ -51,8 +33,6 @@ export default function AddReview(props) {
             filled: false
         }
     ])
-
-    
 
     const starsHtml = stars.map((el, index) => {
         return <div onMouseEnter={() => handleMouseEnterStar(index + 1)}
@@ -82,45 +62,79 @@ export default function AddReview(props) {
         setStars(newStars)
     }
 
-    console.log(stars)
+    function handleSubmit(e) {
+        e.preventDefault()
+    }
+
+    const handleInputChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const [formData, setFormData] = React.useState(props.edit ? {
+        name: product.name,
+        price: product.price,
+        desc: product.description,
+        size: "",
+        color: ""
+    }
+        : {
+            name: "",
+            category: "",
+            price: "",
+            desc: "",
+            size: "",
+            color: ""
+        })
+
+    const leftForm = <form className="add-product__form">
+        <div>
+            <div className="text--medium-bold text--dark">{product.name}</div>
+            <div className="add-review__product-image">
+                <ProductImage shadow={true} src={product.img}></ProductImage>
+            </div>
+        </div>
+        <div className='add-product__long-input-container'>
+            <label htmlFor="name">Set a title for your review</label>
+            <input type="text" id='name' name='name' value={formData.name} onChange={handleInputChange} placeholder='Summarize review' className='add-product__input--long' />
+            <p className="text--small text--medium-dark">do not exceed 40 characters</p>
+        </div>
+        <div className='add-product__long-input-container'>
+            <label htmlFor="desc">What did you like or dislike?</label>
+            <textarea type="text" id='desc' name='desc' placeholder="What should shoppers know?" rows={3} value={formData.desc} onChange={handleInputChange} />
+            <p className="text--small text--medium-dark">do not exceed 250 characters</p>
+        </div>
+    </form>
+
+    const rightForm = <form onSubmit={e => handleSubmit(e)} className="add-product__form">
+        <div>
+            <label htmlFor="name">Would you like to add a photo?</label>
+            <UploadImage />
+        </div>
+        <div>
+            <label htmlFor="name">Your overall rating of this product</label>
+            < div className="add-review__stars" >
+                {starsHtml}
+            </div >
+        </div>
+        <button className="btn--medium btn--solid btn add-review__add-btn">Add review</button>
+    </form>
+
     return (
         <div className="add-review">
             <div className="container">
-                <Header></Header>
+                <Header title="Add review" subtitle="" searchbar={false} buttons={false}></Header>
                 <div className="add-review__main">
-                    <div className="text--primary">Add review</div>
-                    <div className="add-review__product">
-                        <div className="add-review__product-image">
-                            <ProductImage shadow={true} src={product.img}></ProductImage>
-                        </div>
-                        <div className="text--medium-bold">{product.name}</div>
+                    <div className="add-review__left card--big">
+                        {leftForm}
                     </div>
-                    <form className="add-review__form">
-                        <div>
-                            <label htmlFor="title" className="text--medium-bold">Set a title for your review</label>
-                            <input type="text" id='title' name='title' placeholder="Summarize review" />
-                        </div>
-                        <div>
-                            <div className="text--medium-bold">Your overall rating of this product</div>
-                            < div className="add-review__stars" >
-                                {starsHtml}
-                            </div >
-
-                        </div>
-                        <div>
-                            <label htmlFor="text" className="text--medium-bold">What did you like or dislike?</label>
-                            <textarea type="text" id='text' name='text' placeholder="What should shoppers know?"
-                                rows={3} />
-                        </div>
-
-                        <div>
-                            <div htmlFor="text" className="text--medium-bold">Would you like to add a photo?</div>
-                            <div className="btn--ghost btn--big btn add-review__upload-btn" >Upload</div>
-                        </div>
-                        <div className="btn--solid btn--big btn add-review__submit-btn" >Submit</div>
-                    </form>
+                    <div className="add-review__right card--big">
+                        {rightForm}
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }

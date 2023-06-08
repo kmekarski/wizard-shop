@@ -1040,9 +1040,9 @@ form.login input {
   font-size: 1rem;
   font-family: inherit;
   padding: 0.5rem;
+  padding-left: 1.25rem;
   background-color: #f4f4f4;
   border-radius: 10px;
-  text-indent: 0.75rem;
   border: none;
   outline: none;
   resize: none;
@@ -1089,6 +1089,12 @@ form.login input {
 .add-product .upload-image {
   border: 2px dashed #666666;
   color: #666666;
+}
+
+.edit-product__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1em;
 }
 
 /* all products */
@@ -1383,9 +1389,9 @@ form.login input {
   font-size: 1rem;
   font-family: inherit;
   padding: 0.5rem;
+  padding-left: 1.25rem;
   background-color: #d9d9d9;
   border-radius: 10px;
-  text-indent: 0.75rem;
   border: none;
   outline: none;
   resize: none;

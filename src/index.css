@@ -654,7 +654,7 @@ textarea {
 }
 
 .btn--ghost:hover {
-  box-shadow: 0 0 4px 2px #DAC6E1;
+  box-shadow: 0 0 0 2px #DAC6E1;
 }
 
 /* cards */

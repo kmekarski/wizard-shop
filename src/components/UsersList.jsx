@@ -5,14 +5,24 @@ import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
+import { ModalContext } from '../context/modalContext.jsx';
 import UploadImage from './UploadImage.jsx';
 import { useParams } from 'react-router-dom';
 
 export default function UsersList(props) {
     const navigate = useNavigate()
     const productsContext = React.useContext(ProductsContext)
+    const modalContext = React.useContext(ModalContext)
 
     const header = ["Username", "Name", "Email", "Role", "Action"]
+
+    function performAction() {
+        //block or unblock user
+    }
+
+    function handleActionClick() {
+        modalContext.setCallback(performAction)
+    }
 
     const activeUsers = [
         {
@@ -69,7 +79,7 @@ export default function UsersList(props) {
                 <p className="text--small-reguler text--dark">{el.name}</p>
                 <p className="text--small-regular text--dark">{el.email}</p>
                 <p className="text--small-regular text--dark">{el.role}</p>
-                <div className="btn--solid btn--small btn">
+                <div className="btn--solid btn--small btn" onClick={handleActionClick}>
                     {props.type === "active" ? "Block" : "Unblock"}
                 </div>
             </div>

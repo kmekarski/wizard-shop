@@ -10,6 +10,8 @@ export default function ProductCard(props) {
     const context = React.useContext(ProductsContext)
     
 
+
+
     if (props.size === 'big')
         return (
             <div className={`product--big card--small`} onClick={props.linkToEdit ? () => navigate(`/admin/edit-product/${props.id}`) : () => navigate(`/product/${props.id}`)}>

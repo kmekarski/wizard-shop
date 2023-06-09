@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import { ProductsContext } from "../context/productsContext";
+import { ModalContext } from "../context/modalContext";
 import { faList } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -22,16 +23,25 @@ export default function ProductPage(props) {
     const navigate = useNavigate()
 
     const productsContext = React.useContext(ProductsContext)
+    const modalContext = React.useContext(ModalContext)
 
     const { id } = useParams()
 
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
 
-    React.useEffect( () => {
+    React.useEffect(() => {
         productsContext.setShowCart(false)
-      }, [])
-      
+    }, [])
+
+    const performAction = () => {
+        console.log('Fetch called');
+    }
+
+    const handleActionClick = () => {
+        modalContext.setCallback(performAction);
+    }
+
     const reviews = [
         {
             user: "Some user",
@@ -51,30 +61,30 @@ export default function ProductPage(props) {
     ]
 
     const reviewsHtml = reviews.map(el => {
-        return (<div className={`product-page__review${el.withPhoto? "--with-photo" : ""} card--small`}>
-        <div className="product-page__review__panel">
-            <div className="product-page__review__title">
-                <FontAwesomeIcon icon="fa-solid fa-user" className='icon--darker icon--s' />
-                <div className="text--medium-regular text--dark">{el.user}</div>
-                <div>
-                    <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                    <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                    <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                    <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                    <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
+        return (<div className={`product-page__review${el.withPhoto ? "--with-photo" : ""} card--small`}>
+            <div className="product-page__review__panel">
+                <div className="product-page__review__title">
+                    <FontAwesomeIcon icon="fa-solid fa-user" className='icon--darker icon--s' />
+                    <div className="text--medium-regular text--dark">{el.user}</div>
+                    <div>
+                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
+                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
+                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
+                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
+                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
+                    </div>
                 </div>
+                <div className="text--medium-bold text--dark">{el.title}</div>
+                <div className="text--medium-regular text--dark">{el.text}</div>
             </div>
-            <div className="text--medium-bold text--dark">{el.title}</div>
-            <div className="text--medium-regular text--dark">{el.text}</div>
-        </div>
-        {el.withPhoto && <div className="product-page__review__image">
-            <ProductImage shadow={true} src={product.img}></ProductImage>
-        </div>}
-        <div className="product-page__review__footer">
-            <div className="text--small-regular text-dark">2 hours ago</div>
-            <div className="text--small-regular text-dark">remove</div>
-        </div>
-    </div>)
+            {el.withPhoto && <div className="product-page__review__image">
+                <ProductImage shadow={true} src={product.img}></ProductImage>
+            </div>}
+            <div className="product-page__review__footer">
+                <div className="text--small-regular text-dark">2 hours ago</div>
+                <div className="text--small-regular text-dark" onClick={handleActionClick}>remove</div>
+            </div>
+        </div>)
     })
 
     return (
@@ -113,8 +123,10 @@ export default function ProductPage(props) {
                                 <div className="text--medium-regular">{product.description}</div>
                             </div>
                             <div className="product-page__buttons">
-                                <div className="btn--ghost btn--big btn" onClick={() => {productsContext.addToCart(product.id, 1)
-                                productsContext.setShowCart(true)}}>Add to Cart</div>
+                                <div className="btn--ghost btn--big btn" onClick={() => {
+                                    productsContext.addToCart(product.id, 1)
+                                    productsContext.setShowCart(true)
+                                }}>Add to Cart</div>
                                 <div className="btn--solid btn--big btn" onClick={() => {
                                     productsContext.addToCart(product.id, 1)
                                     navigate("/checkout")

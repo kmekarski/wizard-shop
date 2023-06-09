@@ -5,19 +5,49 @@ import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
+import { ModalContext } from '../context/modalContext.jsx';
 import UploadImage from './UploadImage.jsx';
 import { useParams } from 'react-router-dom';
 
 export default function AddProduct(props) {
     const navigate = useNavigate()
     const productsContext = React.useContext(ProductsContext)
+    const modalContext = React.useContext(ModalContext)
 
     const { id } = useParams()
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
 
-    function handleSubmit(e) {
+
+
+    function editProduct() {
+        console.log("edit product")
+    }
+
+    function deleteProduct() {
+        console.log("delete product")
+    }
+
+    function addProduct() {
+        console.log("add product")
+    }
+
+    function handleSubmitClick(e) {
         e.preventDefault()
+        switch(e.target.innerHTML) {
+            case "Add product": {
+                modalContext.setCallback(addProduct)
+                break;
+            }
+            case "Delete product": {
+                modalContext.setCallback(deleteProduct)
+                break;
+            }
+            case "Edit product": {
+                modalContext.setCallback(editProduct)
+                break;
+            }
+        }
     }
 
     const handleInputChange = (event) => {
@@ -87,9 +117,9 @@ export default function AddProduct(props) {
             </div>
         </div>
         {props.edit ? <div className='edit-product__buttons'>
-            <button className="btn--medium btn--solid btn add-product__add-btn">Edit product</button>
-            <button className="btn--medium btn--solid btn add-product__add-btn">Delete product</button>
-        </div> : <button className="btn--medium btn--solid btn add-product__add-btn">Add product</button>}
+            <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Edit product</button>
+            <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Delete product</button>
+        </div> : <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Add product</button>}
     </form>
 
     return (

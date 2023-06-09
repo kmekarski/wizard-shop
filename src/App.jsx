@@ -14,6 +14,7 @@ import AdminPanel from './components/AdminPanel';
 import AddProduct from './components/AddProduct';
 import UsersList from './components/UsersList';
 import OrdersList from './components/OrdersList';
+import Modal from './components/Modal';
 import { ProductsContext } from './context/productsContext';
 
 import { Login, Logout } from './components/Login'
@@ -30,6 +31,7 @@ function App() {
   return (
     <Router>
       <div className="app">
+        <Modal />
         <Sidebar />
         <Routes>
           <Route path='/' element={<MainContent />} />

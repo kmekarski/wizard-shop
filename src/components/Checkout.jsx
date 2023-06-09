@@ -5,14 +5,16 @@ import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
+import { ModalContext } from '../context/modalContext.jsx';
 
 export default function Checkout(props) {
   const navigate = useNavigate()
-  const context = React.useContext(ProductsContext)
+  const productsContext = React.useContext(ProductsContext)
+  const modalContext = React.useContext(ModalContext)
 
 
 
-  if (context.cart.length === 0) {
+  if (productsContext.cart.length === 0) {
     navigate('/')
   }
 
@@ -26,18 +28,29 @@ export default function Checkout(props) {
 
   function handleAddressSubmit(e) {
     e.preventDefault()
-    setAddressData(prev => { return { ...prev, isSet: true } })
-    //odpowiednio sformatować dane z formularza i zapisać w state addressData
+    modalContext.setCallback(addressSubmit)
+
+
   }
 
   function handlePaymentSubmit(e) {
     e.preventDefault()
-    setPaymentData(prev => { return { ...prev, isSet: true } })
-  //odpowiednio sformatować dane z formularza, zapisać w state paymentData
-  //i wysłać na odpowiedni endpoint
+    modalContext.setCallback(paymentSubmit)
   }
 
-  const cartItemsHtml = context.cart.map((item, index) => {
+  function addressSubmit() {
+    setAddressData(prev => { return { ...prev, isSet: true } })
+    //odpowiednio sformatować dane z formularza i zapisać w state addressData
+  }
+
+  function paymentSubmit() {
+    setPaymentData(prev => { return { ...prev, isSet: true } })
+    //odpowiednio sformatować dane z formularza, zapisać w state paymentData
+    //i wysłać na odpowiedni endpoint
+  }
+
+
+  const cartItemsHtml = productsContext.cart.map((item, index) => {
     return (
       <div className="cart-popup__item" key={index}>
         <ProductImage src={item.img} />
@@ -46,11 +59,11 @@ export default function Checkout(props) {
           <p className="cart-popup__item__price text--small-bold">${item.price}</p>
           <div className="cart-popup__item__panel">
             <div className="cart-popup__item__quantity">
-              <div className="cart-popup__item__quantity-btn" onClick={() => context.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
+              <div className="cart-popup__item__quantity-btn" onClick={() => productsContext.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
               <p className="cart-popup__item__quantity-number">{item.number}</p>
-              <div className="cart-popup__item__quantity-btn" onClick={() => context.changeNumberOfItemsInCart(item.id, "plus")}>+</div>
+              <div className="cart-popup__item__quantity-btn" onClick={() => productsContext.changeNumberOfItemsInCart(item.id, "plus")}>+</div>
             </div>
-            <p className="text--small" onClick={() => context.removeFromCart(item.id)}>remove</p>
+            <p className="text--small" onClick={() => productsContext.removeFromCart(item.id)}>remove</p>
           </div>
         </div>
       </div>
@@ -58,7 +71,7 @@ export default function Checkout(props) {
   })
 
   let total = 0
-  context.cart.forEach(item => total += item.price * item.number)
+  productsContext.cart.forEach(item => total += item.price * item.number)
 
   const addressForm = <form onSubmit={e => handleAddressSubmit(e)} className="checkout__form">
     <div className='checkout__long-input-container'>
@@ -70,7 +83,7 @@ export default function Checkout(props) {
       <label htmlFor="address2">Address line 2 (optional)</label>
       <input type="text" id='address2' name='address2' className='checkout__input--long' />
     </div>
-        <div className='checkout__two-inputs-container'>
+    <div className='checkout__two-inputs-container'>
       <div>
         <label htmlFor="country">Country or region</label>
         <input type="text" id='country' name='country' className='checkout__input--medium' />
@@ -141,7 +154,7 @@ export default function Checkout(props) {
           <div className="checkout__payment card--big">
 
 
-            
+
             {addressData.isSet === true ? <div>
               <p className="text--small text--medium-dark">pay using:</p>
               <div className="checkout__providers">

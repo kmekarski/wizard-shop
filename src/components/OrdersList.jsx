@@ -5,14 +5,25 @@ import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext.jsx";
+import { ModalContext } from '../context/modalContext.jsx';
 import UploadImage from './UploadImage.jsx';
 import { useParams } from 'react-router-dom';
 
 export default function OrdersList(props) {
     const navigate = useNavigate()
     const productsContext = React.useContext(ProductsContext)
+    const modalContext = React.useContext(ModalContext)
 
     const header = ["Order ID", "Username", "Name", "Date", "Price", "Items", "Action"]
+
+
+    function performAction() {
+        //delete, complete or reaccept order
+    }
+
+    function handleActionClick() {
+        modalContext.setCallback(performAction)
+    }
 
     const pendingOrders = [
         {
@@ -99,7 +110,7 @@ export default function OrdersList(props) {
                 <div className="btn--solid btn--small btn">
                     Show
                 </div>
-                <div className="btn--solid btn--small btn">
+                <div className="btn--solid btn--small btn" onClick={handleActionClick}>
                     {props.type === "pending" ? "Complete" : props.type === "completed" ? "Delete" : "Reaccept"}
                 </div>
             </div>

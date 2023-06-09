@@ -1493,3 +1493,54 @@ column-gap: 1em;
     "products-title products-title products-title ad ad"
     "products products products products products";
 }
+
+/* modal */
+
+.modal {
+  display: flex;
+  position: fixed; /* Stay in place */
+  z-index: 3; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ 
+}
+
+.modal__card--small,
+.modal__card--big {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  background-color: #fff;
+  margin: auto;
+  padding: 1.5em 2em;
+}
+
+.modal__card--small {
+  /* width: 300px;
+  height: 150px; */
+}
+
+.modal__card--big {
+  width: 300px;
+  height: 300px;
+}
+
+.modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  text-align: center;
+
+}
+
+.modal__buttons {
+  /* margin-top: auto; */
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}

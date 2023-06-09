@@ -5,15 +5,25 @@ import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
+import { ModalContext } from '../context/modalContext.jsx';
 import UploadImage from './UploadImage.jsx';
 import { useParams } from 'react-router-dom';
 
 export default function AddReview(props) {
     const navigate = useNavigate()
     const productsContext = React.useContext(ProductsContext)
+    const modalContext = React.useContext(ModalContext)
 
     const { id } = useParams()
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
+
+    function handleSubmitClick() {
+        modalContext.setCallback(addReview)
+    }
+
+    function addReview() {
+
+    }
 
     const [clickedRating, setClickedRating] = React.useState(0)
     const [stars, setStars] = React.useState([
@@ -119,7 +129,7 @@ export default function AddReview(props) {
                 {starsHtml}
             </div >
         </div>
-        <button className="btn--medium btn--solid btn add-review__add-btn">Add review</button>
+        <button className="btn--medium btn--solid btn add-review__add-btn" onClick={handleSubmitClick}>Add review</button>
     </form>
 
     return (

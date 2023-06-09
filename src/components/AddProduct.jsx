@@ -22,19 +22,22 @@ export default function AddProduct(props) {
 
     function editProduct() {
         console.log("edit product")
+        //odpowiedni fetch tutaj
     }
 
     function deleteProduct() {
         console.log("delete product")
+        //odpowiedni fetch tutaj
     }
 
     function addProduct() {
         console.log("add product")
+        //odpowiedni fetch tutaj
     }
 
     function handleSubmitClick(e) {
         e.preventDefault()
-        switch(e.target.innerHTML) {
+        switch (e.target.innerHTML) {
             case "Add product": {
                 modalContext.setCallback(addProduct)
                 break;

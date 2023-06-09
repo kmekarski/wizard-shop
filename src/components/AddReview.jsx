@@ -22,7 +22,7 @@ export default function AddReview(props) {
     }
 
     function addReview() {
-
+        //odpowiedni fetch tutaj
     }
 
     const [clickedRating, setClickedRating] = React.useState(0)

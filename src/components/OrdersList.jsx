@@ -18,7 +18,15 @@ export default function OrdersList(props) {
 
 
     function performAction() {
-        //delete, complete or reaccept order
+        if (props.type === "pending") {
+            //odpowiedni fetch dla zatwierdzenia zamowienia tutaj
+        }
+        else if (props.type === "completed") {
+            //odpowiedni fetch dla usuniecia zamowienia z historii tutaj
+        }
+        else {
+            //odpowiedni fetch dla ponownego przyjęcia zamowienia tutaj
+        }
     }
 
     function handleActionClick() {
@@ -97,7 +105,7 @@ export default function OrdersList(props) {
         }
     ]
 
-    
+
 
     const usersHtml = (props.type === "pending" ? pendingOrders : props.type === "completed" ? completedOrders : rejectedOrders).map((el, index) => {
         return (

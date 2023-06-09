@@ -35,7 +35,7 @@ export default function ProductPage(props) {
     }, [])
 
     const performAction = () => {
-        console.log('Fetch called');
+        // odpowiedni fetch dla usuniecia recenzji tutaj
     }
 
     const handleActionClick = () => {

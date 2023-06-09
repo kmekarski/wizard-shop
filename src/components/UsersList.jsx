@@ -17,7 +17,12 @@ export default function UsersList(props) {
     const header = ["Username", "Name", "Email", "Role", "Action"]
 
     function performAction() {
-        //block or unblock user
+        if (props.type === "active") {
+            //odpowiedni fetch dla banowania uźytkownika tutaj
+        }
+        else {
+            //odpowiedni fetch dla odbanowania uźytkownika tutaj
+        }
     }
 
     function handleActionClick() {

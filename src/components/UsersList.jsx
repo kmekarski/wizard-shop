@@ -16,17 +16,26 @@ export default function UsersList(props) {
 
     const header = ["Username", "Name", "Email", "Role", "Action"]
 
-    function performAction() {
-        if (props.type === "active") {
-            //odpowiedni fetch dla banowania uźytkownika tutaj
-        }
-        else {
-            //odpowiedni fetch dla odbanowania uźytkownika tutaj
-        }
+    function blockUser() {
+        //odpowiedni fetch dla banowania uzytkownika tutaj
     }
 
-    function handleActionClick() {
-        modalContext.setCallback(performAction)
+    function unblockUser() {
+        //odpowiedni fetch dla odbanowania uzytkownika tutaj
+    }
+
+    function handleActionClick(e) {
+        e.preventDefault()
+        switch (e.target.innerHTML) {
+            case "Block": {
+                modalContext.setCallback(blockUser)
+                break;
+            }
+            case "Unblock": {
+                modalContext.setCallback(unblockUser)
+                break;
+            }
+        }
     }
 
     const activeUsers = [

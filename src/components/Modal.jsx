@@ -16,7 +16,7 @@ export default function Modal(props) {
                 <div className={`modal__card--${modalContext.size} card--small`}>
                     <div className="modal__header text--medium-bold text--dark">
                         <p className="text--medium-bold text--dark">
-                            Do you want to procceed?
+                            Do you want to procceed? {modalContext.content}
                         </p>
                         <p className="text--small-regular text--dark">
                             This action cannot be reversed.

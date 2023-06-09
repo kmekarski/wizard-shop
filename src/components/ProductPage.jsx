@@ -34,12 +34,12 @@ export default function ProductPage(props) {
         productsContext.setShowCart(false)
     }, [])
 
-    const performAction = () => {
+    const deleteReview = () => {
         // odpowiedni fetch dla usuniecia recenzji tutaj
     }
 
     const handleActionClick = () => {
-        modalContext.setCallback(performAction);
+        modalContext.setCallback(deleteReview);
     }
 
     const reviews = [

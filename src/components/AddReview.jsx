@@ -18,7 +18,7 @@ export default function AddReview(props) {
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
     function handleSubmitClick() {
-        modalContext.setCallback(addReview)
+        addReview()
     }
 
     function addReview() {

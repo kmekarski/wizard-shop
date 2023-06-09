@@ -16,21 +16,34 @@ export default function OrdersList(props) {
 
     const header = ["Order ID", "Username", "Name", "Date", "Price", "Items", "Action"]
 
-
-    function performAction() {
-        if (props.type === "pending") {
-            //odpowiedni fetch dla zatwierdzenia zamowienia tutaj
-        }
-        else if (props.type === "completed") {
-            //odpowiedni fetch dla usuniecia zamowienia z historii tutaj
-        }
-        else {
-            //odpowiedni fetch dla ponownego przyjęcia zamowienia tutaj
-        }
+    function completeOrder() {
+        //odpowiedni fetch dla zatwierdzenia zamowienia tutaj
     }
 
-    function handleActionClick() {
-        modalContext.setCallback(performAction)
+    function deleteOrder() {
+        //odpowiedni fetch dla usuniecia zamowienia z historii tutaj
+    }
+
+    function reacceptOrder() {
+        //odpowiedni fetch dla ponownego przyjęcia zamowienia tutaj
+    }
+
+    function handleActionClick(e) {
+        e.preventDefault()
+        switch (e.target.innerHTML) {
+            case "Complete": {
+                modalContext.setCallback(completeOrder)
+                break;
+            }
+            case "Delete": {
+                modalContext.setCallback(deleteOrder)
+                break;
+            }
+            case "Reaccept": {
+                modalContext.setCallback(reacceptOrder)
+                break;
+            }
+        }
     }
 
     const pendingOrders = [

@@ -28,6 +28,15 @@ export default function OrdersList(props) {
         //odpowiedni fetch dla ponownego przyjęcia zamowienia tutaj
     }
 
+    function showItemsList() {
+
+    }
+
+    function handleShowClick(items) {
+        modalContext.setCallback(showItemsList)
+        modalContext.setList(items)
+    }
+
     function handleActionClick(e) {
         e.preventDefault()
         switch (e.target.innerHTML) {
@@ -52,14 +61,28 @@ export default function OrdersList(props) {
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            price: "$69",
+            items: [
+                {
+                    id: 1,
+                    name: "Cedric Diggory's Wand",
+                    price: 49,
+                    quantity: 1
+                },
+                {
+                    id: 1,
+                    name: "Cedric Diggory's Wand",
+                    price: 49,
+                    quantity: 2
+                }
+            ]
         },
         {
             id: "AKN15208",
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            price: "$69",
         },
         {
             id: "AKN15208",
@@ -128,7 +151,7 @@ export default function OrdersList(props) {
                 <p className="text--small-reguler text--dark">{el.name}</p>
                 <p className="text--small-regular text--dark">{el.date}</p>
                 <p className="text--small-regular text--dark">{el.price}</p>
-                <div className="btn--solid btn--small btn">
+                <div className="btn--solid btn--small btn" onClick={() => handleShowClick(el.items)}>
                     Show
                 </div>
                 <div className="btn--solid btn--small btn" onClick={handleActionClick}>
@@ -167,3 +190,5 @@ export default function OrdersList(props) {
         </div>
     );
 }
+
+

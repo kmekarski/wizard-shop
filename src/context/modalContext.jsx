@@ -5,7 +5,7 @@ const ModalContext = createContext();
 const ModalContextProvider = ({ children }) => {
 
     const [visible, setVisible] = React.useState(false)
-    const [size, setSize] = React.useState("small")
+    const [list, setList] = React.useState([])
 
     const [method, setMethod] = React.useState("")
     const callbackRef = React.useRef()
@@ -28,8 +28,8 @@ const ModalContextProvider = ({ children }) => {
         <ModalContext.Provider value={{
             visible: visible,
             setVisible: setVisible,
-            size: size,
-            setSize: setSize,
+            list: list,
+            setList: setList,
             method,
             setCallback: setCallback,
             handleButtonClick: handleButtonClick

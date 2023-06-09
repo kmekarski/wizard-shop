@@ -5,11 +5,21 @@ import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
+import { ModalContext } from '../context/modalContext.jsx';
 
 export default function AdminPanel(props) {
     const navigate = useNavigate()
-    const context = React.useContext(ProductsContext)
+    const productsContext = React.useContext(ProductsContext)
+    const modalContext = React.useContext(ModalContext)
 
+
+    function createReport() {
+
+    }
+
+    function handleReportClick() {
+        modalContext.setCallback(createReport)
+    }
     const panel = [
         {
             header: "Products",
@@ -75,9 +85,11 @@ export default function AdminPanel(props) {
     ]
 
     const panelHtml = panel.map(el => {
+
         const buttonsHtml = el.buttons.map(button => {
+            const handleClick = () => {button.link==="" ?handleReportClick() : navigate(button.link)}
             return (
-                <div className="admin__card__button card--big" onClick={() => navigate(button.link)}>
+                <div className="admin__card__button card--big" onClick={handleClick}>
                     <FontAwesomeIcon icon={`fa-solid fa-${button.icon}`} className='admin__button__icon' />
                     <p className="text--medium-bold text--dark">{button.text}</p>
                 </div>

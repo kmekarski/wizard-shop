@@ -10,6 +10,7 @@ export default function FeaturedCard(props) {
 
   const navigate = useNavigate()
   const context = React.useContext(ProductsContext)
+  console.log(context.productsList)
   const featuredProduct = context.productsList[0]
   const [numberOfItems, setNumberOfItems] = React.useState(1)
 

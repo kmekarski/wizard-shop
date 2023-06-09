@@ -1,6 +1,7 @@
 import React from "react";
 import { ModalContext } from "../context/modalContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProductImage from "./ProductImage";
 
 export default function Modal(props) {
 
@@ -10,12 +11,41 @@ export default function Modal(props) {
         modalContext.setVisible(false)
     }
 
+    const listHeader = ["ID", "Name", "Price", "Quantity"]
+
+    const headerHtml = <div className="modal__items-list__header">
+        {listHeader.map(el => {
+            return (
+                <p className="text--medium-bold text--dark">{el}</p>
+            )
+        })}
+    </div>
+
+    const itemsHtml = modalContext.list?.map((el, index) => {
+        return (
+            <div className={`modal__items-list__row ${index % 2 === 1 ? "modal__items-list__row--gray" : ""}`}>
+                <p className="text--small-regular text--dark">{el.id}</p>
+                <p className="text--small-regular text--dark">{el.name}</p>
+                <p className="text--small-reguler text--dark">${el.price}</p>
+                <p className="text--small-regular text--dark">{el.quantity}</p>
+            </div>
+        )
+    })
+
+
     let title = "Do you want to continue?"
     let subtitle = "Following action cannot be reversed"
     let confirmText = "Yes"
     let cancelText = "No"
 
-    switch(modalContext.method) {
+    let formHtml
+    let listHtml
+
+    let confirmButtonVisible = true
+    let cancelButtonVisible = true
+
+
+    switch (modalContext.method) {
         case "deleteReview": {
             title = "Confirm"
             subtitle = "Are you sure you want to remove this review?"
@@ -71,27 +101,61 @@ export default function Modal(props) {
             subtitle = "Are you sure you want to return this order to the list of pending orders?"
             break
         }
+        case "createReport": {
+            title = "Create report"
+            subtitle = "Please provide the range of report"
+            confirmText = "Create"
+            cancelText = "Cancel"
+            formHtml = (
+                <div className="modal__form">
+                    <div className='checkout__long-input-container'>
+                        <label htmlFor="from">Date from</label>
+                        <input type="date" id='from' name='from' className='checkout__input--long' />
+                    </div>
+                    <div className='checkout__long-input-container'>
+                        <label htmlFor="to">Date to</label>
+                        <input type="date" id='to' name='to' className='checkout__input--long' />
+                    </div>
+                </div>
+            )
+            break
+        }
+        case "showItemsList": {
+            title = ""
+            subtitle = ""
+            confirmButtonVisible = false
+            cancelText = "OK"
+            listHtml = <div className="modal__list">
+                {headerHtml}
+                <div className="modal__list__rows">
+                    {itemsHtml}
+                </div>
+            </div>
+            break
+        }
     }
 
     return (
         <div>
             {modalContext.visible && <div className="modal">
-                <div className={`modal__card--${modalContext.size} card--small`}>
+                <div className="modal__card card--small">
                     <div className="modal__header text--medium-bold text--dark">
-                        <p className="text--medium-bold text--dark">
+                        {title !== "" && <p className="text--medium-bold text--dark">
                             {title}
-                        </p>
-                        <p className="text--small-regular text--dark">
+                        </p>}
+                        {subtitle !== "" && <p className="text--small-regular text--dark">
                             {subtitle}
-                        </p>
+                        </p>}
+                        {formHtml}
+                        {listHtml}
                     </div>
                     <div className="modal__buttons">
-                        <div className="btn--solid btn--small btn" onClick={modalContext.handleButtonClick}>
+                        {confirmButtonVisible && <div className="btn--solid btn--small btn" onClick={modalContext.handleButtonClick}>
                             {confirmText}
-                        </div>
-                        <div className="btn--solid btn--small btn" onClick={handleNoClick}>
+                        </div>}
+                        {cancelButtonVisible && <div className="btn--solid btn--small btn" onClick={handleNoClick}>
                             {cancelText}
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>}

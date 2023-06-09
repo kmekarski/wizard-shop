@@ -15,7 +15,7 @@ export default function Modal(props) {
     let confirmText = "Yes"
     let cancelText = "No"
 
-    switch(modalContext.content) {
+    switch(modalContext.method) {
         case "deleteReview": {
             title = "Confirm"
             subtitle = "Are you sure you want to remove this review?"

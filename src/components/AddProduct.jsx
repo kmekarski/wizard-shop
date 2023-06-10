@@ -43,7 +43,14 @@ export default function AddProduct(props) {
     }
 
     // inputs limits management:
-    const [inputsOkay, setInputsOkay] = React.useState({
+    const [inputsOkay, setInputsOkay] = React.useState(props.edit ? {
+        name: true,
+        category: true,
+        price: true,
+        desc: true,
+        color: true,
+        size: true,
+    } : {
         name: false,
         category: false,
         price: false,
@@ -80,28 +87,13 @@ export default function AddProduct(props) {
         }
     }
 
-    const handleInputChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
-        })
-    }
-
-    const [formData, setFormData] = React.useState(props.edit ? {
-        name: product.name,
-        price: product.price,
-        desc: product.description,
+    const [formData, setFormData] = React.useState({
+        name: product?.name || "",
+        price: product?.price || "",
+        desc: product?.description || "",
         size: "",
         color: ""
-    }
-        : {
-            name: "",
-            category: "",
-            price: "",
-            desc: "",
-            size: "",
-            color: ""
-        })
+    })
 
     const leftForm = <form className="add-product__form">
         <div className='add-product__long-input-container'>
@@ -179,7 +171,7 @@ export default function AddProduct(props) {
             />
         </div>
         {props.edit ? <div className='edit-product__buttons'>
-            <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Edit product</button>
+            <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}disabled={!allInputsOkay}>Edit product</button>
             <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Delete product</button>
         </div> : <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick} disabled={!allInputsOkay}>Add product</button>}
     </form>

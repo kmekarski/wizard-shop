@@ -13,20 +13,11 @@ import TextInput from './TextInput.jsx';
 export default function AddReview(props) {
     const navigate = useNavigate()
     const productsContext = React.useContext(ProductsContext)
-    const modalContext = React.useContext(ModalContext)
 
     const { id } = useParams()
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
 
-    const [reviewImages, setReviewImages] = React.useState(new Array(1).fill(null))
-
-    function setReviewImage(number, image) {
-        const newArray = reviewImages
-        reviewImages[number - 1] = image
-        setReviewImages(newArray)
-        console.log(reviewImages)
-    }
 
     function handleSubmitClick() {
         addReview()
@@ -53,6 +44,19 @@ export default function AddReview(props) {
     })
     ////////
 
+    // image upload functionality
+    const [reviewImages, setReviewImages] = React.useState(new Array(1).fill(null))
+
+    function setReviewImage(number, image) {
+        const newArray = reviewImages
+        reviewImages[number - 1] = image
+        setReviewImages(newArray)
+    }
+    ////////////
+
+
+
+    // stars functionality
     const [clickedRating, setClickedRating] = React.useState(0)
     const [stars, setStars] = React.useState([
         {
@@ -103,40 +107,17 @@ export default function AddReview(props) {
         }
         setStars(newStars)
     }
+    ///////////////////
 
     function handleSubmit(e) {
         e.preventDefault()
     }
 
-    const handleInputChange = (event) => {
-        setInputsLimits({
-            ...inputsLimits,
-            [event.target.name]: {
-                ...inputsLimits[event.target.name],
-                okay: event.target.value.length <= inputsLimits[event.target.name].limit
-            }
-        })
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
-        })
-    }
 
-    const [formData, setFormData] = React.useState(props.edit ? {
-        name: product.name,
-        price: product.price,
-        desc: product.description,
-        size: "",
-        color: ""
-    }
-        : {
-            name: "",
-            category: "",
-            price: "",
-            desc: "",
-            size: "",
-            color: ""
-        })
+    const [formData, setFormData] = React.useState({
+        name: "",
+        desc: ""
+    })
 
     const leftForm = <form className="add-product__form">
         <div>
@@ -154,10 +135,10 @@ export default function AddReview(props) {
                 formData={formData}
                 setFormData={setFormData}
                 setInputOkay={setInputOkay}
-                 />
+            />
         </div>
         <div className='add-product__long-input-container'>
-        <TextInput
+            <TextInput
                 limit={20}
                 name="desc"
                 label="What did you like or dislike?"
@@ -165,7 +146,7 @@ export default function AddReview(props) {
                 formData={formData}
                 setFormData={setFormData}
                 setInputOkay={setInputOkay}
-                 />
+            />
         </div>
     </form>
 

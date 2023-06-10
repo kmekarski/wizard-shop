@@ -179,7 +179,6 @@ label {
   display: grid;
   grid-template-columns: 4fr 4fr 5fr;
   column-gap: 1em;
-  place-items: center;
 }
 
 .header__text {
@@ -189,11 +188,16 @@ label {
   font-size: 1rem;
 }
 
+.header__searchbar {
+  place-self: center;
+}
+
 .header__buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2em;
+  place-self: center;
 }
 
 .header__icon-btn {

@@ -30,7 +30,7 @@ export default function Header(props) {
         <h2 className="header__title text--primary text--nowrap">{props.title}</h2>
         <h4 className="header__subtitle text--secondary text--nowrap" >{props.subtitle}</h4>
       </div>
-      {props.searchbar && <div className="input-with-icon">
+      {props.searchbar && <div className="header__searchbar input-with-icon">
         <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className='icon--input' />
         <form onSubmit={e => search(e)}><input className='text--input-medium' placeholder="Search"/></form>
       </div>}

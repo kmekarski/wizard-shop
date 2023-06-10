@@ -7,6 +7,8 @@ function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const disabled = !email || !password
+
     const backendAddr = 'https://wishop.azurewebsites.net'
 
     const navigate = useNavigate()
@@ -68,7 +70,7 @@ function Login() {
                             } />
                     </div>
                 </div>
-                <button className='login__btn btn--medium btn--solid btn' type="submit">Login</button>
+                <button className='login__btn btn--medium btn--solid btn' type="submit" disabled={disabled}>Login</button>
                 <h4 className='btn' onClick={() => navigate("/register")}>Do not have an account? Register!</h4>
             </form>
         </div>

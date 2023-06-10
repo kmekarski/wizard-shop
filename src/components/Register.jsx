@@ -8,6 +8,8 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
 
+  disabled = !username || !email || !password || !repeatedPassword
+
   const backendAddr = 'https://wishop.azurewebsites.net'
 
   const handleSubmit = async (event) => {
@@ -101,7 +103,7 @@ export default function Register() {
                    } />
           </div>
         </div>
-        <button className='login__btn btn--medium btn--solid btn' type="submit">Register</button>
+        <button className='login__btn btn--medium btn--solid btn' type="submit" disabled={disabled}>Register</button>
       </form>
     </div>
   );

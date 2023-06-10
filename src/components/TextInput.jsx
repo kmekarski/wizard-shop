@@ -38,13 +38,8 @@ export default function TextInput(props) {
                 [event.target.name]: event.target.value
             })
         }
-
-        // const newOkay = (event.target.value.length <= limit) && (!props.required || event.target.value.length > 0)
         setOkay(newOkay)
         setInputOkay(name, newOkay)
-        console.log(newOkay)
-
-
     }
 
     return (

@@ -7,6 +7,7 @@ import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 import { ModalContext } from '../context/modalContext.jsx';
 import UploadImage from './UploadImage.jsx';
+import TextInput from './TextInput.jsx';
 import { useParams } from 'react-router-dom';
 
 export default function AddProduct(props) {
@@ -21,7 +22,7 @@ export default function AddProduct(props) {
 
     function setProductImage(number, image) {
         const newArray = productImages
-        productImages[number-1] = image
+        productImages[number - 1] = image
         setProductImages(newArray)
     }
 
@@ -40,6 +41,26 @@ export default function AddProduct(props) {
         console.log("add product")
         //odpowiedni fetch tutaj
     }
+
+    // inputs limits management:
+    const [inputsOkay, setInputsOkay] = React.useState({
+        name: false,
+        category: false,
+        price: false,
+        desc: false,
+        color: false,
+        size: false,
+    })
+    function setInputOkay(name, okay) {
+        setInputsOkay({
+            ...inputsOkay,
+            [name]: okay
+        })
+    }
+    const allInputsOkay = Object.keys(inputsOkay).every(key => {
+        return inputsOkay[key]
+    })
+    ////////
 
     function handleSubmitClick(e) {
         e.preventDefault()
@@ -84,24 +105,48 @@ export default function AddProduct(props) {
 
     const leftForm = <form className="add-product__form">
         <div className='add-product__long-input-container'>
-            <label htmlFor="name">Product name</label>
-            <input type="text" id='name' name='name' value={formData.name} onChange={handleInputChange} className='add-product__input--long' />
-            <p className="text--small text--medium-dark">do not exceed 20 characters</p>
+            <TextInput
+                limit={20}
+                name="name"
+                label="Product name"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+            />
         </div>
         <div className='add-product__long-input-container'>
-            <label htmlFor="category">Category</label>
-            <input type="text" id='category' name='category' value={formData.category} onChange={handleInputChange} className='add-product__input--long' />
+            <TextInput
+                limit={20}
+                name="category"
+                label="Category"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+            />
         </div>
         <div className='add-product__two-inputs-container'>
-            <div>
-                <label htmlFor="price">Price</label>
-                <input type="text" id='price' name='price' value={formData.price} onChange={handleInputChange} className='add-product__input--medium' />
-            </div>
+
+            <TextInput
+                limit={20}
+                name="price"
+                label="Price"
+                dataType="number"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+            />
+
         </div>
         <div className='add-product__long-input-container'>
-            <label htmlFor="desc">Description</label>
-            <textarea type="text" id='desc' name='desc' placeholder="" rows={3} value={formData.desc} onChange={handleInputChange} />
-            <p className="text--small text--medium-dark">do not exceed 100 characters</p>
+            <TextInput
+                limit={20}
+                name="desc"
+                label="Description"
+                type="textarea"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+            />
         </div>
     </form>
 
@@ -109,26 +154,34 @@ export default function AddProduct(props) {
         <div className='add-product__long-input-container'>
             <label htmlFor="name">Product images</label>
             <div className="add-product__upload-images">
-                <UploadImage number={1} setImage={setProductImage}/>
-                <UploadImage number={2} setImage={setProductImage}/>
-                <UploadImage number={3} setImage={setProductImage}/>
-                <UploadImage number={4} setImage={setProductImage}/>
+                <UploadImage number={1} setImage={setProductImage} src={product?.img}/>
+                <UploadImage number={2} setImage={setProductImage} />
+                <UploadImage number={3} setImage={setProductImage} />
+                <UploadImage number={4} setImage={setProductImage} />
             </div>
         </div>
         <div className='add-product__two-inputs-container--even'>
-            <div>
-                <label htmlFor="size">Size</label>
-                <input type="text" id='size' name='size' value={formData.size} onChange={handleInputChange} className='checkout__input--medium' />
-            </div>
-            <div>
-                <label htmlFor="color">Color</label>
-                <input type="text" id='color' name='color' value={formData.color} onChange={handleInputChange} className='checkout__input--short' />
-            </div>
+            <TextInput
+                limit={20}
+                name="size"
+                label="Size"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+            />
+            <TextInput
+                limit={20}
+                name="color"
+                label="Color"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+            />
         </div>
         {props.edit ? <div className='edit-product__buttons'>
             <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Edit product</button>
             <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Delete product</button>
-        </div> : <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick}>Add product</button>}
+        </div> : <button className="btn--medium btn--solid btn add-product__add-btn" onClick={handleSubmitClick} disabled={!allInputsOkay}>Add product</button>}
     </form>
 
     return (

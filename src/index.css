@@ -641,6 +641,11 @@ textarea {
   background: #BA1C50;
 }
 
+.btn--solid:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .btn--light {
   background: #f4f4f4;
   border: 1px solid transparent;
@@ -1063,22 +1068,6 @@ form.login input {
   border: none;
   outline: none;
   margin-bottom: 0.25em;
-}
-
-.add-product textarea,
-.add-review textarea {
-  display: block;
-  margin-bottom: 0.25em;
-  min-width: 100%;
-  font-size: 1rem;
-  font-family: inherit;
-  padding: 0.5rem;
-  padding-left: 1.25rem;
-  background-color: #f4f4f4;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  resize: none;
 }
 
 .checkout__input--short,
@@ -1628,4 +1617,26 @@ input.upload-image {
   left: 0;
   overflow: hidden;
   white-space: nowrap;
+}
+
+/* text input */
+
+.text-input {
+  text-align: start;
+  width: 100%;
+}
+
+.text-input textarea {
+  display: block;
+  margin-bottom: 0.25em;
+  min-width: 100%;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0.5rem;
+  padding-left: 1.25rem;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  resize: none;
 }

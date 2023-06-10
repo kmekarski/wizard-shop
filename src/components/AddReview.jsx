@@ -8,6 +8,7 @@ import { ProductsContext } from "../context/productsContext";
 import { ModalContext } from '../context/modalContext.jsx';
 import UploadImage from './UploadImage.jsx';
 import { useParams } from 'react-router-dom';
+import TextInput from './TextInput.jsx';
 
 export default function AddReview(props) {
     const navigate = useNavigate()
@@ -22,7 +23,7 @@ export default function AddReview(props) {
 
     function setReviewImage(number, image) {
         const newArray = reviewImages
-        reviewImages[number-1] = image
+        reviewImages[number - 1] = image
         setReviewImages(newArray)
         console.log(reviewImages)
     }
@@ -34,6 +35,23 @@ export default function AddReview(props) {
     function addReview() {
         //odpowiedni fetch tutaj
     }
+
+    // inputs limits management:
+    const [inputsOkay, setInputsOkay] = React.useState({
+        name: false,
+        desc: false,
+        stars: false
+    })
+    function setInputOkay(name, okay) {
+        setInputsOkay({
+            ...inputsOkay,
+            [name]: okay
+        })
+    }
+    const allInputsOkay = Object.keys(inputsOkay).every(key => {
+        return inputsOkay[key]
+    })
+    ////////
 
     const [clickedRating, setClickedRating] = React.useState(0)
     const [stars, setStars] = React.useState([
@@ -69,6 +87,10 @@ export default function AddReview(props) {
         updateStars(clickedRating)
     }
     function handleClickStar(starNumber) {
+        setInputsOkay({
+            ...inputsOkay,
+            stars: true
+        })
         setClickedRating(starNumber)
     }
     function updateStars(number) {
@@ -87,6 +109,13 @@ export default function AddReview(props) {
     }
 
     const handleInputChange = (event) => {
+        setInputsLimits({
+            ...inputsLimits,
+            [event.target.name]: {
+                ...inputsLimits[event.target.name],
+                okay: event.target.value.length <= inputsLimits[event.target.name].limit
+            }
+        })
         setFormData({
             ...formData,
             [event.target.name]: event.target.value
@@ -117,21 +146,33 @@ export default function AddReview(props) {
             </div>
         </div>
         <div className='add-product__long-input-container'>
-            <label htmlFor="name">Set a title for your review</label>
-            <input type="text" id='name' name='name' value={formData.name} onChange={handleInputChange} placeholder='Summarize review' className='add-product__input--long' />
-            <p className="text--small text--medium-dark">do not exceed 40 characters</p>
+            <TextInput
+                limit={20}
+                name="name"
+                label="Set a title for your review"
+                placeholder="Summarize review"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+                 />
         </div>
         <div className='add-product__long-input-container'>
-            <label htmlFor="desc">What did you like or dislike?</label>
-            <textarea type="text" id='desc' name='desc' placeholder="What should shoppers know?" rows={3} value={formData.desc} onChange={handleInputChange} />
-            <p className="text--small text--medium-dark">do not exceed 250 characters</p>
+        <TextInput
+                limit={20}
+                name="desc"
+                label="What did you like or dislike?"
+                placeholder="What should shoppers know?"
+                formData={formData}
+                setFormData={setFormData}
+                setInputOkay={setInputOkay}
+                 />
         </div>
     </form>
 
     const rightForm = <form onSubmit={e => handleSubmit(e)} className="add-product__form">
         <div>
             <label htmlFor="name">Would you like to add a photo?</label>
-            <UploadImage setImage={setReviewImage}/>
+            <UploadImage setImage={setReviewImage} />
         </div>
         <div>
             <label htmlFor="name">Your overall rating of this product</label>
@@ -139,7 +180,7 @@ export default function AddReview(props) {
                 {starsHtml}
             </div >
         </div>
-        <button className="btn--medium btn--solid btn add-review__add-btn" onClick={handleSubmitClick}>Add review</button>
+        <button className="btn--medium btn--solid btn add-review__add-btn" disabled={!allInputsOkay} onClick={handleSubmitClick}>Add review</button>
     </form>
 
     return (

@@ -7,7 +7,7 @@ import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 
 export default function UploadImage(props) {
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(props.src);
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -48,5 +48,6 @@ export default function UploadImage(props) {
 }
 
 UploadImage.defaultProps = {
-    number: 1
+    number: 1,
+    src: null
 }

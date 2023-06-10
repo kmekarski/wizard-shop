@@ -92,8 +92,8 @@ export default function AddProduct(props) {
         price: product?.price || "",
         desc: product?.description || "",
         category: product?.category || "",
-        size: "",
-        color: ""
+        size: product?.size || "",
+        color: product?.color || "",
     })
 
     const leftForm = <form className="add-product__form">

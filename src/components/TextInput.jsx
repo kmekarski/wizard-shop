@@ -15,12 +15,12 @@ export default function TextInput(props) {
 
     function handleInputChange(event) {
         let newOkay
-        if (event.target.value.length === limit + 1) {
+        if (event.target.value.length > limit) {
             newOkay = true
             setAlert(true)
             setFormData({
                 ...formData,
-                [event.target.name]: event.target.value.slice(0, -1)
+                [event.target.name]: event.target.value.slice(0, 20)
             })
         } else if(event.target.value.length === 0 && props.required) {
             newOkay = false

@@ -8,7 +8,7 @@ export default function NavLink(props) {
   return (
     <div className={`nav__element  btn ${isCurrent ? "nav__element--selected" : ""}`} onClick={() => navigate(props.link)}>
       <FontAwesomeIcon icon={`fa-solid fa-${props.icon}`} className='icon--l icon--primary' />
-      <p className="nav__text">{props.text}</p>
+      <p>{props.text}</p>
     </div>
   )
 }

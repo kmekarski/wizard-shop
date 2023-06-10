@@ -30,14 +30,14 @@ export default function Header(props) {
         <h2 className="header__title text--primary text--nowrap">{props.title}</h2>
         <h4 className="header__subtitle text--secondary text--nowrap" >{props.subtitle}</h4>
       </div>
-      {props.searchbar && <div className="header__searchbar input">
+      {props.searchbar && <div className="input-with-icon">
         <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className='icon--input' />
         <form onSubmit={e => search(e)}><input className='text--input-medium' placeholder="Search"/></form>
       </div>}
       {props.buttons && <div className="header__buttons">
         <div className="header__cart-btn header__icon-btn">
           <FontAwesomeIcon icon="fa-solid fa-cart-shopping" className='icon--m icon--primary' onClick={(e) => toggleCart(e)} />
-          <p className='text--icon' onClick={(e) => toggleCart(e)}>Cart</p>
+          <p className='text--small text--white' onClick={(e) => toggleCart(e)}>Cart</p>
           <CartPopup show={productsContext.showCart}
             toggle={toggleCart}
             removeFromCart={props.removeFromCart}
@@ -47,7 +47,7 @@ export default function Header(props) {
 
         {localStorage.getItem("userID") !== null && <div className="header__account-btn header__icon-btn" onClick={() => navigate("/profile")}>
           <FontAwesomeIcon icon="fa-solid fa-user" className='icon--m icon--primary' />
-          <p className='text--icon'>Account</p>
+          <p className='text--small text--white'>Account</p>
         </div>}
         {localStorage.getItem("userID") === null && <div className="header__logout-btn btn--solid btn--medium btn" onClick={() => navigate("/login")}>Login</div>}
         {localStorage.getItem("userID") !== null && <div className="header__logout-btn btn--solid btn--medium btn" onClick={() => navigate("/logout")}>Logout</div>}

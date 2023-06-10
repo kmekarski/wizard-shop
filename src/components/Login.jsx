@@ -39,13 +39,13 @@ function Login() {
 
     return (
         <div className="login">
-            <form className='login card--big' onSubmit={handleSubmit}>
-                <h2 className='login__title text--primary'>Login</h2>
+            <form className='login__form card--big' onSubmit={handleSubmit}>
+                <h2 className='text--primary text--dark text--center'>Login</h2>
                 <div className='login__group'>
-                    <label htmlFor='username' className='text--medium-small'>Email</label>
-                    <div className='login__input text--input-big'>
-                        <FontAwesomeIcon icon="fa-solid fa-user" className='icon--input' />
-                        <input className=' text--input-big' type="text"
+                    <label htmlFor='username' className='text--medium-regular text--dark'>Email</label>
+                    <div className='login__input'>
+                        <FontAwesomeIcon icon="fa-solid fa-user" className='icon--s' />
+                        <input className='text--medium-regular text--dark' type="text"
                             value={email}
                             name='username'
                             id='username'
@@ -57,10 +57,10 @@ function Login() {
 
                 </div>
                 <div className='login__group'>
-                    <label htmlFor='password' className='text--medium-small'>Password</label>
-                    <div className='login__input text--input-big'>
-                        <FontAwesomeIcon icon="fa-solid fa-lock" className='icon--input' />
-                        <input className='text--input-big' type="password"
+                    <label htmlFor='password' className='text--medium-regular text--dark'>Password</label>
+                    <div className='login__input'>
+                        <FontAwesomeIcon icon="fa-solid fa-lock" className='icon--s' />
+                        <input className='text--medium-regular text--dark' type="password"
                             value={password}
                             name='password'
                             id='password'
@@ -71,7 +71,7 @@ function Login() {
                     </div>
                 </div>
                 <button className='login__btn btn--medium btn--solid btn' type="submit" disabled={disabled}>Login</button>
-                <h4 className='btn' onClick={() => navigate("/register")}>Do not have an account? Register!</h4>
+                <h4 className='text--small-regular text--clickable text--center' onClick={() => navigate("/register")}>Do not have an account? Register!</h4>
             </form>
         </div>
     );

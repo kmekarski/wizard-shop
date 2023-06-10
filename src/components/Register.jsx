@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {useNavigate, Navigate} from "react-router-dom";
+
 
 
 export default function Register() {
@@ -7,6 +9,9 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
+
+  const navigate = useNavigate()
+
 
   const disabled = !username || !email || !password || !repeatedPassword
 
@@ -40,15 +45,15 @@ export default function Register() {
 
   return (
     <div className="login">
-      <form className='login card--big' onSubmit={handleSubmit}>
+      <form className='login__form card--big' onSubmit={handleSubmit}>
 
-        <h2 className='login__title text--primary'>Register</h2>
+        <h2 className='text--primary text--dark text--center'>Register</h2>
 
         <div className='login__group'>
-          <label htmlFor='username' className='text--medium-small'>Username</label>
-          <div className='login__input text--input-big'>
-            <FontAwesomeIcon icon="fa-solid fa-user" className='icon--input' />
-            <input className=' text--input-big' type="text"
+          <label htmlFor='username' className='text--medium-regular text--dark'>Username</label>
+          <div className='login__input'>
+            <FontAwesomeIcon icon="fa-solid fa-user" className='icon--s' />
+            <input className='text--medium-regular text--dark' type="text"
                    value={username}
                    name='username'
                    id='username'
@@ -60,10 +65,10 @@ export default function Register() {
         </div>
 
         <div className='login__group'>
-          <label htmlFor='email' className='text--medium-small'>Email</label>
+          <label htmlFor='email' className='text--medium-regular text--dark '>Email</label>
           <div className='login__input text--input-big'>
-            <FontAwesomeIcon icon="fa-solid fa-user" className='icon--input' />
-            <input className=' text--input-big' type="email"
+            <FontAwesomeIcon icon="fa-solid fa-user" className='icon--s' />
+            <input className='text--medium-regular text--dark' type="email"
                    value={email}
                    name='email'
                    id='email'
@@ -75,10 +80,10 @@ export default function Register() {
         </div>
 
         <div className='login__group'>
-          <label htmlFor='password' className='text--medium-small'>Password</label>
+          <label htmlFor='password' className='text--medium-regular text--dark '>Password</label>
           <div className='login__input text--input-big'>
-            <FontAwesomeIcon icon="fa-solid fa-lock" className='icon--input' />
-            <input className='text--input-big' type="password"
+            <FontAwesomeIcon icon="fa-solid fa-lock" className='icon--s' />
+            <input className='text--medium-regular text--dark' type="password"
                    value={password}
                    name='password'
                    id='password'
@@ -90,10 +95,10 @@ export default function Register() {
         </div>
 
         <div className='login__group'>
-          <label htmlFor='repeatedPassword' className='text--medium-small'>Password</label>
+          <label htmlFor='repeatedPassword' className='text--medium-regular text--dark '>Password</label>
           <div className='login__input text--input-big'>
-            <FontAwesomeIcon icon="fa-solid fa-lock" className='icon--input' />
-            <input className='text--input-big' type="password"
+            <FontAwesomeIcon icon="fa-solid fa-lock" className='icon--s' />
+            <input className='text--medium-regular text--dark' type="password"
                    value={repeatedPassword}
                    name='repeatedPassword'
                    id='repeatedPassword'
@@ -104,6 +109,7 @@ export default function Register() {
           </div>
         </div>
         <button className='login__btn btn--medium btn--solid btn' type="submit" disabled={disabled}>Register</button>
+        <h4 className='text--small-regular text--clickable text--center' onClick={() => navigate("/login")}>Already have an account?</h4>
       </form>
     </div>
   );

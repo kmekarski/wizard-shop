@@ -43,7 +43,7 @@ export default function Sidebar(props) {
             <div className="container">
 
                 <div className='title text--primary btn' onClick={() => navigate("/")}>
-                    <h2 className="title__text text--primary">Wizards Shop</h2>
+                    <h2 className="text--primary">Wizards Shop</h2>
                     <FontAwesomeIcon icon="fa-solid fa-wand-magic-sparkles" className='icon--xl icon--primary'/>
                 </div>
 
@@ -55,9 +55,9 @@ export default function Sidebar(props) {
                     <div className="newsletter__header">
                         <FontAwesomeIcon icon="fa-solid fa-newspaper" className='icon--xl icon--primary'/>
                         <h2 className="text--medium-bold">Join our Newsletter!</h2>
-                        <h2 className="text--desc">Get great deals and information about new products</h2>
+                        <h2 className="text--small text--white">Get great deals and information about new products</h2>
                     </div>
-                        <div className="newsletter__input input">
+                        <div className="input-with-icon">
                             <FontAwesomeIcon icon="fa-solid fa-envelope" className='icon--input'/>
                             <input className='text--input-medium' placeholder="Email"/>
                         </div>

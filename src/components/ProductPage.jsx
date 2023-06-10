@@ -6,6 +6,8 @@ import AdCard from "./AdCard";
 import ProductCard from "./ProductCard";
 import ScrollableProductsList from "./ScrollableProductsList";
 import ProductImage from "./ProductImage";
+import StarsDisplay from "./StarsDisplay";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useLocation } from "react-router-dom";
@@ -66,13 +68,7 @@ export default function ProductPage(props) {
                 <div className="product-page__review__title">
                     <FontAwesomeIcon icon="fa-solid fa-user" className='icon--darker icon--s' />
                     <div className="text--medium-regular text--dark">{el.user}</div>
-                    <div>
-                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                        <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                    </div>
+                    <StarsDisplay rating={el.rating}/>
                 </div>
                 <div className="text--medium-bold text--dark">{el.title}</div>
                 <div className="text--medium-regular text--dark">{el.text}</div>
@@ -110,13 +106,7 @@ export default function ProductPage(props) {
                                 <div>
                                     <div className="text--primary">${product.price}</div>
                                     <div className="featured__rating">
-                                        <div className="featured__stars">
-                                            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                                            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                                            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                                            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                                            <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />
-                                        </div>
+                                        <StarsDisplay size="m" rating={product.rating}/>
                                         <p className="text--regular text--white">(200 reviews)</p>
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ProductsContext } from "../context/productsContext";
 import ProductImage from "./ProductImage";
+import StarsDisplay from "./StarsDisplay";
 import { useNavigate } from "react-router-dom";
 
 export default function ProductCard(props) {

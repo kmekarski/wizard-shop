@@ -47,7 +47,7 @@ export default function AddReview(props) {
     const starsHtml = stars.map((el, index) => {
         return <div onMouseEnter={() => handleMouseEnterStar(index + 1)}
             onMouseLeave={handleMouseLeaveStar} onClick={() => handleClickStar(index + 1)}
-            className={`add-review__star${el.filled ? "--filled" : "--empty"}`}>
+            className={`icon--star${el.filled ? "--filled" : "--empty"}`}>
             <FontAwesomeIcon icon="fa-solid fa-star" className='icon--l' />
         </div>
     })

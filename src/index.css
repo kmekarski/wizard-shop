@@ -257,11 +257,7 @@ textarea {
 .featured__rating {
   display: flex;
   gap: 1em;
-}
-
-.featured__stars {
-  display: flex;
-  gap: 3px;
+  align-items: center;
 }
 
 .featured__desc {}
@@ -593,6 +589,11 @@ textarea {
   color: #666666;
 }
 
+.icon--star--empty {
+  color: #D9D9D9;
+}
+
+.icon--star--filled,
 .icon--star {
   color: #FCF352;
 }
@@ -1383,13 +1384,7 @@ form.login input {
   margin: 0.75em auto 0;
 }
 
-.add-review__star--empty {
-  color: #D9D9D9;
-}
 
-.add-review__star--filled {
-  color: #FCF352;
-}
 
 /* admin panel */
 
@@ -1572,4 +1567,25 @@ form.login input {
   grid-template-columns: 1fr 2fr;
   gap: 1.5em;
   border-bottom: 1px solid #D9D9D9;
+}
+
+/* stars display*/
+
+.stars-display {
+  display: flex;
+  align-items: center;
+  gap: 0.15em
+}
+
+.star-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.star-icon.partial {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }

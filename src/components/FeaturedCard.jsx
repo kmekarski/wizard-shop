@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import ProductImage from "./ProductImage";
+import StarsDisplay from "./StarsDisplay";
 
 import { ProductsContext } from "../context/productsContext";
 
@@ -26,9 +27,7 @@ export default function FeaturedCard(props) {
       <div className="featured__text">
         <h3 className="featured__name text--primary">{featuredProduct.name}</h3>
         <div className="featured__rating">
-          <div className="featured__stars">
-            {Array(5).fill(null).map(() => {return <FontAwesomeIcon icon="fa-solid fa-star" className='icon--star icon--s' />})}
-          </div>
+          <StarsDisplay rating={featuredProduct.rating}/>
           <p className="text--small-regular text--white">({featuredProduct.reviewCount}200 reviews)</p>
         </div>
         <p className="featured__desc text--desc">{featuredProduct.desc}</p>
@@ -36,13 +35,18 @@ export default function FeaturedCard(props) {
           <p className="text--medium-bold">Price: ${featuredProduct.price}</p>
         </div>
         <div className="featured__buttons">
-          <div className="btn--ghost btn--small btn" onClick={(e) => {e.stopPropagation()
-          context.addToCart(featuredProduct.id, numberOfItems)
-          context.setShowCart(true)}}>Add to Cart</div>
-          <div className="btn--solid btn--small btn" onClick={(e) => {{e.stopPropagation()
-            context.addToCart(featuredProduct.id, 1)
-            navigate("/checkout")
-          }}}>Buy now</div>
+          <div className="btn--ghost btn--small btn" onClick={(e) => {
+            e.stopPropagation()
+            context.addToCart(featuredProduct.id, numberOfItems)
+            context.setShowCart(true)
+          }}>Add to Cart</div>
+          <div className="btn--solid btn--small btn" onClick={(e) => {
+            {
+              e.stopPropagation()
+              context.addToCart(featuredProduct.id, 1)
+              navigate("/checkout")
+            }
+          }}>Buy now</div>
         </div>
       </div>
     </div>

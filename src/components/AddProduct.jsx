@@ -91,6 +91,7 @@ export default function AddProduct(props) {
         name: product?.name || "",
         price: product?.price || "",
         desc: product?.description || "",
+        category: product?.category || "",
         size: "",
         color: ""
     })

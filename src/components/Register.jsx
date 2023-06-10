@@ -8,7 +8,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [repeatedPassword, setRepeatedPassword] = useState('');
 
-  disabled = !username || !email || !password || !repeatedPassword
+  const disabled = !username || !email || !password || !repeatedPassword
 
   const backendAddr = 'https://wishop.azurewebsites.net'
 

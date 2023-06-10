@@ -49,7 +49,7 @@ export default function ProductPage(props) {
             user: "Some user",
             title: "Excelent choice",
             text: "Great wand! Bought it for my sister and she absolutely loves it!",
-            rating: 5,
+            rating: 3,
             withPhoto: true,
             photo: product.img
         },
@@ -57,7 +57,7 @@ export default function ProductPage(props) {
             user: "Some user",
             title: "Excelent choice",
             text: "Great wand! Bought it for my sister and she absolutely loves it!",
-            rating: 5,
+            rating: 2,
             withPhoto: false
         }
     ]

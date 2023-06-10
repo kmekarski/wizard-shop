@@ -17,6 +17,16 @@ export default function AddReview(props) {
     const { id } = useParams()
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
+
+    const [reviewImages, setReviewImages] = React.useState(new Array(1).fill(null))
+
+    function setReviewImage(number, image) {
+        const newArray = reviewImages
+        reviewImages[number-1] = image
+        setReviewImages(newArray)
+        console.log(reviewImages)
+    }
+
     function handleSubmitClick() {
         addReview()
     }
@@ -121,7 +131,7 @@ export default function AddReview(props) {
     const rightForm = <form onSubmit={e => handleSubmit(e)} className="add-product__form">
         <div>
             <label htmlFor="name">Would you like to add a photo?</label>
-            <UploadImage />
+            <UploadImage setImage={setReviewImage}/>
         </div>
         <div>
             <label htmlFor="name">Your overall rating of this product</label>

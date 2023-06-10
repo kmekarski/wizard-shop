@@ -17,7 +17,13 @@ export default function AddProduct(props) {
     const { id } = useParams()
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
+    const [productImages, setProductImages] = React.useState(new Array(4).fill(null))
 
+    function setProductImage(number, image) {
+        const newArray = productImages
+        productImages[number-1] = image
+        setProductImages(newArray)
+    }
 
 
     function editProduct() {
@@ -103,10 +109,10 @@ export default function AddProduct(props) {
         <div className='add-product__long-input-container'>
             <label htmlFor="name">Product images</label>
             <div className="add-product__upload-images">
-                <UploadImage />
-                <UploadImage />
-                <UploadImage />
-                <UploadImage />
+                <UploadImage number={1} setImage={setProductImage}/>
+                <UploadImage number={2} setImage={setProductImage}/>
+                <UploadImage number={3} setImage={setProductImage}/>
+                <UploadImage number={4} setImage={setProductImage}/>
             </div>
         </div>
         <div className='add-product__two-inputs-container--even'>

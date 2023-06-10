@@ -1157,12 +1157,14 @@ form.login input {
   width: 2em;
   height: 2em;
   border-radius: 0.5em;
-  border: 1px solid #666666;
+  border: 1px solid black;
+  color: black;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1em;
+  opacity: 0.5;
 }
 
 input.upload-image {

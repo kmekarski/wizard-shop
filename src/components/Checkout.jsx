@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
+import TextInput from './TextInput.jsx';
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 import { ModalContext } from '../context/modalContext.jsx';
@@ -26,11 +27,62 @@ export default function Checkout(props) {
     isSet: false
   })
 
+  // inputs limits management:
+  const [addressInputsOkay, setAddressInputsOkay] = React.useState({
+    address1: false,
+    address2: true,
+    country: false,
+    city: false,
+    zip: false
+  })
+
+  const [paymentInputsOkay, setPaymentInputsOkay] = React.useState({
+    cardNumber: false,
+    expDate: false,
+    cvc: false,
+    name: false,
+    country2: false,
+    zip2: false
+  })
+
+  function setInputOkay(name, okay) {
+    setAddressInputsOkay({
+      ...addressInputsOkay,
+      [name]: okay
+    })
+    setPaymentInputsOkay({
+      ...paymentInputsOkay,
+      [name]: okay
+    })
+  }
+  const allAddressInputsOkay = Object.keys(addressInputsOkay).every(key => {
+    return addressInputsOkay[key]
+  })
+  const allPaymentInputsOkay = Object.keys(paymentInputsOkay).every(key => {
+    return paymentInputsOkay[key]
+  })
+  ////////
+
+  const [addressFormData, setAddressFormData] = React.useState({
+    address1: "",
+    address2: "",
+    country: "",
+    city: "",
+    zip: ""
+  })
+
+  const [paymentFormData, setPaymentFormData] = React.useState({
+    cardNumber: "",
+    expDate: "",
+    cvc: "",
+    name: "",
+    country2: "",
+    zip2: ""
+  })
+
   function handleAddressSubmit(e) {
     e.preventDefault()
     modalContext.setCallback(addressSubmit)
-
-
   }
 
   function handlePaymentSubmit(e) {
@@ -75,63 +127,142 @@ export default function Checkout(props) {
 
   const addressForm = <form onSubmit={e => handleAddressSubmit(e)} className="checkout__form">
     <div className='checkout__long-input-container'>
-      <label htmlFor="address1">Address line 1</label>
-      <input type="text" id='address1' name='address1' className='checkout__input--long' />
+      <TextInput
+        limit={20}
+        name="address1"
+        label="Address line 1"
+        formData={addressFormData}
+        setFormData={setAddressFormData}
+        setInputOkay={setInputOkay}
+        silent={true}
+      />
     </div>
 
     <div className='checkout__long-input-container'>
-      <label htmlFor="address2">Address line 2 (optional)</label>
-      <input type="text" id='address2' name='address2' className='checkout__input--long' />
+      <TextInput
+        limit={20}
+        name="address2"
+        label="Address line 2 (optional)"
+        required={false}
+        formData={addressFormData}
+        setFormData={setAddressFormData}
+        setInputOkay={setInputOkay}
+        silent={true}
+      />
     </div>
     <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="country">Country or region</label>
-        <input type="text" id='country' name='country' className='checkout__input--medium' />
+        <TextInput
+          limit={20}
+          name="country"
+          label="Country or region"
+          formData={addressFormData}
+          setFormData={setAddressFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
       </div>
     </div>
     <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="city">City</label>
-        <input type="text" id='city' name='city' className='checkout__input--medium' />
+        <TextInput
+          limit={20}
+          name="city"
+          label="City"
+          formData={addressFormData}
+          setFormData={setAddressFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
       </div>
       <div>
-        <label htmlFor="zip">ZIP</label>
-        <input type="text" id='zip' name='zip' className='checkout__input--short' />
+        <TextInput
+          limit={20}
+          name="zip"
+          label="Zip"
+          formData={addressFormData}
+          setFormData={setAddressFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
       </div>
     </div>
-    <button className="btn--medium btn--solid btn checkout__purchase-btn">Proceed</button>
+    <button className="btn--medium btn--solid btn checkout__purchase-btn" disabled={!allAddressInputsOkay}>Proceed</button>
   </form>
 
   const paymentForm = <form onSubmit={e => handlePaymentSubmit(e)} className="checkout__form">
     <div className='checkout__long-input-container'>
       <label htmlFor="card-number">Card number</label>
-      <input type="text" id='card-number' name='card-number' className='checkout__input--long' />
+      <TextInput
+        limit={20}
+        name="cardNumber"
+        label="Card number"
+        formData={paymentFormData}
+        setFormData={setPaymentFormData}
+        setInputOkay={setInputOkay}
+        silent={true}
+      />
     </div>
     <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="exp-date">Expiration date</label>
-        <input type="text" id='exp-date' name='exp-date' className='checkout__input--medium' />
+        <TextInput
+          limit={20}
+          name="expDate"
+          label="Expiration date"
+          formData={paymentFormData}
+          setFormData={setPaymentFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
       </div>
       <div>
-        <label htmlFor="cvc">CVC</label>
-        <input type="text" id='cvc' name='cvc' className='checkout__input--short' />
+        <TextInput
+          limit={20}
+          name="cvc"
+          label="CVC"
+          formData={paymentFormData}
+          setFormData={setPaymentFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
       </div>
     </div>
     <div className='checkout__long-input-container'>
-      <label htmlFor="name">Name on card</label>
-      <input type="text" id='name' name='name' className='checkout__input--long' />
+    <TextInput
+          limit={20}
+          name="name"
+          label="Name on card"
+          formData={paymentFormData}
+          setFormData={setPaymentFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
     </div>
     <div className='checkout__two-inputs-container'>
       <div>
-        <label htmlFor="country">Country or region</label>
-        <input type="text" id='country' name='country' className='checkout__input--medium' />
+      <TextInput
+          limit={20}
+          name="country2"
+          label="Country or region"
+          formData={paymentFormData}
+          setFormData={setPaymentFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
       </div>
       <div>
-        <label htmlFor="zip">ZIP</label>
-        <input type="text" id='zip' name='zip' className='checkout__input--short' />
+      <TextInput
+          limit={20}
+          name="zip2"
+          label="Zip"
+          formData={paymentFormData}
+          setFormData={setPaymentFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
       </div>
     </div>
-    <button className="btn--medium btn--solid btn checkout__purchase-btn">Purchase</button>
+    <button className="btn--medium btn--solid btn checkout__purchase-btn" disabled={!allPaymentInputsOkay}>Purchase</button>
   </form>
 
   return (

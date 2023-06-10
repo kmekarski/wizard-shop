@@ -637,11 +637,9 @@ label {
   background-color: #D9D9D9;
   top: calc(100% + 1em);
   right: -40px;
-
   display: flex;
   flex-direction: column;
   justify-content: end;
-
   cursor: default;
 }
 
@@ -699,10 +697,6 @@ label {
   gap: 0.75em 0;
 }
 
-.cart-popup__item__text p {
-  color: inherit;
-}
-
 .cart-popup__item__price {
   margin-top: auto;
   margin-left: auto;
@@ -751,7 +745,6 @@ label {
   display: flex;
   justify-content: space-between;
   align-self: stretch;
-  color: inherit;
 }
 
 /* checkout, admin, add-product, add-review */

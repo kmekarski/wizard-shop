@@ -21,24 +21,26 @@ export default function AllProducts(props) {
 
     React.useEffect(() => {
         productsContext.setShowCart(false)
-        fetch("https://wishop.azurewebsites.net/api/Products")
-            .then(res => res.json())
-            .then(data => {
-                productsContext.setProductsList([])
-                data.forEach(el => {
-                    fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`)
-                        .then(res => res.json())
-                        .then(imgData => {
-                            const newProduct = {
-                                ...el,
-                                img: imgData.uri
-                            }
-                            productsContext.setProductsList(prev => [...prev, newProduct])
-                        })
+        if (productsContext.productsList.length === 0) {
+            fetch("https://wishop.azurewebsites.net/api/Products")
+                .then(res => res.json())
+                .then(data => {
+                    productsContext.setProductsList([])
+                    data.forEach(el => {
+                        fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`)
+                            .then(res => res.json())
+                            .then(imgData => {
+                                const newProduct = {
+                                    ...el,
+                                    img: imgData.uri
+                                }
+                                productsContext.setProductsList(prev => [...prev, newProduct])
+                            })
+
+                    })
 
                 })
-
-            })
+        }
     }, [])
 
     const productsList = productsContext.productsList

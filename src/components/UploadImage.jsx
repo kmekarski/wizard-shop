@@ -34,7 +34,7 @@ export default function UploadImage(props) {
 
                     {!selectedImage && <div>
                         <FontAwesomeIcon icon="fa-solid fa-image" className='icon--m' />
-                        <p>drop your images here or click to browse</p></div>}
+                        <p>click here to browse</p></div>}
                     <input type="file" id={`fileInput${props.number}`} className='upload-image' text='hi' onChange={handleImageChange} />
                 </div>
             </label>

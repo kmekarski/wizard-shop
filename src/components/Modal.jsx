@@ -178,7 +178,7 @@ export default function Modal(props) {
     else {
         return (
             <div>
-                {modalContext.visible && <div className="modal" onClick={handleNoClick}>
+                {modalContext.visible && <div className="modal btn" onClick={handleNoClick}>
                     <div className="image-modal__card card--big">
                         {imageHtml}
                     </div>

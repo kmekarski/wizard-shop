@@ -107,8 +107,8 @@ export default function Checkout(props) {
       <div className="cart-popup__item" key={index}>
         <ProductImage src={item.img} />
         <div className="cart-popup__item__text">
-          <p className="cart-popup__item__name text--small-bold">{item.name}</p>
-          <p className="cart-popup__item__price text--small-bold">${item.price}</p>
+          <p className="text--small-bold text--dark">{item.name}</p>
+          <p className="cart-popup__item__price text--small-bold text--dark">${item.price}</p>
           <div className="cart-popup__item__panel">
             <div className="cart-popup__item__quantity">
               <div className="cart-popup__item__quantity-btn" onClick={() => productsContext.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
@@ -192,7 +192,7 @@ export default function Checkout(props) {
 
   const paymentForm = <form onSubmit={e => handlePaymentSubmit(e)} className="checkout__form">
     <div className='checkout__long-input-container'>
-      <label htmlFor="card-number">Card number</label>
+      <label htmlFor="card-number"></label>
       <TextInput
         limit={20}
         name="cardNumber"
@@ -276,7 +276,7 @@ export default function Checkout(props) {
               {cartItemsHtml}
             </div>
             <div className="cart-popup__checkout">
-              <div className="cart-popup__checkout__text text--medium-bold">
+              <div className="cart-popup__checkout__text text--medium-bold text--dark">
                 <p>Total:</p>
                 <p>${total}</p>
               </div>

@@ -9,6 +9,7 @@ export default function Modal(props) {
 
     function handleNoClick() {
         modalContext.setVisible(false)
+        modalContext.setImage(null)
     }
 
     const listHeader = ["ID", "Name", "Price", "Quantity"]
@@ -40,6 +41,8 @@ export default function Modal(props) {
 
     let formHtml
     let listHtml
+    let imageHtml
+
 
     let confirmButtonVisible = true
     let cancelButtonVisible = true
@@ -133,32 +136,56 @@ export default function Modal(props) {
             </div>
             break
         }
+        case "showImage": {
+            title = ""
+            subtitle = ""
+            confirmButtonVisible = false
+            cancelButtonVisible = false
+            console.log(modalContext.image)
+            imageHtml = <ProductImage src={modalContext.image}></ProductImage>
+            break
+        }
+    }
+    if (modalContext.image === null) {
+        console.log(modalContext.image)
+        return (
+            <div>
+                {modalContext.visible && <div className="modal">
+                    <div className="modal__card card--small">
+                        <div className="modal__header text--medium-bold text--dark">
+                            {title !== "" && <p className="text--medium-bold text--dark">
+                                {title}
+                            </p>}
+                            {subtitle !== "" && <p className="text--small-regular text--dark">
+                                {subtitle}
+                            </p>}
+                            {formHtml}
+                            {listHtml}
+                        </div>
+                        <div className="modal__buttons">
+                            {confirmButtonVisible && <div className="btn--solid btn--small btn" onClick={modalContext.handleButtonClick}>
+                                {confirmText}
+                            </div>}
+                            {cancelButtonVisible && <div className="btn--solid btn--small btn" onClick={handleNoClick}>
+                                {cancelText}
+                            </div>}
+                        </div>
+                    </div>
+                </div>}
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                {modalContext.visible && <div className="modal" onClick={handleNoClick}>
+                    <div className="image-modal__card card--big">
+                        {imageHtml}
+                    </div>
+                </div>}
+            </div>
+
+        )
     }
 
-    return (
-        <div>
-            {modalContext.visible && <div className="modal">
-                <div className="modal__card card--small">
-                    <div className="modal__header text--medium-bold text--dark">
-                        {title !== "" && <p className="text--medium-bold text--dark">
-                            {title}
-                        </p>}
-                        {subtitle !== "" && <p className="text--small-regular text--dark">
-                            {subtitle}
-                        </p>}
-                        {formHtml}
-                        {listHtml}
-                    </div>
-                    <div className="modal__buttons">
-                        {confirmButtonVisible && <div className="btn--solid btn--small btn" onClick={modalContext.handleButtonClick}>
-                            {confirmText}
-                        </div>}
-                        {cancelButtonVisible && <div className="btn--solid btn--small btn" onClick={handleNoClick}>
-                            {cancelText}
-                        </div>}
-                    </div>
-                </div>
-            </div>}
-        </div>
-    )
 }

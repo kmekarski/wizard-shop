@@ -6,6 +6,7 @@ const ModalContextProvider = ({ children }) => {
 
     const [visible, setVisible] = React.useState(false)
     const [list, setList] = React.useState([])
+    const [image, setImage] = React.useState(null)
 
     const [method, setMethod] = React.useState("")
     const callbackRef = React.useRef()
@@ -24,13 +25,16 @@ const ModalContextProvider = ({ children }) => {
           setVisible(false);
     }
 
+
     return (
         <ModalContext.Provider value={{
             visible: visible,
             setVisible: setVisible,
             list: list,
             setList: setList,
-            method,
+            image: image,
+            setImage: setImage,
+            method: method,
             setCallback: setCallback,
             handleButtonClick: handleButtonClick
         }}>

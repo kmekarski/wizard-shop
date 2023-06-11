@@ -44,6 +44,16 @@ export default function ProductPage(props) {
         modalContext.setCallback(deleteReview);
     }
 
+    function handleImageClick(img) {
+        console.log("img clicked")
+        modalContext.setCallback(showImage)
+        modalContext.setImage(img)
+    }
+
+    function showImage() {
+
+    }
+
     const reviews = [
         {
             user: "Some user",
@@ -74,7 +84,7 @@ export default function ProductPage(props) {
                 <div className="text--medium-regular text--dark">{el.text}</div>
             </div>
             {el.withPhoto && <div className="product-page__review__image">
-                <ProductImage shadow={true} src={product.img}></ProductImage>
+                <ProductImage shadow={true} src={product.img} onClick={handleImageClick}></ProductImage>
             </div>}
             <div className="product-page__review__footer">
                 <div className="text--small-regular text-dark">2 hours ago</div>
@@ -90,11 +100,11 @@ export default function ProductPage(props) {
                 <div className="product-page__main">
                     <div className="product-page__preview">
                         <div className="product-page__images">
-                            <ProductImage shadow={true} src={product.img}></ProductImage>
+                            <ProductImage shadow={true} src={product.img} onClick={handleImageClick}></ProductImage >
                             <div className="product-page__small-images">
-                                <ProductImage shadow={true} src={product.img}></ProductImage>
-                                <ProductImage shadow={true} src={product.img}></ProductImage>
-                                <ProductImage shadow={true} src={product.img}></ProductImage>
+                                <ProductImage shadow={true} src={product.img}onClick={handleImageClick}></ProductImage>
+                                <ProductImage shadow={true} src={product.img}onClick={handleImageClick}></ProductImage>
+                                <ProductImage shadow={true} src={product.img}onClick={handleImageClick}></ProductImage>
                             </div>
                         </div>
                         <div className="product-page__panel">

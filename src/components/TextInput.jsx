@@ -40,6 +40,9 @@ export default function TextInput(props) {
         }
         setOkay(newOkay)
         setInputOkay(name, newOkay)
+        console.log(newOkay)
+
+
     }
 
     return (

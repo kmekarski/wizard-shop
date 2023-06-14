@@ -19,6 +19,7 @@ export default function MainContent(props) {
 
     React.useEffect(() => {
         productsContext.setShowCart(false)
+        if(!productsContext.allFetched){
             fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
@@ -37,6 +38,7 @@ export default function MainContent(props) {
                 })
 
             })
+        productsContext.setAllFetched(true)}
     }, [])
 
 

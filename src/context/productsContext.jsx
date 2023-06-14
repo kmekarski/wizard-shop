@@ -7,6 +7,7 @@ const ProductsContextProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [showCart, setShowCart] = useState(false)
     const [productsList, setProductsList] = useState([])
+    const [allFetched, setAllFetched] = useState(false)
 
     function addToCart(id, number) {
         let newCart
@@ -59,7 +60,9 @@ const ProductsContextProvider = ({ children }) => {
             removeFromCart,
             changeNumberOfItemsInCart,
             productsList,
-            setProductsList
+            setProductsList,
+            allFetched,
+            setAllFetched
         }}>
             {children}
         </ProductsContext.Provider>

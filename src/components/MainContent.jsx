@@ -19,7 +19,6 @@ export default function MainContent(props) {
 
     React.useEffect(() => {
         productsContext.setShowCart(false)
-        if (productsContext.productsList.length === 0) {
             fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
@@ -38,7 +37,6 @@ export default function MainContent(props) {
                 })
 
             })
-        }
     }, [])
 
 

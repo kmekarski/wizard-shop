@@ -21,7 +21,6 @@ export default function AllProducts(props) {
 
     React.useEffect(() => {
         productsContext.setShowCart(false)
-        if (productsContext.productsList.length === 0) {
             fetch("https://wishop.azurewebsites.net/api/Products")
                 .then(res => res.json())
                 .then(data => {
@@ -40,7 +39,6 @@ export default function AllProducts(props) {
                     })
 
                 })
-        }
     }, [])
 
     const productsList = productsContext.productsList

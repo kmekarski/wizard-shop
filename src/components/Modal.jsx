@@ -141,13 +141,11 @@ export default function Modal(props) {
             subtitle = ""
             confirmButtonVisible = false
             cancelButtonVisible = false
-            console.log(modalContext.image)
             imageHtml = <ProductImage src={modalContext.image}></ProductImage>
             break
         }
     }
     if (modalContext.image === null) {
-        console.log(modalContext.image)
         return (
             <div>
                 {modalContext.visible && <div className="modal">

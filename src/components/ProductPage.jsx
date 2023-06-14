@@ -29,11 +29,31 @@ export default function ProductPage(props) {
 
     const { id } = useParams()
 
-    const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
+    let product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
+
 
 
     React.useEffect(() => {
         productsContext.setShowCart(false)
+        if (!product) {
+            console.log("fetching")
+            fetch(`https://wishop.azurewebsites.net/api/Products/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${data.photoId}`)
+                        .then(res => res.json())
+                        .then(imgData => {
+                            const newProduct = {
+                                ...data,
+                                img: imgData.uri
+                            }
+                            productsContext.setProductsList(prev => [...prev, newProduct])
+                        })
+
+
+
+                })
+        }
     }, [])
 
     const deleteReview = () => {
@@ -61,7 +81,7 @@ export default function ProductPage(props) {
             text: "Great wand! Bought it for my sister and she absolutely loves it!",
             rating: 3,
             withPhoto: true,
-            photo: product.img
+            photo: product?.img
         },
         {
             user: "Some user",
@@ -73,12 +93,12 @@ export default function ProductPage(props) {
     ]
 
     const reviewsHtml = reviews.map(el => {
-        return (<div className={`product-page__review${el.withPhoto ? "--with-photo" : ""} card--small`}>
+        return (product && <div className={`product-page__review${el.withPhoto ? "--with-photo" : ""} card--small`}>
             <div className="product-page__review__panel">
                 <div className="product-page__review__title">
                     <FontAwesomeIcon icon="fa-solid fa-user" className='icon--darker icon--s' />
                     <div className="text--medium-regular text--dark">{el.user}</div>
-                    <StarsDisplay rating={el.rating}/>
+                    <StarsDisplay rating={el.rating} />
                 </div>
                 <div className="text--medium-bold text--dark">{el.title}</div>
                 <div className="text--medium-regular text--dark">{el.text}</div>
@@ -95,16 +115,16 @@ export default function ProductPage(props) {
 
     return (
         <div className="product-page">
-            <div className="container">
+            {product && <div className="container">
                 <Header></Header>
                 <div className="product-page__main">
                     <div className="product-page__preview">
                         <div className="product-page__images">
                             <ProductImage shadow={true} src={product.img} onClick={handleImageClick}></ProductImage >
                             <div className="product-page__small-images">
-                                <ProductImage shadow={true} src={product.img}onClick={handleImageClick}></ProductImage>
-                                <ProductImage shadow={true} src={product.img}onClick={handleImageClick}></ProductImage>
-                                <ProductImage shadow={true} src={product.img}onClick={handleImageClick}></ProductImage>
+                                <ProductImage shadow={true} src={product.img} onClick={handleImageClick}></ProductImage>
+                                <ProductImage shadow={true} src={product.img} onClick={handleImageClick}></ProductImage>
+                                <ProductImage shadow={true} src={product.img} onClick={handleImageClick}></ProductImage>
                             </div>
                         </div>
                         <div className="product-page__panel">
@@ -116,7 +136,7 @@ export default function ProductPage(props) {
                                 <div>
                                     <div className="text--primary">${product.price}</div>
                                     <div className="featured__rating">
-                                        <StarsDisplay size="m" rating={product.rating}/>
+                                        <StarsDisplay size="m" rating={product.rating} />
                                         <p className="text--regular text--white">(200 reviews)</p>
                                     </div>
                                 </div>
@@ -145,7 +165,7 @@ export default function ProductPage(props) {
                     </div>
 
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

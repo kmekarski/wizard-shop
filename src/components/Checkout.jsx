@@ -23,10 +23,6 @@ export default function Checkout(props) {
     isSet: false
   })
 
-  const [paymentData, setPaymentData] = useState({
-    isSet: false
-  })
-
   // inputs limits management:
   const [addressInputsOkay, setAddressInputsOkay] = React.useState({
     address1: false,
@@ -92,13 +88,11 @@ export default function Checkout(props) {
 
   function addressSubmit() {
     setAddressData(prev => { return { ...prev, isSet: true } })
-    //odpowiednio sformatować dane z formularza i zapisać w state addressData
+    //odpowiednio sformatować dane z formularza i wysłać na odpowiedni endpoint
   }
 
   function paymentSubmit() {
-    setPaymentData(prev => { return { ...prev, isSet: true } })
-    //odpowiednio sformatować dane z formularza, zapisać w state paymentData
-    //i wysłać na odpowiedni endpoint
+    //odpowiednio sformatować dane z formularza i wysłać na odpowiedni endpoint
   }
 
 

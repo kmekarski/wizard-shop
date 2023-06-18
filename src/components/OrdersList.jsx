@@ -14,7 +14,7 @@ export default function OrdersList(props) {
     const productsContext = React.useContext(ProductsContext)
     const modalContext = React.useContext(ModalContext)
 
-    const header = ["Order ID", "Username", "Name", "Date", "Price", "Items", "Action"]
+    const header = ["Order ID", "Username", "Name", "Date", "Status", "Items", "Action"]
 
     function completeOrder() {
         //odpowiedni fetch dla zatwierdzenia zamowienia tutaj
@@ -61,14 +61,13 @@ export default function OrdersList(props) {
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69",
+            status: "unpaid",
             items: [
                 {
                     id: 1,
                     name: "Cedric Diggory's Wand",
                     price: 49,
-                    quantity: 1
-                },
+                    quantity: 1                },
                 {
                     id: 1,
                     name: "Cedric Diggory's Wand",
@@ -82,21 +81,21 @@ export default function OrdersList(props) {
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69",
+            status: "unpaid",
         },
         {
             id: "AKN15208",
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            status: "paid",
         },
         {
             id: "AKN15208",
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            status: "paid",
         }
     ]
 
@@ -106,21 +105,21 @@ export default function OrdersList(props) {
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            status: "sent",
         },
         {
             id: "AKN15208",
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            status: "delivered",
         },
         {
             id: "AKN15208",
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            status: "delivered",
         }
     ]
 
@@ -130,14 +129,14 @@ export default function OrdersList(props) {
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            status: "rejected"
         },
         {
             id: "AKN15208",
             username: "klaumek406",
             name: "Klaudiusz Mękarski",
             date: "08.06.2023",
-            price: "$69"
+            status: "rejected"
         }
     ]
 
@@ -150,7 +149,7 @@ export default function OrdersList(props) {
                 <p className="text--small-regular text--dark">{el.username}</p>
                 <p className="text--small-reguler text--dark">{el.name}</p>
                 <p className="text--small-regular text--dark">{el.date}</p>
-                <p className="text--small-regular text--dark">{el.price}</p>
+                <p className="text--small-regular text--dark">{el.status}</p>
                 <div className="btn--solid btn--small btn" onClick={() => handleShowClick(el.items)}>
                     Show
                 </div>

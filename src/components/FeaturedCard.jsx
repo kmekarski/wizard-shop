@@ -22,7 +22,7 @@ export default function FeaturedCard(props) {
 
   return (
     <div className='featured card--big' onClick={() => navigate(`/product/${featuredProduct.id}`)}>
-      <ProductImage src={featuredProduct.img} />
+      <ProductImage src={featuredProduct.images[0]} />
       <div className="featured__text">
         <h3 className="featured__name text--primary">{featuredProduct.name}</h3>
         <div className="featured__rating">

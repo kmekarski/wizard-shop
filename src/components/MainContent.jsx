@@ -23,14 +23,15 @@ export default function MainContent(props) {
             fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 productsContext.setProductsList([])
                 data.forEach(el => {
                     fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`)
                         .then(res => res.json())
-                        .then(imgData => {
+                        .then(images => {
                             const newProduct = {
                                 ...el,
-                                img: imgData.uri
+                                images: images
                             }
                             productsContext.setProductsList(prev => [...prev, newProduct])
                         })

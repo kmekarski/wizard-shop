@@ -123,7 +123,7 @@ export default function AddReview(props) {
         <div>
             <div className="text--medium-bold text--dark">{product.name}</div>
             <div className="add-review__product-image">
-                <ProductImage shadow={true} src={product.img}></ProductImage>
+                <ProductImage shadow={true} src={product.images[0]}></ProductImage>
             </div>
         </div>
         <div className='add-product__long-input-container'>

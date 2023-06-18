@@ -21,7 +21,7 @@ function ScrollableProductsList(props) {
             name={product.name}
             price={product.price}
             rating={product.rating}
-            img={product.img}
+            img={product.images[0]}
             addToCart={context.addToCart}
             scroll={scrollByAmount}
             last={index === productsList.length - 2 ? true : false}

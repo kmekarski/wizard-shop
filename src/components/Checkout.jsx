@@ -105,7 +105,7 @@ export default function Checkout(props) {
   const cartItemsHtml = productsContext.cart.map((item, index) => {
     return (
       <div className="cart-popup__item" key={index}>
-        <ProductImage src={item.img} />
+        <ProductImage src={item.images[0]} />
         <div className="cart-popup__item__text">
           <p className="text--small-bold text--dark">{item.name}</p>
           <p className="cart-popup__item__price text--small-bold text--dark">${item.price}</p>

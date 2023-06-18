@@ -25,14 +25,15 @@ export default function AllProducts(props) {
             fetch("https://wishop.azurewebsites.net/api/Products")
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 productsContext.setProductsList([])
                 data.forEach(el => {
                     fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`)
                         .then(res => res.json())
-                        .then(imgData => {
+                        .then(images => {
                             const newProduct = {
                                 ...el,
-                                img: imgData.uri
+                                images: images
                             }
                             productsContext.setProductsList(prev => [...prev, newProduct])
                         })
@@ -51,7 +52,7 @@ export default function AllProducts(props) {
             name={product.name}
             price={product.price}
             rating={product.rating}
-            img={product.img}
+            img={product.images[0]}
             addToCart={productsContext.addToCart}
             size='big'
             linkToEdit={props.linkToEdit}
@@ -84,7 +85,7 @@ export default function AllProducts(props) {
             isOpen: false
         },
         {
-            name: "Sort by",
+            name: "Sort",
             options: ["Name", "Price", "Rating"],
             selected: "",
             isOpen: false

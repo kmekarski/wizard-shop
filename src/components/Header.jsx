@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 import { UserContext } from "../context/userContext";
@@ -10,10 +11,12 @@ import CartPopup from "./CartPopup";
 
 export default function Header(props) {
 
+
   const userContext = useContext(UserContext)
   const productsContext = useContext(ProductsContext)
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   function toggleCart() {
     productsContext.setShowCart(prev => !prev)
@@ -21,7 +24,15 @@ export default function Header(props) {
 
   function search(e) {
     e.preventDefault()
-    navigate("/products")
+    productsContext.setAllFetched(false)
+    //odpowiedni fetch do wyszukiwania
+    if(location.pathname==="/products") {
+      window.location.reload(false);
+
+    }
+    else{
+      navigate("/products")
+    }
   }
 
   return (

@@ -8,6 +8,8 @@ import ScrollableProductsList from "./ScrollableProductsList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 import { ProductsContext } from "../context/productsContext";
 import { faList } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +19,14 @@ export default function AllProducts(props) {
 
     const productsContext = React.useContext(ProductsContext)
 
+    const navigate = useNavigate()
 
+    function applyFilters() {
+        productsContext.setAllFetched(false)
+        //dane ze state controls (właściwość selected) wysłać na odpowiedni endpoint
+        window.location.reload(false);
+
+    }
 
     React.useEffect(() => {
         productsContext.setShowCart(false)
@@ -137,7 +146,7 @@ export default function AllProducts(props) {
                     buttons={props.header_buttons} />
                 <div className="all-products__controls">
                     {controlsHtml}
-                    <div className="btn--ghost btn--small btn all-products__filter-btn">Apply filters</div>
+                    <div className="btn--ghost btn--small btn all-products__filter-btn" onClick={applyFilters}>Apply filters</div>
                 </div>
                 <div className="all-products__products">
                     {productsHtml}

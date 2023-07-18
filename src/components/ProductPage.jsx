@@ -36,7 +36,6 @@ export default function ProductPage(props) {
     React.useEffect(() => {
         productsContext.setShowCart(false)
         if (!product) {
-            console.log("fetching")
             fetch(`https://wishop.azurewebsites.net/api/Products/${id}`)
                 .then(res => res.json())
                 .then(data => {

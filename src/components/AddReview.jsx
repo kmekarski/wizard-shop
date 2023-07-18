@@ -24,7 +24,40 @@ export default function AddReview(props) {
     }
 
     function addReview() {
-        //odpowiedni fetch tutaj
+        const userid = localStorage.getItem("userID")
+
+        console.log("add review")
+
+        const reviewData = {
+            productId: id,
+            userId: userid,
+            title: "TEST!",
+            description: "testesttest",
+            rating: 3
+        };
+
+        fetch(backendAddr + '/Products/' + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(reviewData),
+        })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+              console.log("Review added:", data);
+              // You can handle the success response here, for example, show a success message
+              // or redirect the user to a different page.
+          })
+          .catch((error) => {
+              console.error("Error adding review:", error);
+              // Handle error here, e.g., show an error message to the user.
+          });
     }
 
     // inputs limits management:

@@ -20,6 +20,8 @@ export default function AddProduct(props) {
 
     const [productImages, setProductImages] = React.useState(new Array(4).fill(null))
 
+    const backendAddr = 'https://wishop.azurewebsites.net/api'
+
     function setProductImage(number, image) {
         const newArray = productImages
         productImages[number - 1] = image
@@ -29,17 +31,106 @@ export default function AddProduct(props) {
 
     function editProduct() {
         console.log("edit product")
-        //odpowiedni fetch tutaj
+
+        const productData = {
+            id: id,
+            name: formData.name,
+            description: formData.desc,
+            price: formData.price,
+            rating: "5",
+            photoId: "2",
+            categoryId: formData.category,
+            popularity: 2,
+            quantity: 1,
+            size: formData.size,
+            color: formData.color
+        };
+
+        fetch(backendAddr + '/Products/' + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(productData),
+        })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+              console.log("Product edited:", data);
+              // You can handle the success response here, for example, show a success message
+              // or redirect the user to a different page.
+          })
+          .catch((error) => {
+              console.error("Error updating product:", error);
+              // Handle error here, e.g., show an error message to the user.
+          });
     }
 
     function deleteProduct() {
         console.log("delete product")
-        //odpowiedni fetch tutaj
+
+        fetch(backendAddr + '/Products/' + id, {
+            method: "DELETE"
+        })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response;
+          })
+          .then(() => {
+              console.log("Product " + id + " deleted");
+              // You can handle the success response here, for example, show a success message
+              // or redirect the user to a different page.
+          })
+          .catch((error) => {
+              console.error("Error updating product:", error);
+              // Handle error here, e.g., show an error message to the user.
+          });
     }
 
     function addProduct() {
         console.log("add product")
-        //odpowiedni fetch tutaj
+
+        const productData = {
+            name: formData.name,
+            description: formData.desc,
+            price: formData.price,
+            rating: "5",
+            photoId: "2",
+            categoryId: formData.category,
+            popularity: 2,
+            quantity: 1,
+            size: formData.size,
+            color: formData.color
+        };
+
+        fetch(backendAddr + '/Products', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(productData),
+        })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+              console.log("Product added:", data);
+              // You can handle the success response here, for example, show a success message
+              // or redirect the user to a different page.
+          })
+          .catch((error) => {
+              console.error("Error updating product:", error);
+              // Handle error here, e.g., show an error message to the user.
+          });
     }
 
     // inputs limits management:

@@ -6,6 +6,7 @@ import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 import { ModalContext } from '../context/modalContext.jsx';
+import { UserContext } from "../context/userContext"
 import UploadImage from './UploadImage.jsx';
 import TextInput from './TextInput.jsx';
 import { useParams } from 'react-router-dom';

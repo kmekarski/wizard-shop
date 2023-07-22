@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import Header from "./Header";
 import FeaturedCard from "./FeaturedCard";
@@ -31,7 +31,7 @@ export default function ProductPage(props) {
 
     let product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
-
+    const backendAddr = 'https://wishop.azurewebsites.net/api'
 
     React.useEffect(() => {
         productsContext.setShowCart(false)
@@ -48,19 +48,34 @@ export default function ProductPage(props) {
                             }
                             productsContext.setProductsList(prev => [...prev, newProduct])
                         })
-
-
-
                 })
         }
     }, [])
 
-    const deleteReview = () => {
-        // odpowiedni fetch dla usuniecia recenzji tutaj
+    const deleteReview = (reviewId) => {
+        fetch(backendAddr + "/Reviews/" + reviewId, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+        })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+              setReviews(data)
+          })
+          .catch((error) => {
+              console.error("Error getting reviews:", error);
+          })
     }
 
-    const handleActionClick = () => {
-        modalContext.setCallback(deleteReview);
+    const handleActionClick = (reviewId) => {
+        modalContext.setCallback(deleteReview(reviewId));
     }
 
     function handleImageClick(img) {
@@ -73,7 +88,37 @@ export default function ProductPage(props) {
 
     }
 
-    const reviews = [
+    const [reviews, setReviews] = useState([])
+
+    const getReviews = async (e) => {
+        const response = await fetch(backendAddr + "/Reviews/" + id + "/ProductReviews", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error("Network response was not ok");
+              }
+              return response.json();
+          })
+          .then((data) => {
+              setReviews(data)
+          })
+          .catch((error) => {
+              console.error("Error getting reviews:", error);
+          })
+    };
+
+    useEffect(() => {
+        getReviews()
+          .catch(error => {
+              console.error(error);
+          });
+    }, []);
+
+      /*[
         {
             user: "Some user",
             title: "Excelent choice",
@@ -89,25 +134,25 @@ export default function ProductPage(props) {
             rating: 2,
             withPhoto: false
         }
-    ]
+    ]*/
 
     const reviewsHtml = reviews.map(el => {
-        return (product && <div className={`product-page__review${el.withPhoto ? "--with-photo" : ""} card--small`}>
+        return (product && <div key={el.reviewId} className={`product-page__review${el.withPhoto ? "--with-photo" : ""} card--small`}>
             <div className="product-page__review__panel">
                 <div className="product-page__review__title">
                     <FontAwesomeIcon icon="fa-solid fa-user" className='icon--darker icon--s' />
-                    <div className="text--medium-regular text--dark">{el.user}</div>
+                    <div className="text--medium-regular text--dark">{el.username}</div>
                     <StarsDisplay rating={el.rating} />
                 </div>
                 <div className="text--medium-bold text--dark">{el.title}</div>
-                <div className="text--medium-regular text--dark">{el.text}</div>
+                <div className="text--medium-regular text--dark">{el.description}</div>
             </div>
             {el.withPhoto && <div className="product-page__review__image">
                 <ProductImage shadow={true} src={product.images[0]} onClick={handleImageClick}></ProductImage>
             </div>}
             <div className="product-page__review__footer">
                 <div className="text--small-regular text-dark">2 hours ago</div>
-                <div className="text--small-regular text-dark" onClick={handleActionClick}>remove</div>
+                <div className="text--small-regular text-dark btn" onClick={() => handleActionClick(el.reviewId)}>remove</div>
             </div>
         </div>)
     })

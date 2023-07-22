@@ -7,13 +7,15 @@ const UserContextProvider = ({ children }) => {
 
     // tutaj tworzysz state, funkcje, co tam chcesz zeby było globalne
     const [name, setName] = React.useState("some name")
+    const backendAddr = 'https://wishop.azurewebsites/api'
 
 
     // musisz te rzeczy umieścić w objekcie value zeby były dostepne w innych komponentach
     return (
         <UserContext.Provider value={{
             name: name,
-            setName: setName
+            setName: setName,
+            backendAddr: backendAddr
         }}>
             {children}
         </UserContext.Provider>

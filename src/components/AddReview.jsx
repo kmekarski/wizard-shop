@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CartPopup from "./CartPopup.jsx";
@@ -6,6 +6,7 @@ import ProductImage from "./ProductImage.jsx";
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 import { ModalContext } from '../context/modalContext.jsx';
+import { UserContext } from "../context/userContext"
 import UploadImage from './UploadImage.jsx';
 import { useParams } from 'react-router-dom';
 import TextInput from './TextInput.jsx';
@@ -17,7 +18,7 @@ export default function AddReview(props) {
     const { id } = useParams()
     const product = productsContext.productsList.filter(el => el.id === parseInt(id))[0]
 
-
+    const backendAddr = 'https://wishop.azurewebsites.net/api'
 
     function handleSubmitClick() {
         addReview()
@@ -31,15 +32,16 @@ export default function AddReview(props) {
         const reviewData = {
             productId: id,
             userId: userid,
-            title: "TEST!",
-            description: "testesttest",
-            rating: 3
+            title: formData.name,
+            description: formData.desc,
+            rating: clickedRating
         };
 
-        fetch(backendAddr + '/Products/' + id, {
-            method: "PUT",
+        fetch(backendAddr + '/Reviews', {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
             },
             body: JSON.stringify(reviewData),
         })

@@ -13,8 +13,6 @@ export default function Checkout(props) {
   const productsContext = React.useContext(ProductsContext)
   const modalContext = React.useContext(ModalContext)
 
-
-
   if (productsContext.cart.length === 0) {
     navigate('/')
   }

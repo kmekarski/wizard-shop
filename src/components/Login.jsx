@@ -28,6 +28,7 @@ function Login() {
         console.log(data)
         if(response.status === 200 || response.status === 201) {
             localStorage.setItem('userID', data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"])
+            localStorage.setItem('token', jwtToken)
             alert('Zalogowałeś się!')
             window.location.href = '/'
         } else if(response.status === 400)  {

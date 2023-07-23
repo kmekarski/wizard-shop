@@ -64,13 +64,10 @@ export default function ProductPage(props) {
               if (!response.ok) {
                   throw new Error("Network response was not ok");
               }
-              return response.json();
-          })
-          .then((data) => {
-              setReviews(data)
+              return response;
           })
           .catch((error) => {
-              console.error("Error getting reviews:", error);
+              console.error("Error deleting review:", error);
           })
     }
 

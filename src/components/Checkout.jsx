@@ -7,11 +7,14 @@ import TextInput from './TextInput.jsx';
 import Header from './Header.jsx';
 import { ProductsContext } from "../context/productsContext";
 import { ModalContext } from '../context/modalContext.jsx';
+//import { profileInfo } from "./Profile";
 
 export default function Checkout(props) {
   const navigate = useNavigate()
   const productsContext = React.useContext(ProductsContext)
   const modalContext = React.useContext(ModalContext)
+
+  const backendAddr = 'https://wishop.azurewebsites.net/api'
 
   if (productsContext.cart.length === 0) {
     navigate('/')
@@ -84,15 +87,117 @@ export default function Checkout(props) {
     modalContext.setCallback(paymentSubmit)
   }
 
+  const [orderId, setOrderId] = useState(0)
+  const [profileInfo, setProfileInfo] = useState('{{\n' +
+    '  "userId": 0,\n' +
+    '  "username": "",\n' +
+    '  "name": "",\n' +
+    '  "surname": "",\n' +
+    '  "email": "",\n' +
+    '  "password": "",\n' +
+    '  "passwordSalt": "",\n' +
+    '  "status": "",\n' +
+    '  "role": ""\n' +
+    '}}')
+
+  const getProfileInfo = async (e) => {
+    const response = await fetch(backendAddr + "/Users/" + localStorage.getItem("userID"), {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setProfileInfo(data)
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  };
+
+  useEffect(() => {
+    getProfileInfo()
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
   function addressSubmit() {
     setAddressData(prev => { return { ...prev, isSet: true } })
     //odpowiednio sformatować dane z formularza i wysłać na odpowiedni endpoint
+    const orderData = {
+      firstName: "aaa",
+      lastName: "bbb",
+      phoneNumber: "string",
+      email: "aaa@bbb.com",
+      comment: "string",
+      zipCode: addressFormData.zip,
+      city: addressFormData.city,
+      street: addressFormData.address1 + "; " + addressFormData.address2,
+      houseNumber: 0,
+      apartmentNumber: 0
+    };
+    console.log(orderData)
+
+    fetch(backendAddr + '/Order', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify(orderData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Order placed: ", data);
+        setOrderId(data.orderId);
+      })
+      .catch((error) => {
+        console.error("Error placing order:", error);
+      });
   }
 
   function paymentSubmit() {
     //odpowiednio sformatować dane z formularza i wysłać na odpowiedni endpoint
-  }
+    const paymentData = {
+      cardNumber: "string",
+      expirationDate: "string",
+      cvc: 0,
+      nameOnCard: "string",
+      country: "string",
+      zip: "string"
+    };
+    console.log(paymentData)
 
+    fetch(backendAddr + '/Payment/CardPayment' + "?orderId=" + orderId, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify(paymentData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Paid: ", data);
+      })
+      .catch((error) => {
+        console.error("Error while paying:", error);
+      });
+  }
 
   const cartItemsHtml = productsContext.cart.map((item, index) => {
     return (

@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+
+
 export default function Profile(props) {
+  const apiUrl = 'https://wishop.azurewebsites.net/api'
+
   const [profileInfo, setProfileInfo] = useState('{{\n' +
     '  "userId": 0,\n' +
     '  "username": "",\n' +
@@ -13,7 +17,6 @@ export default function Profile(props) {
     '  "status": "",\n' +
     '  "role": ""\n' +
     '}}')
-  const apiUrl = 'https://wishop.azurewebsites.net/api'
 
   const getProfileInfo = async (e) => {
     const response = await fetch(apiUrl + "/Users/" + localStorage.getItem("userID"), {

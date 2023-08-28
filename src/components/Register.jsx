@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {useNavigate, Navigate} from "react-router-dom";
-
-
-
 export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -11,7 +8,6 @@ export default function Register() {
   const [repeatedPassword, setRepeatedPassword] = useState('');
 
   const navigate = useNavigate()
-
 
   const disabled = !username || !email || !password || !repeatedPassword
 
@@ -28,11 +24,11 @@ export default function Register() {
         },
         body: JSON.stringify({username, email, password})
       });
-      const data = await response.json();
-      console.log(data)
 
       if(response.status === 201) {
         alert('Successfully registered! Now you can log in.');
+        const data = await response.text();
+        console.log(data)
         window.location.href = '/login';
       } else {
         alert("Other error.")

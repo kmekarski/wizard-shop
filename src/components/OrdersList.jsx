@@ -82,6 +82,7 @@ export default function OrdersList(props) {
     }
 
     function handleShowClick(items) {
+        console.log(JSON.stringify(items))
         modalContext.setCallback(showItemsList)
         modalContext.setList(items)
     }
@@ -223,12 +224,13 @@ export default function OrdersList(props) {
 
 
     const usersHtml = (props.type === "pending" ? orders.filter(order => order.orderState === 0 || order.orderState === 1) : props.type === "completed" ? orders.filter(order => order.orderState === 2) : orders.filter(order => order.orderState === 3)).map((el, index) => {
-        return (
+      let date = new Date(el.dateCreated)
+      return (
             <div className={`orders-list__row ${index % 2 === 1 ? "orders-list__row--gray" : ""}`}>
                 <p className="text--small-regular text--dark">{el.id}</p>
                 <p className="text--small-regular text--dark">{el.email}</p>
                 <p className="text--small-reguler text--dark">{el.firstName + " " + el.lastName}</p>
-                <p className="text--small-regular text--dark">{el.dateCreated}</p>
+                <p className="text--small-regular text--dark">{date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear() + " " + date.getHours() + ":" + (date.getMinutes().valueOf() < 10 ? '0' + date.getMinutes() : date.getMinutes())}</p>
                 <p className="text--small-regular text--dark">{el.orderState === 0 ? "unpaid" : el.orderState === 1 ? "paid" : el.orderState === 2 ? "completed" : el.orderState === 3 ? "rejected" : "other"}</p>
                 <div className="btn--solid btn--small btn" onClick={() => handleShowClick(el.orderItems)}>
                     Show

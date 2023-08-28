@@ -51,9 +51,11 @@ export default function Profile(props) {
         <h4 className="text--secondary">
           {profileInfo.name !== null && profileInfo.surname !== null && "Name: " + profileInfo.name + " " + profileInfo.surname}
         </h4>
-        <h4 className="text--secondary">
-          {profileInfo.name === null && profileInfo.surname === null && "You have not filled your personal data."}
-        </h4>
+        {
+          //<h4 className="text--secondary">
+          //profileInfo.name === null && profileInfo.surname === null && "You have not filled your personal data."}
+          //</h4>
+        }
         <h4 className="text--secondary">
           Email address: {profileInfo.email}
         </h4>

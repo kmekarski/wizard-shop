@@ -6,7 +6,7 @@ const UserContext = createContext();
 const UserContextProvider = ({ children }) => {
   // tutaj tworzysz state, funkcje, co tam chcesz zeby było globalne
   const [name, setName] = React.useState("some name");
-  const backendAddr = "https://localhost:7039";
+  const backendAddr = "https://localhost:7039/api";
 
   // musisz te rzeczy umieścić w objekcie value zeby były dostepne w innych komponentach
   return (

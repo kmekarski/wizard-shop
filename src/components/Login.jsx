@@ -20,6 +20,7 @@ function Login() {
     event.preventDefault();
     const response = await fetch(backendAddr + "/Users/Login", {
       method: "POST",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

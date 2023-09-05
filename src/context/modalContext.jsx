@@ -1,4 +1,4 @@
-import React, { createContext, createRef, useState } from "react";
+import React, {createContext, createRef, useEffect, useState} from "react";
 
 const ModalContext = createContext();
 
@@ -15,7 +15,7 @@ const ModalContextProvider = ({ children }) => {
   const [dateFrom, setDateFrom] = React.useState(todaysDate);
   const [dateTo, setDateTo] = React.useState(todaysDate);
 
-  const backendAddr = "https://localhost:7039";
+  const apiUrl = "https://localhost:7039/api";
 
   function formatDateToInputValue(date) {
     const year = date.getFullYear();
@@ -48,7 +48,23 @@ const ModalContextProvider = ({ children }) => {
 
   function createReport() {
     console.log("Executing Callback:", dateFrom, dateTo);
-    //fetch
+
+    const downloadUrl = `${apiUrl}/Raports/Raport?start=${dateFrom}&end=${dateTo}`;
+
+    //window.open(downloadUrl, '_blank');
+
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.setAttribute('download', '');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    return (
+      <div>
+        Jeśli pobieranie nie rozpoczęło się automatycznie, <a href={downloadUrl} target="_blank" rel="noopener noreferrer">kliknij tutaj</a>.
+      </div>
+    );
   }
 
   return (

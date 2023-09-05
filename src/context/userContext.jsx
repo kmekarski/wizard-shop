@@ -2,7 +2,6 @@ import React, { createContext, useState } from "react";
 import { ProductsContext } from "./productsContext";
 
 const UserContext = createContext();
-const productsContext = React.useContext(ProductsContext);
 
 const UserContextProvider = ({ children }) => {
   // tutaj tworzysz state, funkcje, co tam chcesz zeby było globalne

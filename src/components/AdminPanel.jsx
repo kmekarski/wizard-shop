@@ -14,7 +14,15 @@ export default function AdminPanel(props) {
 
 
     function createReport() {
+        const { dateFrom, dateTo } = modalContext;
+        if (!dateFrom || !dateTo) {
+            alert('Please provide valid dates.');
+            return;
+        }
 
+        console.log('Using Dates For Report:', dateFrom, dateTo)
+
+        //fetch
     }
 
     function handleReportClick() {
@@ -87,7 +95,7 @@ export default function AdminPanel(props) {
     const panelHtml = panel.map(el => {
 
         const buttonsHtml = el.buttons.map(button => {
-            const handleClick = () => {button.link==="" ?handleReportClick() : navigate(button.link)}
+            const handleClick = () => {button.link==="" ? handleReportClick() : navigate(button.link)}
             return (
                 <div className="admin__card__button card--big" onClick={handleClick}>
                     <FontAwesomeIcon icon={`fa-solid fa-${button.icon}`} className='admin__button__icon' />

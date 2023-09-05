@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { ModalContext } from "../context/modalContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProductImage from "./ProductImage";
@@ -113,11 +113,11 @@ export default function Modal(props) {
                 <div className="modal__form">
                     <div className='checkout__long-input-container'>
                         <label htmlFor="from">Date from</label>
-                        <input type="date" id='from' name='from' className='checkout__input--long' />
+                        <input type="date" id='from' name='from' className='checkout__input--long' value={modalContext.dateFrom} onChange={(e) => modalContext.setDateFrom(e.target.value)}/>
                     </div>
                     <div className='checkout__long-input-container'>
                         <label htmlFor="to">Date to</label>
-                        <input type="date" id='to' name='to' className='checkout__input--long' />
+                        <input type="date" id='to' name='to' className='checkout__input--long' value={modalContext.dateTo} onChange={(e) => modalContext.setDateTo(e.target.value)}/>
                     </div>
                 </div>
             )

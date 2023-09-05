@@ -35,12 +35,10 @@ export default function ProductPage(props) {
   React.useEffect(() => {
     productsContext.setShowCart(false);
     if (!product) {
-      fetch(`https://wishop.azurewebsites.net/api/Products/${id}`)
+      fetch(`${backendAddr}/Products/${id}`)
         .then((res) => res.json())
         .then((data) => {
-          fetch(
-            `https://wishop.azurewebsites.net/api/ProductStorage/${data.photoId}`
-          )
+          fetch(`${backendAddr}/ProductStorage/${data.photoId}`)
             .then((res) => res.json())
             .then((imgData) => {
               const newProduct = {

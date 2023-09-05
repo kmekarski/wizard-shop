@@ -19,7 +19,7 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (password === repeatedPassword && password !== "") {
-      const response = await fetch(backendAddr + "/api/Users/Register", {
+      const response = await fetch(backendAddr + "/Users/Register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

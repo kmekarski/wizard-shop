@@ -10,59 +10,65 @@ import { useNavigate } from "react-router-dom";
 
 import { ProductsContext } from "../context/productsContext";
 
-
 export default function MainContent(props) {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const productsContext = React.useContext(ProductsContext);
 
-    const productsContext = React.useContext(ProductsContext)
+  const backendAddr = productsContext.apiAddress;
 
-    React.useEffect(() => {
-        productsContext.setShowCart(false)
-        if(!productsContext.allFetched){
-            fetch("https://wishop.azurewebsites.net/api/Products")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                productsContext.setProductsList([])
-                data.forEach(el => {
-                    fetch(`https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`)
-                        .then(res => res.json())
-                        .then(images => {
-                            const newProduct = {
-                                ...el,
-                                images: images
-                            }
-                            productsContext.setProductsList(prev => [...prev, newProduct])
-                        })
+  React.useEffect(() => {
+    productsContext.setShowCart(false);
+    if (!productsContext.allFetched) {
+      fetch(`${backendAddr}/Products`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          productsContext.setProductsList([]);
+          data.forEach((el) => {
+            fetch(`${backendAddr}/ProductStorage/${el.photoId}`)
+              .then((res) => res.json())
+              .then((images) => {
+                const newProduct = {
+                  ...el,
+                  images: images,
+                };
+                productsContext.setProductsList((prev) => [
+                  ...prev,
+                  newProduct,
+                ]);
+              });
+          });
+        });
+      productsContext.setAllFetched(true);
+    }
+  }, []);
 
-                })
+  const productsList = productsContext.productsList;
 
-            })
-        productsContext.setAllFetched(true)}
-    }, [])
+  return (
+    <div className="main">
+      {productsList.length > 0 && (
+        <div className="container">
+          <Header />
 
+          <FeaturedCard />
 
-    const productsList = productsContext.productsList
+          <AdCard />
 
+          <div className="products-title">
+            <h2 className="text--primary text--nowrap">Our top products</h2>
+            <h4
+              className="text--secondary text--clickable text--nowrap"
+              onClick={() => navigate("/products")}
+            >
+              View all
+            </h4>
+          </div>
 
-    return (
-        <div className="main">
-            {productsList.length > 0 && <div className="container">
-                <Header />
-
-                <FeaturedCard />
-
-                <AdCard />
-
-                <div className='products-title'>
-                    <h2 className="text--primary text--nowrap">Our top products</h2>
-                    <h4 className="text--secondary text--clickable text--nowrap" onClick={() => navigate('/products')}>View all</h4>
-                </div>
-
-                <ScrollableProductsList>
-                </ScrollableProductsList>
-            </div>}
-        </div>)
+          <ScrollableProductsList></ScrollableProductsList>
+        </div>
+      )}
+    </div>
+  );
 }
-

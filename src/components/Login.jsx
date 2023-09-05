@@ -18,7 +18,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(backendAddr + "/api/Users/Login", {
+    const response = await fetch(backendAddr + "/Users/Login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

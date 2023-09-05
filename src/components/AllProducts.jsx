@@ -17,6 +17,8 @@ import { faList } from "@fortawesome/free-solid-svg-icons";
 export default function AllProducts(props) {
   const productsContext = React.useContext(ProductsContext);
 
+  const backendAddr = productsContext.apiAddress;
+
   const navigate = useNavigate();
 
   function applyFilters() {
@@ -28,15 +30,13 @@ export default function AllProducts(props) {
   React.useEffect(() => {
     productsContext.setShowCart(false);
     if (!productsContext.allFetched) {
-      fetch("https://wishop.azurewebsites.net/api/Products")
+      fetch(`${backendAddr}/Products`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
           productsContext.setProductsList([]);
           data.forEach((el) => {
-            fetch(
-              `https://wishop.azurewebsites.net/api/ProductStorage/${el.photoId}`
-            )
+            fetch(`${backendAddr}/ProductStorage/${el.photoId}`)
               .then((res) => res.json())
               .then((images) => {
                 const newProduct = {

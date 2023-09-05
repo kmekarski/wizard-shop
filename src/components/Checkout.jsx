@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CartPopup from "./CartPopup.jsx";
 import ProductImage from "./ProductImage.jsx";
-import TextInput from './TextInput.jsx';
-import Header from './Header.jsx';
+import TextInput from "./TextInput.jsx";
+import Header from "./Header.jsx";
 import { ProductsContext } from "../context/productsContext";
-import { ModalContext } from '../context/modalContext.jsx';
+import { ModalContext } from "../context/modalContext.jsx";
 //import { profileInfo } from "./Profile";
 
 export default function Checkout(props) {
-  const navigate = useNavigate()
-  const productsContext = React.useContext(ProductsContext)
-  const modalContext = React.useContext(ModalContext)
+  const navigate = useNavigate();
+  const productsContext = React.useContext(ProductsContext);
+  const modalContext = React.useContext(ModalContext);
 
-  const backendAddr = 'https://wishop.azurewebsites.net/api'
+  const backendAddr = productsContext.apiAddress;
 
   if (productsContext.cart.length === 0) {
-    navigate('/')
+    navigate("/");
   }
 
   const [addressData, setAddressData] = useState({
-    isSet: false
-  })
+    isSet: false,
+  });
 
   // inputs limits management:
   const [addressInputsOkay, setAddressInputsOkay] = React.useState({
@@ -30,8 +30,8 @@ export default function Checkout(props) {
     address2: true,
     country: false,
     city: false,
-    zip: false
-  })
+    zip: false,
+  });
 
   const [paymentInputsOkay, setPaymentInputsOkay] = React.useState({
     cardNumber: false,
@@ -39,25 +39,25 @@ export default function Checkout(props) {
     cvc: false,
     name: false,
     country2: false,
-    zip2: false
-  })
+    zip2: false,
+  });
 
   function setInputOkay(name, okay) {
     setAddressInputsOkay({
       ...addressInputsOkay,
-      [name]: okay
-    })
+      [name]: okay,
+    });
     setPaymentInputsOkay({
       ...paymentInputsOkay,
-      [name]: okay
-    })
+      [name]: okay,
+    });
   }
-  const allAddressInputsOkay = Object.keys(addressInputsOkay).every(key => {
-    return addressInputsOkay[key]
-  })
-  const allPaymentInputsOkay = Object.keys(paymentInputsOkay).every(key => {
-    return paymentInputsOkay[key]
-  })
+  const allAddressInputsOkay = Object.keys(addressInputsOkay).every((key) => {
+    return addressInputsOkay[key];
+  });
+  const allPaymentInputsOkay = Object.keys(paymentInputsOkay).every((key) => {
+    return paymentInputsOkay[key];
+  });
   ////////
 
   const [addressFormData, setAddressFormData] = React.useState({
@@ -65,8 +65,8 @@ export default function Checkout(props) {
     address2: "",
     country: "",
     city: "",
-    zip: ""
-  })
+    zip: "",
+  });
 
   const [paymentFormData, setPaymentFormData] = React.useState({
     cardNumber: "",
@@ -74,59 +74,65 @@ export default function Checkout(props) {
     cvc: "",
     name: "",
     country2: "",
-    zip2: ""
-  })
+    zip2: "",
+  });
 
   function handleAddressSubmit(e) {
-    e.preventDefault()
-    modalContext.setCallback(addressSubmit)
+    e.preventDefault();
+    modalContext.setCallback(addressSubmit);
   }
 
   function handlePaymentSubmit(e) {
-    e.preventDefault()
-    modalContext.setCallback(paymentSubmit)
+    e.preventDefault();
+    modalContext.setCallback(paymentSubmit);
   }
 
-  const [orderId, setOrderId] = useState(0)
-  const [profileInfo, setProfileInfo] = useState('{{\n' +
-    '  "userId": 0,\n' +
-    '  "username": "",\n' +
-    '  "name": "",\n' +
-    '  "surname": "",\n' +
-    '  "email": "",\n' +
-    '  "password": "",\n' +
-    '  "passwordSalt": "",\n' +
-    '  "status": "",\n' +
-    '  "role": ""\n' +
-    '}}')
+  const [orderId, setOrderId] = useState(0);
+  const [profileInfo, setProfileInfo] = useState(
+    "{{\n" +
+      '  "userId": 0,\n' +
+      '  "username": "",\n' +
+      '  "name": "",\n' +
+      '  "surname": "",\n' +
+      '  "email": "",\n' +
+      '  "password": "",\n' +
+      '  "passwordSalt": "",\n' +
+      '  "status": "",\n' +
+      '  "role": ""\n' +
+      "}}"
+  );
 
   const getProfileInfo = async (e) => {
-    const response = await fetch(backendAddr + "/Users/" + localStorage.getItem("userID"), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+    const response = await fetch(
+      backendAddr + "/Users/" + localStorage.getItem("userID"),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        setProfileInfo(data)
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setProfileInfo(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
-      })
+      });
   };
 
   useEffect(() => {
-    getProfileInfo()
-      .catch(error => {
-        console.error(error);
-      });
+    getProfileInfo().catch((error) => {
+      console.error(error);
+    });
   }, []);
 
   function addressSubmit() {
-    setAddressData(prev => { return { ...prev, isSet: true } })
+    setAddressData((prev) => {
+      return { ...prev, isSet: true };
+    });
     //odpowiednio sformatować dane z formularza i wysłać na odpowiedni endpoint
     const orderData = {
       firstName: "aaa",
@@ -138,15 +144,15 @@ export default function Checkout(props) {
       city: addressFormData.city,
       street: addressFormData.address1 + "; " + addressFormData.address2,
       houseNumber: 0,
-      apartmentNumber: 0
+      apartmentNumber: 0,
     };
-    console.log(orderData)
+    console.log(orderData);
 
-    fetch(backendAddr + '/Order', {
+    fetch(backendAddr + "/Order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token")
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify(orderData),
     })
@@ -173,15 +179,15 @@ export default function Checkout(props) {
       cvc: 0,
       nameOnCard: "string",
       country: "string",
-      zip: "string"
+      zip: "string",
     };
-    console.log(paymentData)
+    console.log(paymentData);
 
-    fetch(backendAddr + '/Payment/CardPayment' + "?orderId=" + orderId, {
+    fetch(backendAddr + "/Payment/CardPayment" + "?orderId=" + orderId, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token")
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify(paymentData),
     })
@@ -205,127 +211,156 @@ export default function Checkout(props) {
         <ProductImage src={item.images[0]} />
         <div className="cart-popup__item__text">
           <p className="text--small-bold text--dark">{item.name}</p>
-          <p className="cart-popup__item__price text--small-bold text--dark">${item.price}</p>
+          <p className="cart-popup__item__price text--small-bold text--dark">
+            ${item.price}
+          </p>
           <div className="cart-popup__item__panel">
             <div className="cart-popup__item__quantity">
-              <div className="cart-popup__item__quantity-btn" onClick={() => productsContext.changeNumberOfItemsInCart(item.id, "minus")}>-</div>
+              <div
+                className="cart-popup__item__quantity-btn"
+                onClick={() =>
+                  productsContext.changeNumberOfItemsInCart(item.id, "minus")
+                }
+              >
+                -
+              </div>
               <p className="cart-popup__item__quantity-number">{item.number}</p>
-              <div className="cart-popup__item__quantity-btn" onClick={() => productsContext.changeNumberOfItemsInCart(item.id, "plus")}>+</div>
+              <div
+                className="cart-popup__item__quantity-btn"
+                onClick={() =>
+                  productsContext.changeNumberOfItemsInCart(item.id, "plus")
+                }
+              >
+                +
+              </div>
             </div>
-            <p className="text--small" onClick={() => productsContext.removeFromCart(item.id)}>remove</p>
+            <p
+              className="text--small"
+              onClick={() => productsContext.removeFromCart(item.id)}
+            >
+              remove
+            </p>
           </div>
         </div>
       </div>
-    )
-  })
+    );
+  });
 
-  let total = 0
-  productsContext.cart.forEach(item => total += item.price * item.number)
+  let total = 0;
+  productsContext.cart.forEach((item) => (total += item.price * item.number));
 
-  const addressForm = <form onSubmit={e => handleAddressSubmit(e)} className="checkout__form">
-    <div className='checkout__long-input-container'>
-      <TextInput
-        limit={20}
-        name="address1"
-        label="Address line 1"
-        formData={addressFormData}
-        setFormData={setAddressFormData}
-        setInputOkay={setInputOkay}
-        silent={true}
-      />
-    </div>
-
-    <div className='checkout__long-input-container'>
-      <TextInput
-        limit={20}
-        name="address2"
-        label="Address line 2 (optional)"
-        required={false}
-        formData={addressFormData}
-        setFormData={setAddressFormData}
-        setInputOkay={setInputOkay}
-        silent={true}
-      />
-    </div>
-    <div className='checkout__two-inputs-container'>
-      <div>
+  const addressForm = (
+    <form onSubmit={(e) => handleAddressSubmit(e)} className="checkout__form">
+      <div className="checkout__long-input-container">
         <TextInput
           limit={20}
-          name="country"
-          label="Country or region"
+          name="address1"
+          label="Address line 1"
           formData={addressFormData}
           setFormData={setAddressFormData}
           setInputOkay={setInputOkay}
           silent={true}
         />
       </div>
-    </div>
-    <div className='checkout__two-inputs-container'>
-      <div>
-        <TextInput
-          limit={20}
-          name="city"
-          label="City"
-          formData={addressFormData}
-          setFormData={setAddressFormData}
-          setInputOkay={setInputOkay}
-          silent={true}
-        />
-      </div>
-      <div>
-        <TextInput
-          limit={20}
-          name="zip"
-          label="Zip"
-          formData={addressFormData}
-          setFormData={setAddressFormData}
-          setInputOkay={setInputOkay}
-          silent={true}
-        />
-      </div>
-    </div>
-    <button className="btn--medium btn--solid btn checkout__purchase-btn" disabled={!allAddressInputsOkay}>Proceed</button>
-  </form>
 
-  const paymentForm = <form onSubmit={e => handlePaymentSubmit(e)} className="checkout__form">
-    <div className='checkout__long-input-container'>
-      <label htmlFor="card-number"></label>
-      <TextInput
-        limit={20}
-        name="cardNumber"
-        label="Card number"
-        formData={paymentFormData}
-        setFormData={setPaymentFormData}
-        setInputOkay={setInputOkay}
-        silent={true}
-      />
-    </div>
-    <div className='checkout__two-inputs-container'>
-      <div>
+      <div className="checkout__long-input-container">
         <TextInput
           limit={20}
-          name="expDate"
-          label="Expiration date"
+          name="address2"
+          label="Address line 2 (optional)"
+          required={false}
+          formData={addressFormData}
+          setFormData={setAddressFormData}
+          setInputOkay={setInputOkay}
+          silent={true}
+        />
+      </div>
+      <div className="checkout__two-inputs-container">
+        <div>
+          <TextInput
+            limit={20}
+            name="country"
+            label="Country or region"
+            formData={addressFormData}
+            setFormData={setAddressFormData}
+            setInputOkay={setInputOkay}
+            silent={true}
+          />
+        </div>
+      </div>
+      <div className="checkout__two-inputs-container">
+        <div>
+          <TextInput
+            limit={20}
+            name="city"
+            label="City"
+            formData={addressFormData}
+            setFormData={setAddressFormData}
+            setInputOkay={setInputOkay}
+            silent={true}
+          />
+        </div>
+        <div>
+          <TextInput
+            limit={20}
+            name="zip"
+            label="Zip"
+            formData={addressFormData}
+            setFormData={setAddressFormData}
+            setInputOkay={setInputOkay}
+            silent={true}
+          />
+        </div>
+      </div>
+      <button
+        className="btn--medium btn--solid btn checkout__purchase-btn"
+        disabled={!allAddressInputsOkay}
+      >
+        Proceed
+      </button>
+    </form>
+  );
+
+  const paymentForm = (
+    <form onSubmit={(e) => handlePaymentSubmit(e)} className="checkout__form">
+      <div className="checkout__long-input-container">
+        <label htmlFor="card-number"></label>
+        <TextInput
+          limit={20}
+          name="cardNumber"
+          label="Card number"
           formData={paymentFormData}
           setFormData={setPaymentFormData}
           setInputOkay={setInputOkay}
           silent={true}
         />
       </div>
-      <div>
-        <TextInput
-          limit={20}
-          name="cvc"
-          label="CVC"
-          formData={paymentFormData}
-          setFormData={setPaymentFormData}
-          setInputOkay={setInputOkay}
-          silent={true}
-        />
+      <div className="checkout__two-inputs-container">
+        <div>
+          <TextInput
+            limit={20}
+            name="expDate"
+            label="Expiration date"
+            formData={paymentFormData}
+            setFormData={setPaymentFormData}
+            setInputOkay={setInputOkay}
+            silent={true}
+          />
+        </div>
+        <div>
+          <TextInput
+            limit={20}
+            name="cvc"
+            label="CVC"
+            formData={paymentFormData}
+            setFormData={setPaymentFormData}
+            setInputOkay={setInputOkay}
+            silent={true}
+          />
+        </div>
       </div>
-    </div>
-    <div className='checkout__long-input-container'>
-    <TextInput
+      <div className="checkout__long-input-container">
+        <TextInput
           limit={20}
           name="name"
           label="Name on card"
@@ -334,44 +369,53 @@ export default function Checkout(props) {
           setInputOkay={setInputOkay}
           silent={true}
         />
-    </div>
-    <div className='checkout__two-inputs-container'>
-      <div>
-      <TextInput
-          limit={20}
-          name="country2"
-          label="Country or region"
-          formData={paymentFormData}
-          setFormData={setPaymentFormData}
-          setInputOkay={setInputOkay}
-          silent={true}
-        />
       </div>
-      <div>
-      <TextInput
-          limit={20}
-          name="zip2"
-          label="Zip"
-          formData={paymentFormData}
-          setFormData={setPaymentFormData}
-          setInputOkay={setInputOkay}
-          silent={true}
-        />
+      <div className="checkout__two-inputs-container">
+        <div>
+          <TextInput
+            limit={20}
+            name="country2"
+            label="Country or region"
+            formData={paymentFormData}
+            setFormData={setPaymentFormData}
+            setInputOkay={setInputOkay}
+            silent={true}
+          />
+        </div>
+        <div>
+          <TextInput
+            limit={20}
+            name="zip2"
+            label="Zip"
+            formData={paymentFormData}
+            setFormData={setPaymentFormData}
+            setInputOkay={setInputOkay}
+            silent={true}
+          />
+        </div>
       </div>
-    </div>
-    <button className="btn--medium btn--solid btn checkout__purchase-btn" disabled={!allPaymentInputsOkay}>Purchase</button>
-  </form>
+      <button
+        className="btn--medium btn--solid btn checkout__purchase-btn"
+        disabled={!allPaymentInputsOkay}
+      >
+        Purchase
+      </button>
+    </form>
+  );
 
   return (
     <div className="checkout">
       <div className="container">
-        <Header title="Checkout" subtitle="" searchbar={false} buttons={false}></Header>
+        <Header
+          title="Checkout"
+          subtitle=""
+          searchbar={false}
+          buttons={false}
+        ></Header>
         <div className="checkout__main">
           <div className="checkout__cart card--big">
             <p className="text--medium-bold text--dark">Cart</p>
-            <div className="checkout__cart__items">
-              {cartItemsHtml}
-            </div>
+            <div className="checkout__cart__items">{cartItemsHtml}</div>
             <div className="cart-popup__checkout">
               <div className="cart-popup__checkout__text text--medium-bold text--dark">
                 <p>Total:</p>
@@ -380,19 +424,23 @@ export default function Checkout(props) {
             </div>
           </div>
           <div className="checkout__payment card--big">
-
-
-
-            {addressData.isSet === true ? <div>
-              <p className="text--small text--medium-dark">pay using:</p>
-              <div className="checkout__providers">
-                <div className="btn--medium btn--light btn">Paypal</div>
+            {addressData.isSet === true ? (
+              <div>
+                <p className="text--small text--medium-dark">pay using:</p>
+                <div className="checkout__providers">
+                  <div className="btn--medium btn--light btn">Paypal</div>
+                </div>
+                <p className="text--small text--medium-dark">
+                  or pay using credit card:
+                </p>
               </div>
-              <p className="text--small text--medium-dark">or pay using credit card:</p>
-            </div> : <p className="text--small text--medium-dark">your address info:</p>}
+            ) : (
+              <p className="text--small text--medium-dark">
+                your address info:
+              </p>
+            )}
 
             {addressData.isSet ? paymentForm : addressForm}
-
           </div>
         </div>
       </div>

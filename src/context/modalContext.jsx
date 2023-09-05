@@ -15,6 +15,8 @@ const ModalContextProvider = ({ children }) => {
   const [dateFrom, setDateFrom] = React.useState(todaysDate);
   const [dateTo, setDateTo] = React.useState(todaysDate);
 
+  const backendAddr = "https://localhost:7039";
+
   function formatDateToInputValue(date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");

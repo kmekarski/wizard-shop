@@ -135,10 +135,10 @@ export default function Checkout(props) {
     });
     //odpowiednio sformatować dane z formularza i wysłać na odpowiedni endpoint
     const orderData = {
-      firstName: "aaa",
-      lastName: "bbb",
-      phoneNumber: "string",
-      email: "aaa@bbb.com",
+      firstName: "Filip",
+      lastName: "Sówka",
+      phoneNumber: "517 341 798",
+      email: "filip@example.com",
       comment: "string",
       zipCode: addressFormData.zip,
       city: addressFormData.city,
@@ -172,6 +172,14 @@ export default function Checkout(props) {
   }
 
   function paymentSubmit() {
+    productsContext.setOrderItemsArrays(prev => {
+      let newArray = prev
+      newArray.push(productsContext.cart)
+      console.log("new orderItemsArray:", newArray)
+      return newArray
+    })
+
+
     //odpowiednio sformatować dane z formularza i wysłać na odpowiedni endpoint
     const paymentData = {
       cardNumber: "string",
@@ -199,6 +207,7 @@ export default function Checkout(props) {
       })
       .then((data) => {
         console.log("Paid: ", data);
+
       })
       .catch((error) => {
         console.error("Error while paying:", error);

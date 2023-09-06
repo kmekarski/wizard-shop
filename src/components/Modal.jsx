@@ -31,7 +31,7 @@ export default function Modal(props) {
         <p className="text--small-regular text--dark">{el.id}</p>
         <p className="text--small-regular text--dark">{el.name}</p>
         <p className="text--small-reguler text--dark">${el.price}</p>
-        <p className="text--small-regular text--dark">{el.quantity}</p>
+        <p className="text--small-regular text--dark">{el.number}</p>
       </div>
     );
   });

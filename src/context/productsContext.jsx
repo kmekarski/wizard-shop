@@ -8,6 +8,8 @@ const ProductsContextProvider = ({ children }) => {
   const [productsList, setProductsList] = useState([]);
   const [allFetched, setAllFetched] = useState(false);
 
+  const [orderItemsArrays, setOrderItemsArrays] = useState([])
+
   const apiAddress = "https://localhost:7039/api";
 
   function addToCart(id, number) {
@@ -123,6 +125,8 @@ const ProductsContextProvider = ({ children }) => {
         allFetched,
         setAllFetched,
         apiAddress,
+        orderItemsArrays,
+        setOrderItemsArrays
       }}
     >
       {children}

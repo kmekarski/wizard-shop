@@ -14,6 +14,7 @@ export default function OrdersList(props) {
   const productsContext = React.useContext(ProductsContext);
   const modalContext = React.useContext(ModalContext);
 
+
   const header = [
     "Order ID",
     "Username",
@@ -87,10 +88,10 @@ export default function OrdersList(props) {
 
   function showItemsList() {}
 
-  function handleShowClick(items) {
-    console.log(JSON.stringify(items));
+  function handleShowClick(mockItems) {
+    console.log(mockItems)
     modalContext.setCallback(showItemsList);
-    modalContext.setList(items);
+    modalContext.setList(mockItems);
   }
 
   function handleActionClick(e, order) {
@@ -214,6 +215,11 @@ export default function OrdersList(props) {
         return response.json();
       })
       .then((data) => {
+        data.filter(el => el.orderState !== 4).forEach((element, index) => {
+          console.log("orderListArrays:",index, productsContext.orderItemsArrays)
+          element.mockItems = productsContext.orderItemsArrays[index]
+          console.log(element)
+        });
         setOrders(data);
       })
       .catch((error) => {
@@ -274,7 +280,7 @@ export default function OrdersList(props) {
         </p>
         <div
           className="btn--solid btn--small btn"
-          onClick={() => handleShowClick(el.orderItems)}
+          onClick={() => handleShowClick(el.mockItems)}
         >
           Show
         </div>
